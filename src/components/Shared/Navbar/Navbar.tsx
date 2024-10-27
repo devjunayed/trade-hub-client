@@ -48,8 +48,8 @@ const Navbar = () => {
         </a>
       </div>
      
-      <div className="navbar-center">
-        <input type="search" className="outline-none border-none px-4 py-2 rounded " placeholder="Search" />
+      <div className="navbar-center w-3/12">
+        <input type="search" className="w-full outline-none border-none px-4 py-2 rounded " placeholder="Search" />
       </div>
 
       <div className="navbar-end hidden lg:flex">

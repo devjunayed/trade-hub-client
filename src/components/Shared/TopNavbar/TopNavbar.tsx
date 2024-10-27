@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import Marquee from "react-fast-marquee";
 
@@ -11,7 +12,10 @@ const TopNavbar = () => {
         <Marquee>you are not logged in</Marquee>
       </div>
       <div>
-        <p>🔒 login / register</p>
+        <p>
+          🔒 <Link href="/login">login</Link> /{" "}
+          <Link href="/register">register</Link>
+        </p>
       </div>
     </div>
   );
