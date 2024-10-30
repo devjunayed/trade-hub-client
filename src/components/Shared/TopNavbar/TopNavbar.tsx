@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import Marquee from "react-fast-marquee";
 
 const TopNavbar = () => {
   return (
@@ -8,8 +7,10 @@ const TopNavbar = () => {
       <div>
         <p>Howdy, visitor </p>
       </div>
-      <div className="w-9/12">
-        <Marquee>you are not logged in</Marquee>
+      <div>
+        <ul>
+          <li><Link href="/dashboard">Dashboard</Link></li>
+        </ul>
       </div>
       <div>
         <p>
