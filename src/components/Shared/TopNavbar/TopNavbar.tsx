@@ -12,12 +12,6 @@ const TopNavbar = () => {
           <li><Link href="/dashboard">Dashboard</Link></li>
         </ul>
       </div>
-      <div>
-        <p>
-          🔒 <Link href="/login">login</Link> /{" "}
-          <Link href="/register">register</Link>
-        </p>
-      </div>
     </div>
   );
 };
