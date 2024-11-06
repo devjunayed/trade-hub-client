@@ -3,6 +3,7 @@
 
 import axiosInstance from "@/lib/AxiosInstance";
 import { cookies } from "next/headers";
+import { jwtDecode } from "jwt-decode";
 
 export const registerUser = async (userData: any) => {
   try {
@@ -21,3 +22,18 @@ export const registerUser = async (userData: any) => {
     throw new Error("An unexpected error occurred");
   }
 };
+
+export const getCurrentUser = async () => {
+  const accessToken = cookies().get('access-token')?.value;
+  let decodedToken = null;
+
+  if(accessToken){
+    decodedToken = await jwtDecode(accessToken);
+
+    return {
+      userId: decodedToken.userId,
+      role: decodedToken.role
+    }
+  }
+  return decodedToken;
+}

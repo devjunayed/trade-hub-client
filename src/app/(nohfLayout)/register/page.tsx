@@ -8,10 +8,10 @@ import { CircleLoader } from "react-spinners";
 
 const RegisterPage = () => {
   const { mutate: handleUserRegistration, isPending } = useUserRegistration();
+
   // Handle form submission
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const formData = new FormData(e.currentTarget);
     const userData = Object.fromEntries(formData.entries());
     handleUserRegistration(userData);
@@ -24,7 +24,7 @@ const RegisterPage = () => {
         {/* Left Side */}
         <div className="w-full sm:w-1/2 h-full flex flex-col items-center justify-center bg-background px-4 py-8">
           <Image
-            className={"mb-4"}
+            className="mb-4"
             src={LogoImg}
             width={150}
             height={150}
@@ -42,112 +42,114 @@ const RegisterPage = () => {
         </div>
 
         {/* Right Side */}
-        <div className="w-full overflow-y-auto py-10 h-full bg-white sm:w-1/2 px-8 flex flex-col justify-center ">
-          <form onSubmit={handleSubmit} className="space-y-4 ">
-            <div className="pt-28">
-              <label
-                htmlFor="name"
-                className="block text-sm font-light ml-1 mb-2 text-gray-600"
+        <div className="w-full sm:w-1/2 h-full bg-white flex flex-col justify-center">
+          <div className="overflow-y-auto pr-6 pl-6  max-h-full">
+            <form onSubmit={handleSubmit} className="flex flex-col space-y-4 py-4">
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-light ml-1 mb-2 text-gray-600"
+                >
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
+                  placeholder="Name"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-light ml-1 mb-2 text-gray-600"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-light ml-1 mb-2 text-gray-600"
+                >
+                  Phone
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
+                  placeholder="Phone"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="address"
+                  className="block text-sm font-light ml-1 mb-2 text-gray-600"
+                >
+                  Address
+                </label>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
+                  placeholder="Address"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-light ml-1 mb-2 text-gray-600"
+                >
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-light ml-1 mb-2 text-gray-600"
+                >
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
+                  placeholder="Confirm Password"
+                  required
+                />
+              </div>
+              <button
+                disabled={isPending}
+                type="submit"
+                className="w-full flex justify-center py-2 mt-6 disabled:bg-gray-400 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none"
               >
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
-                placeholder="Name"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-light ml-1 mb-2 text-gray-600"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
-                placeholder="Email"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="phone"
-                className="block text-sm font-light ml-1 mb-2 text-gray-600"
-              >
-                Phone
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
-                placeholder="Phone"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="address"
-                className="block text-sm font-light ml-1 mb-2 text-gray-600"
-              >
-                Address
-              </label>
-              <input
-                type="text"
-                id="address"
-                name="address"
-                className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
-                placeholder="Address"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-light ml-1 mb-2 text-gray-600"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
-                placeholder="Password"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="confirmPassword"
-                className="block text-sm font-light ml-1 mb-2 text-gray-600"
-              >
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
-                placeholder="Confirm Password"
-                required
-              />
-            </div>
-            <button
-              disabled={isPending}
-              type="submit"
-              className="w-full py-2 mb-10 mt-6 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none"
-            >
-              {isPending ? <CircleLoader size={18} color="white"/> : "Register"}
-            </button>
-          </form>
+                {isPending ? <CircleLoader size={24} color="white" /> : "Register"}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
