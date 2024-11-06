@@ -3,8 +3,8 @@ import { getCurrentUser } from "./services/AuthService";
 
 const AuthRoutes = ["/login", "/register"];
 const roleBasedRoutes = {
-    USER: [/^\/profile/],
-    ADMIN: [/^\/admin/]
+    user: [/^\/user/],
+    admin: [/^\/admin/]
 }
 
 type Role = keyof typeof roleBasedRoutes;
@@ -14,7 +14,6 @@ export async function middleware(request: NextRequest) {
 
     const user = await getCurrentUser();
     if(!user){
-        console.log('not user')
         if(AuthRoutes.includes(pathname)){
             return NextResponse.next();
         }else{
@@ -36,5 +35,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/admin",  "/login", "/register"]
+    matcher: ["/admin", "/user",  "/login", "/register"]
 }

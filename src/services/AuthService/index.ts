@@ -23,6 +23,25 @@ export const registerUser = async (userData: any) => {
   }
 };
 
+export const loginUser = async (userData: any) => {
+  try {
+    const { data } = await axiosInstance.post("/auth/login", userData);
+    console.log(data)
+    if (data.success) {
+      cookies().set("access-token", data?.data?.accessToken);
+      cookies().set("refresh-token", data?.data.refreshToken);
+    }
+    return data;
+  } catch (error: any) {
+    // Check if the error response exists and return the message
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data.message || "An error occurred");
+    }
+    // If no specific error message, return a general error
+    throw new Error("An unexpected error occurred");
+  }
+};
+
 export const getCurrentUser = async () => {
   const accessToken = cookies().get('access-token')?.value;
   let decodedToken = null;

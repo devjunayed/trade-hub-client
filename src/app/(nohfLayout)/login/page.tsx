@@ -1,21 +1,37 @@
-"use client"
+/* eslint-disable react-hooks/exhaustive-deps */
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect } from "react";
 import LogoImg from "@/app/assets/images/trade-hub.png";
+import { useUserLogin } from "@/hooks/auth.hook";
+import {  useRouter, useSearchParams } from "next/navigation";
 
 const LoginPage = () => {
-  // State variables for email and password
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect");
+  const router = useRouter();
+  const { mutate: handleLogin, isPending, isSuccess } = useUserLogin();
 
   // Handle form submission
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // You can replace this with an API call
-    console.log("Email:", email);
-    console.log("Password:", password);
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    handleLogin(data);
   };
+
+  useEffect(() => {
+    if (!isPending && isSuccess) {
+      if (redirect) {
+        router.push(redirect);
+      }else{
+        router.push('/')
+      }
+    }
+  }, [isPending, isSuccess]);
 
   return (
     <div className="flex items-center justify-center w-full h-screen bg-gray-100">
@@ -55,8 +71,7 @@ const LoginPage = () => {
               <input
                 type="email"
                 id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email"
                 className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
                 placeholder="Email"
                 required
@@ -72,8 +87,7 @@ const LoginPage = () => {
               <input
                 type="password"
                 id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
                 className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
                 placeholder="Password"
                 required
