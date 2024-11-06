@@ -13,6 +13,11 @@ export const registerUser = async (userData: any) => {
     }
     return data;
   } catch (error: any) {
-    throw new Error(error);
+    // Check if the error response exists and return the message
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data.message || "An error occurred");
+    }
+    // If no specific error message, return a general error
+    throw new Error("An unexpected error occurred");
   }
 };

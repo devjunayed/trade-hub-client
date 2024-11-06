@@ -3,30 +3,22 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { FormEvent } from "react";
 import LogoImg from "@/app/assets/images/trade-hub.png";
-import { registerUser } from "@/services/AuthService";
-import { toast, ToastContainer } from "react-toastify";
+import { useUserRegistration } from "@/hooks/auth.hook";
+import { CircleLoader } from "react-spinners";
 
 const RegisterPage = () => {
+  const { mutate: handleUserRegistration, isPending } = useUserRegistration();
   // Handle form submission
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const userData = Object.fromEntries(formData.entries());
-
-    const response = await registerUser(userData);
-    console.log(response)
-
-    if(response.success){
-      toast.success(response.message, {
-        position: "top-center"
-      });
-    }
+    handleUserRegistration(userData);
   };
 
   return (
     <div className="flex items-center justify-center w-full h-screen bg-gray-100">
-      <ToastContainer />
       {/* Inner Container */}
       <div className="flex sm:flex-row flex-col border-t-4 border-primary w-full mx-4 sm:mx-10 md:w-9/12 lg:w-8/12 xl:w-7/12 h-5/6 sm:h-3/4 shadow-lg rounded">
         {/* Left Side */}
@@ -149,10 +141,11 @@ const RegisterPage = () => {
               />
             </div>
             <button
+              disabled={isPending}
               type="submit"
               className="w-full py-2 mb-10 mt-6 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none"
             >
-              Register
+              {isPending ? <CircleLoader size={18} color="white"/> : "Register"}
             </button>
           </form>
         </div>
