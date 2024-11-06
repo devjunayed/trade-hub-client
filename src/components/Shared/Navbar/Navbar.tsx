@@ -1,11 +1,23 @@
-"use client"
+"use client";
 import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button} from "@nextui-org/react";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+  Link,
+  Button,
+} from "@nextui-org/react";
 import Image from "next/image";
-import Logo from '@/app/assets/images/trade-hub.png'
+import Logo from "@/app/assets/images/trade-hub.png";
+import { useUser } from "@/context/user.provider";
 
-export default function App() {
+export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { user } = useUser();
 
   const menuItems = [
     "Profile",
@@ -32,7 +44,7 @@ export default function App() {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      {/* <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
           <Link color="foreground" href="#">
             Features
@@ -48,23 +60,39 @@ export default function App() {
             Integrations
           </Link>
         </NavbarItem>
-      </NavbarContent>
+      </NavbarContent> */}
+
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="/login">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="/register" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
+        {!user && (
+          <>
+            <NavbarItem className="flex">
+              <Link href="/login">Login</Link>
+            </NavbarItem>
+            <NavbarItem className="flex">
+              <Button as={Link} color="primary" href="/register" variant="flat">
+                Sign Up
+              </Button>
+            </NavbarItem>
+          </>
+        )}
+        {user && (
+          <NavbarItem className="flex">
+            <Button as={Link} color="primary" href="/register" variant="flat">
+              Logout
+            </Button>
+          </NavbarItem>
+        )}
       </NavbarContent>
       <NavbarMenu className="bg-gray-200 text-white">
         {menuItems.map((item, index) => (
           <NavbarMenuItem className="" key={`${item}-${index}`}>
             <Link
               color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                index === 2
+                  ? "primary"
+                  : index === menuItems.length - 1
+                  ? "danger"
+                  : "foreground"
               }
               className="w-full "
               href="#"

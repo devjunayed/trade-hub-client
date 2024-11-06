@@ -1,11 +1,19 @@
-import React, { ReactNode } from 'react'
+"use client";
+import NavBar from "@/components/Shared/Navbar/Navbar";
+import TopNavbar from "@/components/Shared/TopNavbar/TopNavbar";
+import {  SidebarWrapper } from "@/components/ui/SidebarWrapper";
 
-const DashboardLayout = ({children}: {children: ReactNode}) => {
+
+import React, { ReactNode } from "react";
+
+const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div>
-      {children}
+      <TopNavbar />
+      <NavBar />
+      <SidebarWrapper>{children}</SidebarWrapper>
     </div>
-  )
-}
+  );
+};
 
-export default DashboardLayout
+export default DashboardLayout;
