@@ -1,13 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useEffect } from "react";
 import LogoImg from "@/app/assets/images/trade-hub.png";
 import { useUserRegistration } from "@/hooks/auth.hook";
 import { CircleLoader } from "react-spinners";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const RegisterPage = () => {
-  const { mutate: handleUserRegistration, isPending } = useUserRegistration();
+  const { mutate: handleUserRegistration, isPending, isSuccess } = useUserRegistration();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect");
+  const router = useRouter();
 
   // Handle form submission
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -16,6 +21,16 @@ const RegisterPage = () => {
     const userData = Object.fromEntries(formData.entries());
     handleUserRegistration(userData);
   };
+
+  useEffect(() => {
+    if (!isPending && isSuccess) {
+      if (redirect) {
+        router.push(redirect);
+      }else{
+        router.push('/')
+      }
+    }
+  }, [isPending, isSuccess]);
 
   return (
     <div className="flex items-center justify-center w-full h-screen bg-gray-100">

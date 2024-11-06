@@ -21,7 +21,7 @@ export default function App() {
   ];
 
   return (
-    <Navbar className="m-0 p-0" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar className="m-0 p-0 bg-background" onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -59,14 +59,14 @@ export default function App() {
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
+      <NavbarMenu className="bg-gray-200 text-white">
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
+          <NavbarMenuItem className="" key={`${item}-${index}`}>
             <Link
               color={
                 index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
               }
-              className="w-full"
+              className="w-full "
               href="#"
               size="lg"
             >

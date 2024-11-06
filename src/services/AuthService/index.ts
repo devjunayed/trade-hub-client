@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
@@ -49,6 +50,9 @@ export const getCurrentUser = async () => {
   if(accessToken){
     decodedToken = await jwtDecode(accessToken);
 
+    const {data} = await axiosInstance.get(`/user/${decodedToken.userId}`);
+    console.log({fromGetCurrentUser: data})
+
     return {
       userId: decodedToken.userId,
       role: decodedToken.role
@@ -56,3 +60,24 @@ export const getCurrentUser = async () => {
   }
   return decodedToken;
 }
+
+
+export const getNewAccessToken = async () => {
+  try {
+    const refreshToken = cookies().get("refresh-token")?.value;
+
+    const res = await axiosInstance({
+      url: "/auth/refresh-token",
+      method: "POST",
+      withCredentials: true,
+      headers: {
+        cookie: `refreshToken=${refreshToken}`,
+      },
+    });
+    
+
+    return res.data;
+  } catch (error: any) {
+    throw new Error("Failed to get new access token");
+  }
+};
