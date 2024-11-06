@@ -26,11 +26,10 @@ export const registerUser = async (userData: any) => {
 
 export const loginUser = async (userData: any) => {
   try {
-    const { data } = await axiosInstance.post("/auth/login", userData);
-    console.log(data)
-    if (data.success) {
+    const {data} = await axiosInstance.post("/auth/login", userData);
+    if (data?.success) {
       cookies().set("access-token", data?.data?.accessToken);
-      cookies().set("refresh-token", data?.data.refreshToken);
+      cookies().set("refresh-token", data?.data?.refreshToken);
     }
     return data;
   } catch (error: any) {
@@ -44,23 +43,38 @@ export const loginUser = async (userData: any) => {
 };
 
 export const getCurrentUser = async () => {
-  const accessToken = cookies().get('access-token')?.value;
-  let decodedToken = null;
-
-  if(accessToken){
-    decodedToken = await jwtDecode(accessToken);
-
-    const {data} = await axiosInstance.get(`/user/${decodedToken.userId}`);
-    console.log({fromGetCurrentUser: data})
-
-    return {
-      userId: decodedToken.userId,
-      role: decodedToken.role
+  try {
+    const accessToken = cookies().get("access-token")?.value;
+    let decodedToken = null;
+  
+    if (accessToken) {
+      decodedToken = await jwtDecode(accessToken);
+  
+      console.log('hitting from get current user')
+      const { data } = await axiosInstance.get(`/user/${decodedToken?.userId}`);
+      console.log(data)
+  
+      console.log(decodedToken)
+  
+      return {
+        ...data.data[0]
+      };
     }
+    return decodedToken;
+  } catch (error: any) {
+    // Check if the error response exists and return the message
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data.message || "An error occurred");
+    }
+    // If no specific error message, return a general error
+    throw new Error("An unexpected error occurred");
   }
-  return decodedToken;
-}
 
+};
+
+export const setAccessToken = (accessToken: string) => {
+  cookies().set("access-token", accessToken);
+};
 
 export const getNewAccessToken = async () => {
   try {
@@ -74,7 +88,6 @@ export const getNewAccessToken = async () => {
         cookie: `refreshToken=${refreshToken}`,
       },
     });
-    
 
     return res.data;
   } catch (error: any) {

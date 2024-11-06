@@ -31,6 +31,7 @@ const UserProvider = ({children}: {children: ReactNode}) => {
         handleUser();
     }, [isLoading]);
 
+
     return (
         <UserContext.Provider value={{user, setUser, isLoading, setIsLoading}}>
             {children}
@@ -41,6 +42,8 @@ const UserProvider = ({children}: {children: ReactNode}) => {
 
 export const useUser = () => {
     const context = useContext(UserContext);
+
+    console.log(context)
 
     if(context === undefined){
         throw new Error('useUser must be used within the UserProvider context');
