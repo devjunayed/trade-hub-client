@@ -1,41 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { ReactNode, useState } from "react";
-import {
-  IconBrandTabler,
-  IconSettings,
-  IconUserBolt,
-} from "@tabler/icons-react";
+import React, { ReactNode,  useState } from "react";
+import {} from "@tabler/icons-react";
 import { cn } from "@/lib/utils/utils";
 import { Sidebar, SidebarBody, SidebarLink } from "../Sidebar";
+import { links } from "@/lib/utils/sidebar.links";
 
 export function SidebarWrapper({ children }: { children: ReactNode }) {
-  const links = [
-    {
-      label: "Dashboard",
-      href: "#",
-      icon: <IconBrandTabler className="text-white h-5 w-5" />,
-    },
-    {
-      label: "Profile",
-      href: "#",
-      icon: <IconUserBolt className="text-white h-5 w-5" />,
-      subLinks: [
-        {
-          label: "Edit Profile",
-          href: "/profile/edit",
-          icon: <IconUserBolt className="text-white h-5 w-5" />,
-        },
-        { label: "View Profile", href: "/profile/view" },
-      ],
-    },
-    {
-      label: "Settings",
-      href: "#",
-      icon: <IconSettings className="text-white h-5 w-5" />,
-    },
-  ];
-
   const [open, setOpen] = useState(false);
 
   return (
@@ -68,6 +39,7 @@ const SidebarLinkWithNested = ({ link }: { link: any }) => {
   return (
     <div>
       <SidebarLink
+        isOpen={isOpen}
         link={link}
         onClick={() => link.subLinks && setIsOpen(!isOpen)}
       />

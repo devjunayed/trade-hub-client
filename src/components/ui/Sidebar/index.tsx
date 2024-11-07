@@ -5,6 +5,9 @@ import Link, { LinkProps } from "next/link";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IconMenu2, IconX } from "@tabler/icons-react";
+import { useUser } from "@/context/user.provider";
+import { BiArrowToBottom, BiSolidArrowFromBottom } from "react-icons/bi";
+import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 
 interface Links {
   label: string;
@@ -17,9 +20,6 @@ interface SidebarContextProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   animate: boolean;
 }
-
-
-
 
 const SidebarContext = createContext<SidebarContextProps | undefined>(
   undefined
@@ -119,7 +119,7 @@ export const MobileSidebar = ({
     <>
       <div
         className={cn(
-          "h-10 px-4 py-4 flex flex-row md:hidden  items-center justify-between bg-neutral-100 dark:bg-neutral-800 w-full"
+          "h-10 px-4 py-4 flex flex-row md:hidden  items-center justify-between bg-neutral-100  w-full"
         )}
         {...props}
       >
@@ -140,7 +140,7 @@ export const MobileSidebar = ({
                 ease: "easeInOut",
               }}
               className={cn(
-                "fixed h-full w-full inset-0 bg-white dark:bg-neutral-900 p-10 z-[100] flex flex-col justify-between",
+                "fixed h-full w-full inset-0 bg-white p-10 z-[100] flex flex-col justify-between",
                 className
               )}
             >
@@ -161,36 +161,77 @@ export const MobileSidebar = ({
 
 export const SidebarLink = ({
   link,
-  className,
   onClick,
+  isOpen,
+  className,
   ...props
 }: {
   link: Links;
   className?: string;
+  isOpen?: boolean;
   props?: LinkProps;
-  onClick?: () => void
+  onClick?: () => void;
 }) => {
   const { open, animate } = useSidebar();
+  const { user } = useUser();
+  console.log({isOpen})
   return (
-    <Link
-      href={link.href}
-      className={cn(
-        "flex items-center justify-start gap-2  group/sidebar py-2",
-        className
-      )}
-      {...props}
-    >
-      {link.icon}
+    <>
+      {link.href ? (
+        <Link
+          onClick={onClick}
+          href={`/${user?.role}/${link.href}`}
+          className={cn(
+            "flex items-center justify-start gap-2  group/sidebar py-2",
+            className
+          )}
+          {...props}
+        >
+          {link.icon}
 
-      <motion.span
-        animate={{
-          display: animate ? (open ? "inline-block" : "none") : "inline-block",
-          opacity: animate ? (open ? 1 : 0) : 1,
-        }}
-        className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
-      >
-        {link.label}
-      </motion.span>
-    </Link>
+          <motion.span
+            animate={{
+              display: animate
+                ? open
+                  ? "inline-block"
+                  : "none"
+                : "inline-block",
+              opacity: animate ? (open ? 1 : 0) : 1,
+            }}
+            className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+          >
+            {link.label}
+          </motion.span>
+        </Link>
+      ) : (
+        <div className="flex justify-between group/sidebar">
+          <div
+            onClick={onClick}
+            className={cn(
+              "flex items-center cursor-pointer justify-start gap-2   py-2",
+              className
+            )}
+            {...props}
+          >
+            {link.icon}
+
+            <motion.span
+              animate={{
+                display: animate
+                  ? open
+                    ? "inline-block"
+                    : "none"
+                  : "inline-block",
+                opacity: animate ? (open ? 1 : 0) : 1,
+              }}
+              className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+            >
+              {link.label}
+            </motion.span>
+          </div>
+          <div className="text-white group-hover/sidebar:block hidden">{isOpen ? <IoIosArrowDown  className="text-white"/>: <IoIosArrowForward />}</div>
+        </div>
+      )}
+    </>
   );
 };
