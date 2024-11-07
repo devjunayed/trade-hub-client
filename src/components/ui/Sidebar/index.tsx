@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import { cn } from "@/lib/utils/utils";
+import { cn } from "@/utils/utils";
 import Link, { LinkProps } from "next/link";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -174,7 +174,7 @@ export const SidebarLink = ({
 }) => {
   const { open, animate } = useSidebar();
   const { user } = useUser();
-  console.log({isOpen})
+  console.log({ isOpen });
   return (
     <>
       {link.href ? (
@@ -204,7 +204,7 @@ export const SidebarLink = ({
           </motion.span>
         </Link>
       ) : (
-        <div className="flex justify-between group/sidebar">
+        <div className="flex  items-center justify-between group/sidebar">
           <div
             onClick={onClick}
             className={cn(
@@ -229,7 +229,13 @@ export const SidebarLink = ({
               {link.label}
             </motion.span>
           </div>
-          <div className="text-white group-hover/sidebar:block hidden">{isOpen ? <IoIosArrowDown  className="text-white"/>: <IoIosArrowForward />}</div>
+          <div className="text-white ml-2">
+            {isOpen ? (
+              <IoIosArrowDown className="text-white" />
+            ) : (
+              <IoIosArrowForward />
+            )}
+          </div>
         </div>
       )}
     </>

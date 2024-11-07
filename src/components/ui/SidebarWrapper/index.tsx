@@ -1,12 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { ReactNode,  useState } from "react";
+import React, { ReactNode, useState } from "react";
 import {} from "@tabler/icons-react";
-import { cn } from "@/lib/utils/utils";
+import { cn } from "@/utils/utils";
 import { Sidebar, SidebarBody, SidebarLink } from "../Sidebar";
-import { links } from "@/lib/utils/sidebar.links";
+import { TLinkItem } from "@/types";
 
-export function SidebarWrapper({ children }: { children: ReactNode }) {
+export function SidebarWrapper({
+  children,
+  links,
+}: {
+  children: ReactNode;
+  links: TLinkItem[];
+}) {
   const [open, setOpen] = useState(false);
 
   return (
