@@ -4,13 +4,29 @@ import {
   IconPackageImport,
   IconSettings,
 } from "@tabler/icons-react";
-import { AiFillProduct } from "react-icons/ai";
+import { AiFillFolder, AiFillFolderAdd, AiFillProduct, AiOutlineFolderView } from "react-icons/ai";
 
 export const adminLinks = [
   {
     label: "Dashboard",
     href: `dashboard`,
     icon: <IconBrandTabler className="text-white h-5 w-5" />,
+  },
+  {
+    label: "Category",
+    icon: <AiFillFolder className="text-white h-5 w-5" />,
+    subLinks: [
+      {
+        label: "Add Categroy",
+        href: "/add-category",
+        icon: <AiFillFolderAdd className="text-white h-5 w-5" />,
+      },
+      {
+        label: "Manage Category",
+        href: "/manage-category",
+        icon: <AiOutlineFolderView className="text-white h-5 w-5" />,
+      },
+    ],
   },
   {
     label: "Products",
