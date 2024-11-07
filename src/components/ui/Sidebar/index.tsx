@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { cn } from "@/lib/utils/utils";
 import Link, { LinkProps } from "next/link";
@@ -16,6 +17,9 @@ interface SidebarContextProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   animate: boolean;
 }
+
+
+
 
 const SidebarContext = createContext<SidebarContextProps | undefined>(
   undefined
@@ -158,11 +162,13 @@ export const MobileSidebar = ({
 export const SidebarLink = ({
   link,
   className,
+  onClick,
   ...props
 }: {
   link: Links;
   className?: string;
   props?: LinkProps;
+  onClick?: () => void
 }) => {
   const { open, animate } = useSidebar();
   return (
