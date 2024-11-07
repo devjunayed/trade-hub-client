@@ -14,10 +14,18 @@ import {
 import Image from "next/image";
 import Logo from "@/app/assets/images/trade-hub.png";
 import { useUser } from "@/context/user.provider";
+import { logOutUser } from "@/services/AuthService";
+import { useRouter } from "next/navigation";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { user } = useUser();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await logOutUser();
+    router.push("/login");
+  };
 
   const menuItems = [
     "Profile",
@@ -77,7 +85,12 @@ export default function NavBar() {
         )}
         {user && (
           <NavbarItem className="flex">
-            <Button as={Link} color="primary" href="/register" variant="flat">
+            <Button
+              as={Link}
+              color="primary"
+              onClick={handleLogout}
+              variant="flat"
+            >
               Logout
             </Button>
           </NavbarItem>

@@ -7,12 +7,14 @@ import LogoImg from "@/app/assets/images/trade-hub.png";
 import { useUserRegistration } from "@/hooks/auth.hook";
 import { CircleLoader } from "react-spinners";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useUser } from "@/context/user.provider";
 
 const RegisterPage = () => {
   const { mutate: handleUserRegistration, isPending, isSuccess } = useUserRegistration();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
   const router = useRouter();
+  const {user} = useUser();
 
   // Handle form submission
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -26,11 +28,11 @@ const RegisterPage = () => {
     if (!isPending && isSuccess) {
       if (redirect) {
         router.push(redirect);
-      }else{
+      }if(user){
         router.push('/')
       }
     }
-  }, [isPending, isSuccess]);
+  }, [isPending, isSuccess,user]);
 
   return (
     <div className="flex items-center justify-center w-full h-screen bg-gray-100">

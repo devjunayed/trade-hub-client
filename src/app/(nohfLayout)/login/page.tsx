@@ -6,12 +6,15 @@ import React, { FormEvent, useEffect } from "react";
 import LogoImg from "@/app/assets/images/trade-hub.png";
 import { useUserLogin } from "@/hooks/auth.hook";
 import {  useRouter, useSearchParams } from "next/navigation";
+import { CircleLoader } from "react-spinners";
+import { useUser } from "@/context/user.provider";
 
 const LoginPage = () => {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
   const router = useRouter();
   const { mutate: handleLogin, isPending, isSuccess } = useUserLogin();
+  const {user} = useUser();
 
   // Handle form submission
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -27,11 +30,12 @@ const LoginPage = () => {
     if (!isPending && isSuccess) {
       if (redirect) {
         router.push(redirect);
-      }else{
+      }
+      if(user){
         router.push('/')
       }
     }
-  }, [isPending, isSuccess]);
+  }, [isPending, isSuccess, user]);
 
   return (
     <div className="flex items-center justify-center w-full h-screen bg-gray-100">
@@ -94,11 +98,12 @@ const LoginPage = () => {
               />
             </div>
             <button
-              type="submit"
-              className="w-full py-2 mt-6 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none"
-            >
-              Sign In
-            </button>
+                disabled={isPending}
+                type="submit"
+                className="w-full flex justify-center py-2 mt-6 disabled:bg-gray-400 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none"
+              >
+                {isPending ? <CircleLoader size={24} color="white" /> : "Sign In"}
+              </button>
           </form>
         </div>
       </div>
