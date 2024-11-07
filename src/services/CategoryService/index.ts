@@ -20,3 +20,11 @@ export const getCategories = async() => {
         ThrowError(error)
     }
 }
+export const deleteCategory = async(categoryId: string) => {
+    try {
+        const {data} = await axiosInstance.delete(`/category/${categoryId}`);
+        return data;
+    } catch (error) {
+        ThrowError(error)
+    }
+}
