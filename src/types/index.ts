@@ -10,6 +10,6 @@ export interface TLinkItem {
 
 export interface TCategoryData{
   _id?: string;
-  title: string;
-  description: string;
+  title: string | undefined;
+  description: string | undefined;
 }

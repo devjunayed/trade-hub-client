@@ -26,7 +26,15 @@ export const updateCategory = async (
   }
 };
 
-export const getCategories = async () => {
+export const getSingleCategory = async (categoryId: string) => {
+  try {
+    const { data } = await axiosInstance.get(`/category/${categoryId}`);
+    return data;
+  } catch (error) {
+    ThrowError(error);
+  }
+};
+export const getAllCategories = async () => {
   try {
     const { data } = await axiosInstance.get("/category");
     return data;

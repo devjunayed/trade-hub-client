@@ -1,16 +1,27 @@
 "use client";
-import {  useUpdateCategory } from "@/hooks/category.hook";
+import { useGetSingleCategory, useUpdateCategory } from "@/hooks/category.hook";
 import { Button, Input } from "@nextui-org/react";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { CircleLoader } from "react-spinners";
 
-const AddCategory = ({params}: {params: {categoryId: string}}) => {
+const AddCategory = ({ params }: { params: { categoryId: string } }) => {
+  const { categoryId } = params;
+  const { data } = useGetSingleCategory(categoryId);
+
   const { mutate: handleUpdateCategory, isPending } = useUpdateCategory();
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
   });
+
+  useEffect(() => {
+    setFormData({
+      title: data?.data[0]?.title || "",
+      description: data?.data[0]?.description || "",
+    });
+  }, [data]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -19,13 +30,16 @@ const AddCategory = ({params}: {params: {categoryId: string}}) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // handleCreateCategory(formData);
+    handleUpdateCategory({ categoryId, categoryData: {...formData} });
   };
 
   return (
     <>
       <div className="m-8">
-        <Button onClick={() => window.history.back()} className="bg-primary text-white text-xl">
+        <Button
+          onClick={() => window.history.back()}
+          className="bg-primary text-white text-xl"
+        >
           <BsArrowLeft />
         </Button>
       </div>
@@ -64,11 +78,7 @@ const AddCategory = ({params}: {params: {categoryId: string}}) => {
               type="submit"
               className="mt-4 disabled:bg-gray-400 w-full py-2 text-center bg-primary hover:bg-primary-500 flex justify-center text-white rounded-lg"
             >
-              {isPending ? (
-                <CircleLoader size={24} color="white" />
-              ) : (
-                "Save"
-              )}
+              {isPending ? <CircleLoader size={24} color="white" /> : "Save"}
             </button>
           </form>
         </div>

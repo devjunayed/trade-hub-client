@@ -1,7 +1,8 @@
 import {
   createCategory,
   deleteCategory,
-  getCategories,
+  getAllCategories,
+  getSingleCategory,
   updateCategory,
 } from "@/services/CategoryService";
 import { TCategoryData } from "@/types";
@@ -70,10 +71,19 @@ export const useDeleteCategory = () => {
   });
 };
 
-export const useGetALLCategory = () => {
+export const useGetAllCategory = () => {
   return useQuery<unknown, Error, { data: TCategoryData[] }>({
     queryKey: ["GET_ALL_CATEGORY"],
-    queryFn: async () => await getCategories(),
+    queryFn: async () => await getAllCategories(),
+    staleTime: 0,
+  });
+};
+
+
+export const useGetSingleCategory = (categoryId: string) => {
+  return useQuery<unknown, Error, {data: TCategoryData[]}>({
+    queryKey: ["GET_SINGLE_CATEGORY", categoryId],
+    queryFn: async () => await getSingleCategory(categoryId),
     staleTime: 0,
   });
 };
