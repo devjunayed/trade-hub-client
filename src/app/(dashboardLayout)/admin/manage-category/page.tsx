@@ -1,6 +1,11 @@
+"use client";
+import TableRow from "@/components/Category/TableRow";
+import { useGetCategory } from "@/hooks/category.hook";
+import { TCategoryData } from "@/types";
 import React from "react";
 
-const page = () => {
+const ManageCategories = () => {
+  const { data: categories } = useGetCategory();
   return (
     <div className="overflow-x-auto w-full mx-10">
       <table className="table">
@@ -14,18 +19,13 @@ const page = () => {
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
-          <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
-          </tr>
-          
+          {categories?.data?.map((category: TCategoryData, index: number) => (
+            <TableRow key={category._id} category={category} sl={index+1} />
+          ))}
         </tbody>
       </table>
     </div>
   );
 };
 
-export default page;
+export default ManageCategories;

@@ -11,3 +11,12 @@ export const createCategory = async(categoryData: TCategoryData) =>{
         ThrowError(error);
     }
 }
+
+export const getCategories = async() => {
+    try {
+        const {data} = await axiosInstance.get("/category");
+        return data;
+    } catch (error) {
+        ThrowError(error)
+    }
+}
