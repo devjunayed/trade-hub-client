@@ -69,5 +69,5 @@ const SidebarLinkWithNested = ({ link }: { link: any }) => {
 };
 
 const Dashboard = ({ children }: { children: ReactNode }) => {
-  return <div className="text-black  flex justify-center w-screen items-center flex-col">{children}</div>;
+  return <div className="text-black  m-6 rounded-lg flex justify-center w-full shadow-xl">{children}</div>;
 };

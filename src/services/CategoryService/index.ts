@@ -1,3 +1,4 @@
+"use server"
 import axiosInstance from "@/lib/AxiosInstance";
 import { TCategoryData } from "@/types";
 import { ThrowError } from "@/utils/error";
