@@ -10,7 +10,7 @@ import React, { ReactNode } from "react";
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const { user } = useUser();
   return (
-    <div>
+    <div className="min-h-screen">
       <TopNavbar />
       <NavBar />
       <SidebarWrapper links={user?.role === "admin" ? adminLinks : userLinks}>

@@ -1,10 +1,9 @@
-import AddProduct from '@/components/Product/AddProduct'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-      <AddProduct />
+      manage product
     </div>
   )
 }
