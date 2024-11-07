@@ -2,7 +2,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { FormEvent, useEffect } from "react";
+import React, { FormEvent, Suspense, useEffect } from "react";
 import LogoImg from "@/app/assets/images/trade-hub.png";
 import { useUserRegistration } from "@/hooks/auth.hook";
 import { CircleLoader } from "react-spinners";
@@ -35,6 +35,8 @@ const RegisterPage = () => {
   }, [isPending, isSuccess,user]);
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
+
     <div className="flex items-center justify-center w-full h-screen bg-gray-100">
       {/* Inner Container */}
       <div className="flex sm:flex-row flex-col border-t-4 border-primary w-full mx-4 sm:mx-10 md:w-9/12 lg:w-8/12 xl:w-7/12 h-5/6 sm:h-3/4 shadow-lg rounded">
@@ -170,6 +172,7 @@ const RegisterPage = () => {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 };
 
