@@ -1,11 +1,11 @@
 "use client";
 import TableRow from "@/components/Category/TableRow";
-import { useGetCategory } from "@/hooks/category.hook";
+import { useGetALLCategory } from "@/hooks/category.hook";
 import { TCategoryData } from "@/types";
 import React from "react";
 
 const ManageCategories = () => {
-  const { data: categories } = useGetCategory();
+  const { data: categories } = useGetALLCategory();
   return (
     <div className="overflow-x-auto w-full mx-10">
       <table className="table">

@@ -1,6 +1,7 @@
 import { useDeleteCategory } from "@/hooks/category.hook";
 import { TCategoryData } from "@/types";
 import { Button } from "@nextui-org/react";
+import Link from "next/link";
 import React from "react";
 import Swal from "sweetalert2";
 
@@ -35,7 +36,9 @@ const TableRow = ({
       <td>{category.title}</td>
       <td>{category.description}</td>
       <td className="flex gap-4">
-        <Button className="bg-green-500 text-white">Edit</Button>
+        <Link href={`/admin/edit-category/${category?._id}`}>
+          <Button className="bg-green-500 text-white">Edit</Button>
+        </Link>
         <Button
           onClick={() => handleDeleteCategory(category?._id as string)}
           className="bg-red-500 text-white"
