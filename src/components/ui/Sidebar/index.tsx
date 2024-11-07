@@ -174,7 +174,6 @@ export const SidebarLink = ({
 }) => {
   const { open, animate } = useSidebar();
   const { user } = useUser();
-  console.log({ isOpen });
   return (
     <>
       {link.href ? (

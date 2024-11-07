@@ -1,12 +1,17 @@
 "use client";
+import { useCreateCategory } from "@/hooks/category.hook";
 import { Input } from "@nextui-org/react";
 import { useState, FormEvent } from "react";
+import { CircleLoader } from "react-spinners";
 
 const AddCategory = () => {
+  const { mutate: handleCreateCategory, isPending, error } = useCreateCategory();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
   });
+
+  console.log(error)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -15,24 +20,24 @@ const AddCategory = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    handleCreateCategory(formData);
   };
 
   return (
     <div className="h-screen w-full flex items-center justify-center p-4 bg-gray-100">
-      <div className="h-4/5 w-full max-w-lg  rounded-lg shadow-2xl overflow-hidden">
+      <div className="py-6 w-full max-w-lg  rounded-lg shadow-2xl overflow-hidden">
         <h1 className="text-2xl font-semibold text-center text-gray-800 mt-4">
           Add a Category
         </h1>
         <form
           className="px-6 h-full flex items-center justify-center flex-col w overflow-y-auto"
-          style={{ maxHeight: "calc(100% - 80px)" }}
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col gap-4 w-[80vw] max-w-full">
             <Input
               type="text"
               variant="underlined"
-              label="Name"
+              label="Title"
               name="title"
               value={formData.title}
               onChange={handleChange}
@@ -49,10 +54,15 @@ const AddCategory = () => {
             />
           </div>
           <button
+            disabled={isPending}
             type="submit"
             className="mt-4 w-full py-2 bg-primary hover:bg-primary-500 text-white rounded-lg"
           >
-            Submit
+            {isPending ? (
+              <CircleLoader size={24} color="white" />
+            ) : (
+              "Create Category"
+            )}
           </button>
         </form>
       </div>

@@ -5,6 +5,7 @@
 import axiosInstance from "@/lib/AxiosInstance";
 import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
+import { ThrowError } from "@/utils/error";
 
 export const registerUser = async (userData: any) => {
   try {
@@ -15,12 +16,7 @@ export const registerUser = async (userData: any) => {
     }
     return data;
   } catch (error: any) {
-    // Check if the error response exists and return the message
-    if (error.response && error.response.data) {
-      throw new Error(error.response.data.message || "An error occurred");
-    }
-    // If no specific error message, return a general error
-    throw new Error("An unexpected error occurred");
+    ThrowError(error);
   }
 };
 
@@ -33,12 +29,7 @@ export const loginUser = async (userData: any) => {
     }
     return data;
   } catch (error: any) {
-    // Check if the error response exists and return the message
-    if (error.response && error.response.data) {
-      throw new Error(error.response.data.message || "An error occurred");
-    }
-    // If no specific error message, return a general error
-    throw new Error("An unexpected error occurred");
+    ThrowError(error);
   }
 };
 
@@ -58,12 +49,7 @@ export const getCurrentUser = async () => {
     }
     return decodedToken;
   } catch (error: any) {
-    // Check if the error response exists and return the message
-    if (error.response && error.response.data) {
-      throw new Error(error.response.data.message || "An error occurred");
-    }
-    // If no specific error message, return a general error
-    throw new Error("An unexpected error occurred");
+    ThrowError(error);
   }
 };
 
@@ -72,12 +58,7 @@ export const logOutUser = async () => {
     cookies().delete("access-token");
     cookies().delete("refresh-token");
   } catch (error: any) {
-    // Check if the error response exists and return the message
-    if (error.response && error.response.data) {
-      throw new Error(error.response.data.message || "An error occurred");
-    }
-    // If no specific error message, return a general error
-    throw new Error("An unexpected error occurred");
+    ThrowError(error);
   }
 };
 
@@ -100,6 +81,6 @@ export const getNewAccessToken = async () => {
 
     return res.data;
   } catch (error: any) {
-    throw new Error("Failed to get new access token");
+    ThrowError(error);
   }
 };

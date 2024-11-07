@@ -6,3 +6,9 @@ export interface TLinkItem {
     icon: ReactNode;
     subLinks?: TLinkItem[];
   }
+
+
+export interface TCategoryData{
+  title: string;
+  description: string;
+}
