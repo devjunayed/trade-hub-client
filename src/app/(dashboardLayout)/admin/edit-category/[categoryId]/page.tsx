@@ -9,7 +9,7 @@ const AddCategory = ({ params }: { params: { categoryId: string } }) => {
   const { categoryId } = params;
   const { data } = useGetSingleCategory(categoryId);
 
-  const { mutate: handleUpdateCategory, isPending } = useUpdateCategory();
+  const { mutate: handleUpdateCategory, isPending, isSuccess } = useUpdateCategory();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -31,6 +31,9 @@ const AddCategory = ({ params }: { params: { categoryId: string } }) => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     handleUpdateCategory({ categoryId, categoryData: {...formData} });
+    if(isSuccess){
+      window.history.back();
+    }
   };
 
   return (
