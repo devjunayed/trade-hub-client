@@ -1,13 +1,28 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { FileUpload } from "@/components/ui/FileUpload/file-upload";
-import { useUploadImage } from "@/hooks/product.hook";
-import { Input } from "@nextui-org/react";
-import { useState, FormEvent } from "react";
+import { useGetAllCategory } from "@/hooks/category.hook";
+import { useCreateProduct, useUploadImage } from "@/hooks/product.hook";
+import { TCategoryData } from "@/types";
+import { Input, Select, SelectItem } from "@nextui-org/react";
+import { useState, FormEvent, useEffect } from "react";
+import { CircleLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 const AddProduct = () => {
-  const { mutate: handleImageUpload, data: productImage } = useUploadImage();
+  const {
+    mutate: handleImageUpload,
+    data: productImage,
+    isSuccess: isImageUploadSuccess,
+  } = useUploadImage();
+
+  const { data: categories, isPending: isGetCategoriesPending } =
+    useGetAllCategory();
+
+  const { mutate: handleCreateProduct, isPending } = useCreateProduct();
+
   const [files, setFiles] = useState<File[]>([]);
   const [formData, setFormData] = useState({
     productImage: "",
@@ -17,6 +32,10 @@ const AddProduct = () => {
     stockQuantity: "",
     category: "",
   });
+
+  useEffect(() => {
+    setFormData({ ...formData, productImage: productImage as string });
+  }, [productImage, isImageUploadSuccess]);
 
   const handleFileUpload = (files: File[]) => {
     setFiles(files);
@@ -30,9 +49,20 @@ const AddProduct = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleCategorySelect = (eventOrValue: any) => {
+    const value =
+      typeof eventOrValue === "string"
+        ? eventOrValue
+        : eventOrValue.target.value;
+    setFormData({
+      ...formData,
+      category: categories?.data[Number(value)]._id || "",
+    });
+  };
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!productImage) {
+    if (!productImage || productImage === "") {
       toast.error("Image is required", {
         position: "top-center",
       });
@@ -43,7 +73,14 @@ const AddProduct = () => {
       }));
     }
 
-    console.log(formData)
+    handleCreateProduct({
+      productImage: formData.productImage,
+      name: formData.name,
+      description: formData.description,
+      price: Number(formData.price),
+      stockQuantity: Number(formData.stockQuantity),
+      category: formData.category,
+    });
   };
 
   return (
@@ -96,21 +133,32 @@ const AddProduct = () => {
             onChange={handleChange}
             className="w-full"
           />
-          <Input
-            type="text"
+
+          <Select
             variant="underlined"
-            label="Category"
             name="category"
-            value={formData.category}
-            onChange={handleChange}
-            className="w-full"
-          />
+            label="Select a category"
+            onChange={handleCategorySelect}
+          >
+            {categories &&
+            categories.data.length > 0 &&
+            !isGetCategoriesPending ? (
+              categories.data.map((category: TCategoryData, index) => (
+                <SelectItem key={index}>{category.title}</SelectItem>
+              ))
+            ) : (
+              <SelectItem key={"no-categories"} isDisabled>
+                No categories available
+              </SelectItem>
+            )}
+          </Select>
         </div>
         <button
+          disabled={isPending}
           type="submit"
-          className="mt-4 w-full py-2 bg-primary hover:bg-primary-500 text-white rounded-lg"
+          className="w-full flex justify-center py-2 mt-6 disabled:bg-gray-400 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none"
         >
-          Submit
+          {isPending ? <CircleLoader size={24} color="white" /> : "Sign In"}
         </button>
       </form>
     </div>

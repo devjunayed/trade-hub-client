@@ -13,3 +13,13 @@ export interface TCategoryData{
   title: string | undefined;
   description: string | undefined;
 }
+export type TProduct = {
+  _id?: string;
+  name: string;
+  description: string;
+  price: number;
+  stockQuantity: number;
+  category: string;
+  productImage: string;
+  isDeleted?: boolean;
+};
