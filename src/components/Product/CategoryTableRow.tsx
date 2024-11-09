@@ -1,20 +1,22 @@
-import { useDeleteCategory } from "@/hooks/category.hook";
-import { TCategoryData } from "@/types";
+
+import { useDeleteProduct } from "@/hooks/product.hook";
+import { TProduct } from "@/types";
 import { Button } from "@nextui-org/react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Swal from "sweetalert2";
 
-const TableRow = ({
-  category,
+const ProductTableRow = ({
+  product,
   sl,
 }: {
-  category: TCategoryData;
+  product: TProduct;
   sl: number;
 }) => {
-  const { mutate: handleDelete } = useDeleteCategory();
+  const { mutate: handleDelete } = useDeleteProduct();
 
-  const handleDeleteCategory = (id: string) => {
+  const handleDeleteproduct = (id: string) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -31,16 +33,17 @@ const TableRow = ({
   };
 
   return (
-    <tr key={category._id}>
+    <tr key={product._id}>
       <th>{sl}</th>
-      <td>{category.title}</td>
-      <td>{category.description}</td>
+      <td><Image src={product.productImage} width={25} height={25} alt={`${product?.name}`} /></td>
+      <td>{product.name}</td>
+      <td>{product.description}</td>
       <td className="flex gap-4">
-        <Link href={`/admin/edit-category/${category?._id}`}>
+        <Link href={`/admin/edit-product/${product?._id}`}>
           <Button className="bg-green-500 text-white">Edit</Button>
         </Link>
         <Button
-          onClick={() => handleDeleteCategory(category?._id as string)}
+          onClick={() => handleDeleteproduct(product?._id as string)}
           className="bg-red-500 text-white"
         >
           Delete
@@ -50,4 +53,4 @@ const TableRow = ({
   );
 };
 
-export default TableRow;
+export default ProductTableRow;

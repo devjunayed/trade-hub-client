@@ -1,5 +1,5 @@
 "use client";
-import TableRow from "@/components/Category/TableRow";
+import TableRow from "@/components/Category/CategoryTableRow";
 import { useGetAllCategory } from "@/hooks/category.hook";
 import { TCategoryData } from "@/types";
 import React from "react";
@@ -20,7 +20,7 @@ const ManageCategories = () => {
         </thead>
         <tbody>
           {categories?.data?.map((category: TCategoryData, index: number) => (
-            <TableRow  key={category._id} category={category} sl={index+1} />
+            <TableRow key={category._id} category={category} sl={index + 1} />
           ))}
         </tbody>
       </table>
