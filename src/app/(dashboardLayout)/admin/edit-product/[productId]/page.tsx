@@ -6,12 +6,13 @@ import { FileUpload } from "@/components/ui/FileUpload/file-upload";
 import { useGetAllCategory } from "@/hooks/category.hook";
 import { useCreateProduct, useUploadImage } from "@/hooks/product.hook";
 import { TCategoryData } from "@/types";
-import { Input, Select, SelectItem } from "@nextui-org/react";
+import { Button, Input, Select, SelectItem } from "@nextui-org/react";
 import { useState, FormEvent, useEffect } from "react";
+import { BsArrowLeft } from "react-icons/bs";
 import { CircleLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
-const AddProduct = () => {
+const EditProduct = () => {
   const {
     mutate: handleImageUpload,
     data: productImage,
@@ -84,9 +85,18 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="w-full max-w-lg  rounded-lg ">
+    <>
+    <div className="w-full relative max-w-lg  rounded-lg ">
+     <div className="absolute left-0 mt-10">
+        <Button
+          onClick={() => window.history.back()}
+          className="bg-primary text-white text-xl"
+        >
+          <BsArrowLeft />
+        </Button>
+      </div>
       <h1 className="text-2xl font-semibold text-center text-gray-800 my-4">
-        Add a Product
+        Edit Product
       </h1>
       <form
         className="p-6 h-[60vh] flex items-center justify-center flex-col overflow-y-auto"
@@ -158,11 +168,12 @@ const AddProduct = () => {
           type="submit"
           className="w-full flex justify-center py-2 mt-6 disabled:bg-gray-400 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none"
         >
-          {isPending ? <CircleLoader size={24} color="white" /> : "Add product"}
+          {isPending ? <CircleLoader size={24} color="white" /> : "Save"}
         </button>
       </form>
     </div>
+    </>
   );
 };
 
-export default AddProduct;
+export default EditProduct;

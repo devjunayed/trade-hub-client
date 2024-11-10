@@ -5,7 +5,7 @@ import { useState, FormEvent, useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { CircleLoader } from "react-spinners";
 
-const AddCategory = ({ params }: { params: { categoryId: string } }) => {
+const EditCategory = ({ params }: { params: { categoryId: string } }) => {
   const { categoryId } = params;
   const { data } = useGetSingleCategory(categoryId);
 
@@ -90,4 +90,4 @@ const AddCategory = ({ params }: { params: { categoryId: string } }) => {
   );
 };
 
-export default AddCategory;
+export default EditCategory;

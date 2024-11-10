@@ -1,5 +1,5 @@
 "use client";
-import TableRow from "@/components/product/productTableRow";
+import ProductTableRow from "@/components/Product/ProductTableRow";
 import { useGetAllProduct } from "@/hooks/product.hook";
 import {  TProduct } from "@/types";
 import React from "react";
@@ -15,7 +15,8 @@ const ManageProduct = () => {
             <th></th>
             <th>Image</th>
             <th>Name</th>
-            <th>product</th>
+            <th>Description</th>
+            <th>Category</th>
             <th>Price</th>
             <th>Stock</th>
             <th>Actions</th>
@@ -23,7 +24,7 @@ const ManageProduct = () => {
         </thead>
         <tbody>
           {products?.data?.map((product: TProduct, index: number) => (
-            <TableRow key={product._id} product={product} sl={index + 1} />
+            <ProductTableRow key={product._id} product={product} sl={index + 1} />
           ))}
         </tbody>
       </table>

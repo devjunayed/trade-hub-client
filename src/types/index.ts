@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode } from "react";
 
 export interface TLinkItem {
@@ -19,7 +20,7 @@ export type TProduct = {
   description: string;
   price: number;
   stockQuantity: number;
-  category: string;
+  category: any;
   productImage: string;
   isDeleted?: boolean;
 };

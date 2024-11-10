@@ -38,6 +38,9 @@ const ProductTableRow = ({
       <td><Image src={product.productImage} width={25} height={25} alt={`${product?.name}`} /></td>
       <td>{product.name}</td>
       <td>{product.description}</td>
+      <td>{product.category.title}</td>
+      <td>{product.price} $</td>
+      <td>{product.stockQuantity}</td>
       <td className="flex gap-4">
         <Link href={`/admin/edit-product/${product?._id}`}>
           <Button className="bg-green-500 text-white">Edit</Button>
