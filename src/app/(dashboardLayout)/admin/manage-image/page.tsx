@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState } from "react";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import {  message, Upload } from "antd";
+import { message, Upload } from "antd";
 import type { GetProp, UploadFile, UploadProps } from "antd";
 import {
   Modal,
@@ -13,6 +14,7 @@ import {
   useDisclosure,
 } from "@nextui-org/modal";
 import { Button } from "@nextui-org/react";
+import { useUploadImage } from "@/hooks/image.hook";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -39,12 +41,24 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const { mutate: handleImageSave, data } = useUploadImage();
 
-  const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
+  const onChange: UploadProps["onChange"] = (info) => {
+    if(info.file.status === "done"){
+      setFileList(info.fileList);
+    }
+
+    console.log(info);
   };
 
- console.log(fileList)
+  const handleSave = () => {
+    console.log({hitting: "hitting"})
+    if (fileList.length > 0 && fileList[0].originFileObj) {
+      const imageData = new FormData();
+      imageData.append("image", fileList[0].originFileObj);
+      handleImageSave(imageData);
+    }
+  };
 
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
@@ -56,7 +70,7 @@ const App: React.FC = () => {
   return (
     <div className="w-full mx-10">
       <div className="flex justify-end w-full">
-        <Button variant="solid" color="primary"  onPress={onOpen}>
+        <Button variant="solid" color="primary" onPress={onOpen}>
           <PlusOutlined /> Upload
         </Button>
       </div>
@@ -75,25 +89,18 @@ const App: React.FC = () => {
                     listType="picture-card"
                     className="avatar-uploader"
                     showUploadList={true}
-
-                    // action={`https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`}
                     beforeUpload={beforeUpload}
                     onChange={onChange}
                   >
-                    {fileList.length >= 1 ? 
-                      null
-                     : (
-                      uploadButton
-                    )}
+                    {fileList.length >= 1 ? null : uploadButton}
                   </Upload>
-                  
                 </div>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="solid" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button onClick={handleSave} color="primary">
                   Save
                 </Button>
               </ModalFooter>
