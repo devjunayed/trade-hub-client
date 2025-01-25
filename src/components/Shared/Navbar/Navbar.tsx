@@ -48,7 +48,9 @@ export default function NavBar() {
           className="sm:hidden"
         />
         <NavbarBrand>
+          <Link href="/">
           <Image height={150} width={120} src={Logo} alt="Logo image" />
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 

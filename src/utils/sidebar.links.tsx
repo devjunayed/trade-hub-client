@@ -10,7 +10,7 @@ import { BiPhotoAlbum } from "react-icons/bi";
 export const adminLinks = [
   {
     label: "Dashboard",
-    href: `/admin-dashboard`,
+    href: `admin-dashboard`,
     icon: <IconBrandTabler className="text-white h-5 w-5" />,
   },
   {
@@ -19,12 +19,12 @@ export const adminLinks = [
     subLinks: [
       {
         label: "Add Categroy",
-        href: "/add-category",
+        href: "add-category",
         icon: <AiFillFolderAdd className="text-white h-5 w-5" />,
       },
       {
         label: "Manage Category",
-        href: "/manage-category",
+        href: "manage-category",
         icon: <AiOutlineFolderView className="text-white h-5 w-5" />,
       },
     ],
@@ -35,12 +35,12 @@ export const adminLinks = [
     subLinks: [
       {
         label: "Add Product",
-        href: "/add-product",
+        href: "add-product",
         icon: <IconPackageImport className="text-white h-5 w-5" />,
       },
       {
         label: "Manage Product",
-        href: "/manage-product",
+        href: "manage-product",
         icon: <IconBox className="text-white h-5 w-5" />,
       },
     ],
@@ -48,7 +48,7 @@ export const adminLinks = [
   {
     label: "Media",
     icon: <BiPhotoAlbum  className="text-white h-5 w-5" />,
-    href: "/manage-image"
+    href: "manage-image"
   },
   {
     label: "Settings",
@@ -59,7 +59,7 @@ export const adminLinks = [
 export const userLinks = [
   {
     label: "Dashboard",
-    href: `/user-dashboard`,
+    href: `user-dashboard`,
     icon: <IconBrandTabler className="text-white h-5 w-5" />,
   },
 

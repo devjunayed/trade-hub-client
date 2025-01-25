@@ -179,7 +179,7 @@ export const SidebarLink = ({
       {link.href ? (
         <Link
           onClick={onClick}
-          href={`/${user?.role}/${link.href}`}
+          href={`/${link.href}`}
           className={cn(
             "flex items-center justify-start gap-2  group/sidebar py-2",
             className
