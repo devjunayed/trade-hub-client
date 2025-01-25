@@ -10,12 +10,18 @@ import {
   NavbarMenuItem,
   Link,
   Button,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
 } from "@heroui/react";
 import Image from "next/image";
 import Logo from "@/app/assets/images/trade-hub.png";
 import { useUser } from "@/context/user.provider";
 import { logOutUser } from "@/services/AuthService";
 import { useRouter } from "next/navigation";
+import "./navbar.module.css";
+import { Avatar } from "@heroui/react";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -37,19 +43,19 @@ export default function NavBar() {
     "My Settings",
     "Team Settings",
     "Help & Feedback",
-    "Log Out",
   ];
 
   return (
-    <Navbar className="m-0 p-0 bg-background" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      shouldHideOnScroll
+      maxWidth="2xl"
+      className=" m-0 p-0 bg-background th-navbar"
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
         <NavbarBrand>
           <Link href="/">
-          <Image height={150} width={120} src={Logo} alt="Logo image" />
+            <Image height={150} width={120} src={Logo} alt="Logo image" />
           </Link>
         </NavbarBrand>
       </NavbarContent>
@@ -73,6 +79,38 @@ export default function NavBar() {
       </NavbarContent> */}
 
       <NavbarContent justify="end">
+        <div className="sm:block hidden">
+          {user && (
+            <Dropdown>
+              <DropdownTrigger>
+                {user.image ? (
+                  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+                ) : (
+                  <Avatar name={user.name.slice(0, 1)} />
+                )}
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Static Actions">
+                <DropdownItem key="new">New file</DropdownItem>
+                <DropdownItem key="copy">Copy link</DropdownItem>
+                <DropdownItem key="edit">Edit file</DropdownItem>
+                <DropdownItem
+                  key="delete"
+                  className="text-danger"
+                  color="danger"
+                >
+                  <Button
+                    className="w-full bg-transparent hover:text-white"
+                    as={Link}
+                    onPress={handleLogout}
+                  >
+                    Logout
+                  </Button>
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          )}
+        </div>
+
         {!user && (
           <>
             <NavbarItem className="flex">
@@ -85,19 +123,14 @@ export default function NavBar() {
             </NavbarItem>
           </>
         )}
-        {user && (
-          <NavbarItem className="flex">
-            <Button
-              as={Link}
-              color="primary"
-              onClick={handleLogout}
-              variant="flat"
-            >
-              Logout
-            </Button>
-          </NavbarItem>
-        )}
+
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
       </NavbarContent>
+
+      {/* Navbar Menu in small device 🔽*/}
       <NavbarMenu className="bg-gray-200 text-white">
         {menuItems.map((item, index) => (
           <NavbarMenuItem className="" key={`${item}-${index}`}>
@@ -117,7 +150,24 @@ export default function NavBar() {
             </Link>
           </NavbarMenuItem>
         ))}
+        <NavbarMenuItem>
+          {" "}
+          {user && (
+            <NavbarItem className="flex">
+              <Button
+              className="w-full"
+                as={Link}
+                color="danger"
+                onPress={handleLogout}
+                variant="flat"
+              >
+                Logout
+              </Button>
+            </NavbarItem>
+          )}
+        </NavbarMenuItem>
       </NavbarMenu>
+      {/* Navbar Menu in small device  🔼*/}
     </Navbar>
   );
 }

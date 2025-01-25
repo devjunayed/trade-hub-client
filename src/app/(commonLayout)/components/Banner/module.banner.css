@@ -43,3 +43,8 @@
   fill: black !important;
   stroke: black !important;
 }
+
+
+.swiper-button-prev:after, .swiper-button-next:after {
+  font-size: 20px !important;
+}
