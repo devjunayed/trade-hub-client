@@ -24,3 +24,13 @@ export type TProduct = {
   productImage: string;
   isDeleted?: boolean;
 };
+
+
+export type TLoginResponse = {
+  success: boolean;
+  message: string;
+  data: {
+    accessToken: string;
+    refreshToken: string;
+  };
+};

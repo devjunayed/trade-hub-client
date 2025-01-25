@@ -29,9 +29,9 @@ Develop a full-stack e-commerce application using **Next.js** that allows both *
    -  **Delete Product:** Admin can remove products from the inventory.
    -  **View Products:** Admin can see a list of all products with options to filter and search.
 -  **Product Categories Management:**
-   -  ✅ **Add Category:** Admin can create new product categories to organize products.
+   -  **Add Category:** Admin can create new product categories to organize products.
    -  **Edit Category:** Admin can modify existing categories.
-   -  ✅ **Delete Category:** Admin can remove categories.
+   -  **Delete Category:** Admin can remove categories.
 -  **Order & Payment Management:**
    -  **View Orders:** Admin can view all orders placed by users, along with status and details.
    -  **Cancel Orders:** Admin can cancel orders as required.

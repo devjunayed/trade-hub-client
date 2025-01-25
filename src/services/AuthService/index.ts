@@ -6,6 +6,7 @@ import axiosInstance from "@/lib/AxiosInstance";
 import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
 import { ThrowError } from "@/utils/error";
+import { NextResponse } from "next/server";
 
 export const registerUser = async (userData: any) => {
   try {

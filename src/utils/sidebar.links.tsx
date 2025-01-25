@@ -10,7 +10,7 @@ import { BiPhotoAlbum } from "react-icons/bi";
 export const adminLinks = [
   {
     label: "Dashboard",
-    href: `dashboard`,
+    href: `/admin-dashboard`,
     icon: <IconBrandTabler className="text-white h-5 w-5" />,
   },
   {
@@ -59,7 +59,7 @@ export const adminLinks = [
 export const userLinks = [
   {
     label: "Dashboard",
-    href: `dashboard`,
+    href: `/user-dashboard`,
     icon: <IconBrandTabler className="text-white h-5 w-5" />,
   },
 
