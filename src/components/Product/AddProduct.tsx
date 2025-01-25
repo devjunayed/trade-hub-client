@@ -4,7 +4,8 @@
 "use client";
 import { FileUpload } from "@/components/ui/FileUpload/file-upload";
 import { useGetAllCategory } from "@/hooks/category.hook";
-import { useCreateProduct, useUploadImage } from "@/hooks/product.hook";
+import { useUploadImage } from "@/hooks/image.hook";
+import { useCreateProduct } from "@/hooks/product.hook";
 import { TCategoryData } from "@/types";
 import { Input, Select, SelectItem } from "@heroui/react";
 import { useState, FormEvent, useEffect } from "react";
