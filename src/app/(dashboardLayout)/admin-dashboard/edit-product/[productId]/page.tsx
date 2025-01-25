@@ -6,7 +6,7 @@ import { FileUpload } from "@/components/ui/FileUpload/file-upload";
 import { useGetAllCategory } from "@/hooks/category.hook";
 import { useCreateProduct, useUploadImage } from "@/hooks/product.hook";
 import { TCategoryData } from "@/types";
-import { Button, Input, Select, SelectItem } from "@nextui-org/react";
+import { Button, Input, Select, SelectItem } from "@heroui/react";
 import { useState, FormEvent, useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { CircleLoader } from "react-spinners";

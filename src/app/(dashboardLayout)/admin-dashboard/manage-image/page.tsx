@@ -12,8 +12,8 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from "@nextui-org/modal";
-import { Button } from "@nextui-org/react";
+} from "@heroui/modal";
+import { Button } from "@heroui/react";
 import { useUploadImage } from "@/hooks/image.hook";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];

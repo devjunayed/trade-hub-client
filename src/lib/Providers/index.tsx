@@ -1,7 +1,7 @@
 "use client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider } from "@heroui/react";
 import UserProvider from "@/context/user.provider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 
@@ -10,7 +10,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <AntdRegistry>
-      <NextUIProvider>
+      <HeroUIProvider>
         <UserProvider>
           <QueryClientProvider client={queryClient}>
             <ToastContainer
@@ -21,7 +21,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
             {children}
           </QueryClientProvider>
         </UserProvider>
-      </NextUIProvider>
+      </HeroUIProvider>
     </AntdRegistry>
   );
 }

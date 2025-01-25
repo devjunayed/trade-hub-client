@@ -1,6 +1,6 @@
 import { useDeleteCategory } from "@/hooks/category.hook";
 import { TCategoryData } from "@/types";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import Link from "next/link";
 import React from "react";
 import Swal from "sweetalert2";

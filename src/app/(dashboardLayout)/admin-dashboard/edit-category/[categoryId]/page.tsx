@@ -1,6 +1,6 @@
 "use client";
 import { useGetSingleCategory, useUpdateCategory } from "@/hooks/category.hook";
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input } from "@heroui/react";
 import { useState, FormEvent, useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { CircleLoader } from "react-spinners";

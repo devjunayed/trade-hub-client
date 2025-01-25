@@ -1,7 +1,7 @@
 
 import { useDeleteProduct } from "@/hooks/product.hook";
 import { TProduct } from "@/types";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

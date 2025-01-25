@@ -1,6 +1,6 @@
 "use client";
 import { useCreateCategory } from "@/hooks/category.hook";
-import { Input } from "@nextui-org/react";
+import { Input } from "@heroui/react";
 import { useState, FormEvent } from "react";
 import { CircleLoader } from "react-spinners";
 

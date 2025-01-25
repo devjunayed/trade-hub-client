@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
-import {nextui} from "@nextui-org/react";
+import {heroui} from "@heroui/react";
 
 const config: Config = {
   daisyui: {
@@ -10,7 +10,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
+     "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {
@@ -23,6 +23,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('daisyui'), nextui()],
+  plugins: [require('daisyui'), heroui()],
 };
 export default config;

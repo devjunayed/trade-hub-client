@@ -10,7 +10,7 @@ import {
   NavbarMenuItem,
   Link,
   Button,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import Image from "next/image";
 import Logo from "@/app/assets/images/trade-hub.png";
 import { useUser } from "@/context/user.provider";
