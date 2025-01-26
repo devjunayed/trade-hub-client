@@ -20,9 +20,9 @@ export function ThemeSwitcher() {
   console.log(theme)
 
   return (
-    <div>
-      <button className={`${theme === "light" && "hidden"}`} onClick={() => setTheme('light')}><MdLightMode /></button>
-      <button className={`${theme === "dark" && "hidden"}`} onClick={() => setTheme('dark')}><MdOutlineLightMode /></button>
+    <div className="flex items-center">
+      <button className={`${theme === "light" && "hidden"}`} onClick={() => setTheme('light')}><MdLightMode size={28} /></button>
+      <button className={`${theme === "dark" && "hidden"}`} onClick={() => setTheme('dark')}><MdOutlineLightMode size={28} /></button>
     </div>
   )
 };

@@ -2,25 +2,37 @@
 import { useUser } from "@/context/user.provider";
 import React from "react";
 import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
+import Marquee from "react-fast-marquee";
+import { BiCart } from "react-icons/bi";
 
 const TopNavbar = () => {
   const { user } = useUser();
   return (
     <>
-      {user && (
-        <div className="bg-black text-white justify-between py-2 flex px-10">
-          <div>
-            <p>Howdy, {user?.name} </p>
-          </div>
-          <div>
-            <ul>
-              <li>
-               <ThemeSwitcher />
-              </li>
-            </ul>
+      <div className="bg-black text-white justify-between py-2 flex px-6">
+        <div className="w-[93%]  flex items-center">
+          {user && <p className="w-[12%]">Howdy, {user?.name} </p>}
+          <div className={`flex ${user ? "w-[88%]" : "w-full"}`}>
+            <Marquee>
+              <span>Return delivery is applicable on few terms</span>
+              <span>Return delivery is applicable on few terms</span>
+              <span>Return delivery is applicable on few terms</span>
+            </Marquee>
           </div>
         </div>
-      )}
+        <div className="w-[7%]  flex flex-wrap justify-end">
+          <ul className="flex flex-wrap justify-end items-center gap-4 bg-black">
+            <li>
+              <ThemeSwitcher />
+            </li>
+           
+              <li>
+                <BiCart size={28} />
+              </li>
+         
+          </ul>
+        </div>
+      </div>
     </>
   );
 };
