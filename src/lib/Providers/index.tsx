@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { HeroUIProvider } from "@heroui/react";
 import UserProvider from "@/context/user.provider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import {ThemeProvider as NextThemesProvider} from "next-themes";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient();
@@ -11,6 +12,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <AntdRegistry>
       <HeroUIProvider>
+      <NextThemesProvider attribute="class" defaultTheme="dark">
         <UserProvider>
           <QueryClientProvider client={queryClient}>
             <ToastContainer
@@ -21,6 +23,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
             {children}
           </QueryClientProvider>
         </UserProvider>
+        </NextThemesProvider>
       </HeroUIProvider>
     </AntdRegistry>
   );

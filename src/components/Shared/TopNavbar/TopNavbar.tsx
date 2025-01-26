@@ -1,7 +1,7 @@
 "use client";
 import { useUser } from "@/context/user.provider";
-import Link from "next/link";
 import React from "react";
+import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
 
 const TopNavbar = () => {
   const { user } = useUser();
@@ -15,7 +15,7 @@ const TopNavbar = () => {
           <div>
             <ul>
               <li>
-                <Link href={`/${user.role}/dashboard`}>Dashboard</Link>
+               <ThemeSwitcher />
               </li>
             </ul>
           </div>

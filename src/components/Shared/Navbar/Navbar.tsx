@@ -49,7 +49,7 @@ export default function NavBar() {
     <Navbar
       shouldHideOnScroll
       maxWidth="2xl"
-      className=" m-0 p-0 bg-background th-navbar"
+      className=" m-0 p-0 bg-white    th-navbar"
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent>
