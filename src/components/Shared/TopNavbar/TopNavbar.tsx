@@ -13,10 +13,13 @@ const TopNavbar = () => {
         <div className="w-[93%]  flex items-center">
           {user && <p className="w-[12%]">Howdy, {user?.name} </p>}
           <div className={`flex ${user ? "w-[88%]" : "w-full"}`}>
-            <Marquee>
-              <span>Return delivery is applicable on few terms</span>
-              <span>Return delivery is applicable on few terms</span>
-              <span>Return delivery is applicable on few terms</span>
+            <Marquee className="flex " autoFill={true}>
+              <div className=" flex">
+              <span className="ml-64">Return delivery is applicable on few terms</span>
+              <span className="ml-64">Return delivery is applicable on few terms</span>
+              <span className="ml-64">Return delivery is applicable on few terms</span>
+     
+                </div>
             </Marquee>
           </div>
         </div>
@@ -25,11 +28,10 @@ const TopNavbar = () => {
             <li>
               <ThemeSwitcher />
             </li>
-           
-              <li>
-                <BiCart size={28} />
-              </li>
-         
+
+            <li>
+              <BiCart size={28} />
+            </li>
           </ul>
         </div>
       </div>
