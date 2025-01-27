@@ -3,9 +3,10 @@ import {
   IconBrandTabler,
   IconPackageImport,
   IconSettings,
+  IconUsers,
 } from "@tabler/icons-react";
 import { AiFillFolder, AiFillFolderAdd, AiFillProduct, AiOutlineFolderView } from "react-icons/ai";
-import { BiPhotoAlbum } from "react-icons/bi";
+import { BiPhotoAlbum, BiUserPlus } from "react-icons/bi";
 
 export const adminLinks = [
   {
@@ -37,6 +38,22 @@ export const adminLinks = [
         label: "Add Product",
         href: "admin-dashboard/add-product",
         icon: <IconPackageImport className="text-white h-5 w-5" />,
+      },
+      {
+        label: "Manage Product",
+        href: "admin-dashboard/manage-product",
+        icon: <IconBox className="text-white h-5 w-5" />,
+      },
+    ],
+  },
+  {
+    label: "Users",
+    icon: <IconUsers className="text-white h-5 w-5" />,
+    subLinks: [
+      {
+        label: "Create User",
+        href: "admin-dashboard/create-user",
+        icon: <BiUserPlus className="text-white h-5 w-5" />,
       },
       {
         label: "Manage Product",
