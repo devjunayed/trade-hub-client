@@ -17,7 +17,6 @@ export function ThemeSwitcher() {
 
   if(!mounted) return null
 
-  console.log(theme)
 
   return (
     <div className="flex items-center">

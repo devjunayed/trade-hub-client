@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React from "react";
 import {
@@ -22,11 +23,13 @@ import { logOutUser } from "@/services/AuthService";
 import { useRouter } from "next/navigation";
 import "./navbar.module.css";
 import { Avatar } from "@heroui/react";
+import { useTheme } from "next-themes";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { user } = useUser();
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
 
   const handleLogout = async () => {
     await logOutUser();
@@ -49,12 +52,14 @@ export default function NavBar() {
     <Navbar
       shouldHideOnScroll
       maxWidth="2xl"
-      className=" m-0 p-0 bg-white    th-navbar"
+      className={`${
+        theme === "light" ? "bg-white" : "bg-black"
+      } m-0 p-0     th-navbar`}
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent>
         <NavbarBrand>
-          <Link href="/">
+          <Link className={`${theme=== "dark" && "bg-white"} px-4 py-1 rounded-sm`} href="/">
             <Image height={150} width={120} src={Logo} alt="Logo image" />
           </Link>
         </NavbarBrand>
@@ -90,7 +95,18 @@ export default function NavBar() {
                 )}
               </DropdownTrigger>
               <DropdownMenu aria-label="Static Actions">
-                <DropdownItem key="new">New file</DropdownItem>
+                <DropdownItem key="new">
+                  <Link
+                    className="text-white"
+                    href={`${
+                      user.role === "admin"
+                        ? "admin-dashboard"
+                        : "user-dashboard"
+                    }`}
+                  >
+                    Dashboard
+                  </Link>
+                </DropdownItem>
                 <DropdownItem key="copy">Copy link</DropdownItem>
                 <DropdownItem key="edit">Edit file</DropdownItem>
                 <DropdownItem
@@ -155,7 +171,7 @@ export default function NavBar() {
           {user && (
             <NavbarItem className="flex">
               <Button
-              className="w-full"
+                className="w-full"
                 as={Link}
                 color="danger"
                 onPress={handleLogout}
