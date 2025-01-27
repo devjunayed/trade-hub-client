@@ -24,7 +24,7 @@ const TopNavbar = () => {
           </div>
         </div>
         <div className="w-[7%]  flex flex-wrap justify-end">
-          <ul className="flex flex-wrap justify-end items-center gap-4 bg-black">
+          <ul className="flex mr-2 flex-wrap justify-end items-center gap-4 bg-black">
             <li>
               <ThemeSwitcher />
             </li>

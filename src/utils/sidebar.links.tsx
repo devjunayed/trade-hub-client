@@ -19,12 +19,12 @@ export const adminLinks = [
     subLinks: [
       {
         label: "Add Categroy",
-        href: "add-category",
+        href: "admin-dashboard/add-category",
         icon: <AiFillFolderAdd className="text-white h-5 w-5" />,
       },
       {
         label: "Manage Category",
-        href: "manage-category",
+        href: "admin-dashboard/manage-category",
         icon: <AiOutlineFolderView className="text-white h-5 w-5" />,
       },
     ],
@@ -35,12 +35,12 @@ export const adminLinks = [
     subLinks: [
       {
         label: "Add Product",
-        href: "add-product",
+        href: "admin-dashboard/add-product",
         icon: <IconPackageImport className="text-white h-5 w-5" />,
       },
       {
         label: "Manage Product",
-        href: "manage-product",
+        href: "admin-dashboard/manage-product",
         icon: <IconBox className="text-white h-5 w-5" />,
       },
     ],
@@ -48,11 +48,11 @@ export const adminLinks = [
   {
     label: "Media",
     icon: <BiPhotoAlbum  className="text-white h-5 w-5" />,
-    href: "manage-image"
+    href: "admin-dashboard/manage-image"
   },
   {
     label: "Settings",
-    href: "#",
+    href: "admin-dashboard/settings",
     icon: <IconSettings className="text-white h-5 w-5" />,
   },
 ];

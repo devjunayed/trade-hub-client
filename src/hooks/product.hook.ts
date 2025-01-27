@@ -68,7 +68,7 @@ import { toast } from "react-toastify";
   };
   
   export const useGetAllProduct = () => {
-    return useQuery<unknown, Error, { data: TProduct[] }>({
+    return useQuery<TProduct[], Error, TProduct[]>({
       queryKey: ["GET_ALL_PRODUCT"],
       queryFn: async () => await getAllProduct(),
       staleTime: 0,

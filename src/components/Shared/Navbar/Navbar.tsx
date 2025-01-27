@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -29,7 +29,14 @@ export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { user } = useUser();
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   const handleLogout = async () => {
     await logOutUser();
@@ -59,7 +66,12 @@ export default function NavBar() {
     >
       <NavbarContent>
         <NavbarBrand>
-          <Link className={`${theme=== "dark" && "bg-white"} px-4 py-1 rounded-sm`} href="/">
+          <Link
+            className={`${
+              theme === "dark" && "bg-white px-4 py-1"
+            }  rounded-sm`}
+            href="/"
+          >
             <Image height={150} width={120} src={Logo} alt="Logo image" />
           </Link>
         </NavbarBrand>
@@ -95,9 +107,11 @@ export default function NavBar() {
                 )}
               </DropdownTrigger>
               <DropdownMenu aria-label="Static Actions">
-                <DropdownItem key="new">
+                <DropdownItem key="new" className="text-black">
                   <Link
-                    className="text-white"
+                    className={`${
+                      theme === "light" ? "text-black" : "text-white"
+                    }`}
                     href={`${
                       user.role === "admin"
                         ? "admin-dashboard"
