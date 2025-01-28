@@ -14,6 +14,7 @@ const EditUser = ({ params }: { params: { userId: string } }) => {
 
   const { mutate: handleEditUser, isPending } = useEditUser();
   const [formData, setFormData] = useState({
+    _id: "",
     name: "",
     email: "",
     phone: "",
@@ -24,8 +25,8 @@ const EditUser = ({ params }: { params: { userId: string } }) => {
 
   useEffect(() => {
     if (user) {
-      const { name, email, phone, address, role } = user[0];
-      setFormData({ name, email, phone, address, role, password: "" });
+      const {  name, email, phone, address, role } = user[0];
+      setFormData({ _id: params.userId, name, email, phone, address, role, password: "" });
     }
   }, [user]);
 
@@ -41,18 +42,24 @@ const EditUser = ({ params }: { params: { userId: string } }) => {
         : eventOrValue.target.value;
     setFormData({
       ...formData,
-      role: value ,
+      role: value,
     });
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    const { _id, name, email, address, phone, role } = formData;
+    const updatedData = {
+      _id,
+      name,
+      email,
+      address,
+      phone,
+      role,
+      ...((formData.password !== "" || formData.password !== undefined) && { password: formData.password as string }),
+    };
 
-    setFormData((prev) => ({
-      ...prev,
-    }));
-
-    handleEditUser(formData);
+    handleEditUser(updatedData);
   };
 
   return (
@@ -122,28 +129,26 @@ const EditUser = ({ params }: { params: { userId: string } }) => {
               className="w-full"
             />
 
-{(formData.role === "admin" || formData.role === "user") && (
-  <Select
-  autoCorrect={formData.role}
-  autoComplete={formData.role}
-  defaultSelectedKeys={formData.role}
-    key={formData.role} // Ensures re-render if role changes
-    variant="underlined"
-    name="role"
-    label="Select role"
-    placeholder={formData.role}
-    value={formData.role} // Controlled value
-    onChange={handleRoleSelect} // Update state on change
-  >
-    <SelectItem value="user"   key="user">
-      User
-    </SelectItem>
-    <SelectItem value="admin" key="admin">
-      Admin
-    </SelectItem>
-  </Select>
-)}
-
+            {(formData.role === "admin" || formData.role === "user") && (
+              <Select
+                key={formData.role}
+                variant="underlined"
+                name="role"
+                label="Select role"
+                placeholder={
+                  formData.role.charAt(0).toLocaleUpperCase() +
+                  formData.role.slice(1)
+                }
+                onChange={handleRoleSelect}
+              >
+                <SelectItem value="user" key="user">
+                  User
+                </SelectItem>
+                <SelectItem value="admin" key="admin">
+                  Admin
+                </SelectItem>
+              </Select>
+            )}
           </div>
           <Button
             disabled={isPending}
@@ -152,11 +157,7 @@ const EditUser = ({ params }: { params: { userId: string } }) => {
             type="submit"
             className="w-full disabled:bg-gray-400 h-full bg-black py-6 mt-4 text-white"
           >
-            {isPending ? (
-              <CircleLoader size={24} color="white" />
-            ) : (
-              "Save"
-            )}
+            {isPending ? <CircleLoader size={24} color="white" /> : "Save"}
           </Button>
         </form>
       </div>

@@ -46,7 +46,7 @@ export type TUser = {
   email: string;
   phone: string;
   address: string;
-  password: string;
+  password?: string | undefined;
   confirmPassword?: string;
   role: string;
   isDeleted?: boolean;

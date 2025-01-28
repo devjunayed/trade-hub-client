@@ -40,7 +40,15 @@ export const getUser = async (userId: string) => {
 
 export const editUser = async (userData: TUser) => {
   try {
-    const { data } = await axiosInstance.put(`/user/${userData._id}`, userData);
+    const { data } = await axiosInstance.patch(`/user/${userData._id}`, userData);
+    return data;
+  } catch (error: any) {
+    ThrowError(error);
+  }
+};
+export const deleteUser = async (userId: string) => {
+  try {
+    const { data } = await axiosInstance.delete(`/user/${userId}`);
     return data;
   } catch (error: any) {
     ThrowError(error);

@@ -9,11 +9,13 @@ import { useUserLogin } from "@/hooks/auth.hook";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CircleLoader } from "react-spinners";
 import { jwtDecode } from "jwt-decode";
+import { useUser } from "@/context/user.provider";
 
 const Login = () => {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
   const router = useRouter();
+  const { isLoading, setIsLoading} = useUser();
   const {
     mutate: handleLogin,
     data: loginResponse,
@@ -29,30 +31,28 @@ const Login = () => {
     const data = Object.fromEntries(formData.entries());
 
     handleLogin(data);
+    setIsLoading(true);
   };
 
   useEffect(() => {
     if (loginResponse?.data?.accessToken && isSuccess) {
+      
+      setIsLoading(false);
+      if (!isLoading) {
+        const decodedToken = jwtDecode(loginResponse?.data?.accessToken) as any;
 
-      const decodedToken = jwtDecode(loginResponse?.data?.accessToken) as any;
-
-      console.log(decodedToken);
-      console.log({redirect});
-
-      if (redirect) {
-        router.push(redirect);
-      }
-      if (decodedToken?.role === "admin") {
-        console.log("bal 1")
-        router.push("/admin-dashboard");
-      }
-      if (decodedToken?.role === "user") {
-        router.push("/user-dashboard");
-        console.log("bal 1")
-
+        if (redirect) {
+          router.push(redirect);
+        }
+        if (decodedToken?.role === "admin") {
+          router.push("/admin-dashboard");
+        }
+        if (decodedToken?.role === "user") {
+          router.push("/user-dashboard");
+        }
       }
     }
-  }, [ isSuccess, loginResponse]);
+  }, [isSuccess, loginResponse]);
 
   return (
     <div className="flex items-center justify-center w-full h-screen bg-gray-100">

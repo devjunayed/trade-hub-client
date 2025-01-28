@@ -1,5 +1,5 @@
 
-import { useDeleteProduct } from "@/hooks/product.hook";
+import { useDeleteUser } from "@/hooks/user.hook";
 import {  TUser } from "@/types";
 import Link from "next/link";
 import React from "react";
@@ -14,9 +14,9 @@ const UserTableRow = ({
   user: TUser;
   sl: number;
 }) => {
-  const { mutate: handleDelete } = useDeleteProduct();
+  const { mutate: handleDelete } = useDeleteUser();
 
-  const handleDeleteproduct = (id: string) => {
+  const handleDeleteUser = (id: string) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -44,7 +44,7 @@ const UserTableRow = ({
           <button className="hover:text-green-600 text-slate-400"><BiEdit size={24} /></button>
         </Link>
         <button
-          onClick={() => handleDeleteproduct(user?._id as string)}
+          onClick={() => handleDeleteUser(user?._id as string)}
           className="hover:text-red-400 text-slate-400"
         >
           <MdDelete size={24} />

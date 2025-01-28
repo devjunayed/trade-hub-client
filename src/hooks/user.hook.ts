@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createUser, editUser, getAllUser, getUser } from "@/services/UserService";
+import { createUser, deleteUser, editUser, getAllUser, getUser } from "@/services/UserService";
 import { TUser } from "@/types";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
@@ -26,11 +26,30 @@ export const useEditUser = () => {
     mutationKey: ["EDIT_USER"],
     mutationFn: async (userData) => await editUser(userData),
     onSuccess: () => {
-      toast.success("User creation successful", {
+      toast.success("User updated successfully", {
         position: "top-center",
       });
     },
     onError: (error) => {
+      toast.error(error.message, {
+        position: "top-center",
+      });
+    },
+  });
+};
+export const useDeleteUser = () => {
+  const queryClient = useQueryClient();
+  return useMutation<unknown, Error, string>({
+    mutationKey: ["DELETE_USER"],
+    mutationFn: async (userId: string) => await deleteUser(userId),
+    onSuccess: () => {
+      toast.success("User deleted successfully", {
+        position: "top-center",
+      });
+      queryClient.invalidateQueries({ queryKey: ["GET_ALL_USER"] });
+    },
+    onError: (error) => {
+      console.log(error)
       toast.error(error.message, {
         position: "top-center",
       });
@@ -50,20 +69,3 @@ export const useGetUser = (userId: string) => {
   });
 };
 
-// export const useUserLogin = () => {
-//   return useMutation<TLoginResponse, Error, unknown>({
-//     mutationKey: ["USER_LOGIN"],
-//     mutationFn: async (userData) => await loginUser(userData),
-//     onSuccess: () => {
-//       toast.success("User logged in successfully", {
-//         position: 'top-center'
-//       });
-
-//     },
-//     onError: (error) => {
-//       toast.error(error.message, {
-//         position: "top-center"
-//       });
-//     },
-//   });
-// };
