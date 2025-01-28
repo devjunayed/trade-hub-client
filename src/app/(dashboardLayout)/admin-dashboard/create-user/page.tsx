@@ -3,11 +3,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
+import { useCreateUser } from "@/hooks/user.hook";
 import { Button, Input, Select, SelectItem } from "@heroui/react";
 import { FormEvent, useState } from "react";
+import { CircleLoader } from "react-spinners";
 
 
 const CreateUser = () => {
+  const {mutate: handleCreateUser, isPending} = useCreateUser();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,6 +34,10 @@ const CreateUser = () => {
       ...formData,
       role: value || "user",
     });
+
+
+   
+
   };
 
   const handleSubmit = (e: FormEvent) => {
@@ -40,7 +47,7 @@ const CreateUser = () => {
         ...prev,
       }));
     
-      console.log(formData);
+      handleCreateUser(formData);
 
   };
 
@@ -92,7 +99,7 @@ const CreateUser = () => {
             className="w-full"
           />
           <Input
-            type="string"
+            type="password"
             variant="underlined"
             label="Password"
             name="password"
@@ -113,14 +120,13 @@ const CreateUser = () => {
           </Select>
         </div>
         <Button
-          // disabled={isPending}
+          disabled={isPending}
           variant="flat"
           onPress={() => console.log("object")}
           type="submit"
-          className="w-full h-full bg-black py-6 mt-4 text-white"
+          className="w-full disabled:bg-gray-400 h-full bg-black py-6 mt-4 text-white"
         >
-          {/* {isPending ? <CircleLoader size={24} color="white" /> : "Add product"} */}
-          Create User
+          {isPending ? <CircleLoader size={24} color="white" /> : "Create User"}
         </Button>
       </form>
     </div>
