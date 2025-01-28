@@ -13,10 +13,10 @@ Develop a full-stack e-commerce application using **Next.js** that allows both *
 ### **Admin Role:**
 
 -  **User Management:**
-   -  **Create User:** Admin can create new user accounts with roles (Admin/User).
-   -  **View Users:** Admin can view a list of all registered users with details.
-   -  **Edit User:** Admin can modify user information, such as changing roles.
-   -  **Delete User:** Admin can delete user accounts as needed.
+   - ✅ **Create User:** Admin can create new user accounts with roles (Admin/User).
+   - ✅ **View Users:** Admin can view a list of all registered users with details.
+   - ✅ **Edit User:** Admin can modify user information, such as changing roles.
+   - ✅ **Delete User:** Admin can delete user accounts as needed.
 -  **Product Management:**
    -  **Add Product:** Admin can add new products to the inventory, providing details such as:
       -  Product Name

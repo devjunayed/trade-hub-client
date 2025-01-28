@@ -45,6 +45,7 @@ export type TUser = {
   name: string;
   email: string;
   phone: string;
+  image?: string;
   address: string;
   password?: string | undefined;
   confirmPassword?: string;

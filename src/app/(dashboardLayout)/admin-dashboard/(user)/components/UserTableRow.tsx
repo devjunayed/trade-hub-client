@@ -1,19 +1,13 @@
-
 import { useDeleteUser } from "@/hooks/user.hook";
-import {  TUser } from "@/types";
+import { TUser } from "@/types";
 import Link from "next/link";
 import React from "react";
 import { BiEdit } from "react-icons/bi";
+import { BsEye } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 
-const UserTableRow = ({
-  user,
-  sl,
-}: {
-  user: TUser;
-  sl: number;
-}) => {
+const UserTableRow = ({ user, sl }: { user: TUser; sl: number }) => {
   const { mutate: handleDelete } = useDeleteUser();
 
   const handleDeleteUser = (id: string) => {
@@ -34,22 +28,29 @@ const UserTableRow = ({
 
   return (
     <tr key={user._id} className="text-center w-full">
-      <th>{sl}</th>
-      <td>{user.name}</td>
-      <td>{user.email}</td>
-      <td>{user.phone}</td>
-      <td>{user.role}</td>
-      <td className="flex gap-4 justify-center items-center">
-        <Link href={`/admin-dashboard/edit-user/${user?._id}`}>
-          <button className="hover:text-green-600 text-slate-400"><BiEdit size={24} /></button>
-        </Link>
-        <button
-          onClick={() => handleDeleteUser(user?._id as string)}
-          className="hover:text-red-400 text-slate-400"
-        >
-          <MdDelete size={24} />
-        </button>
-      </td>
+        <th>{sl}</th>
+        <td>{user.name}</td>
+        <td>{user.email}</td>
+        <td>{user.phone}</td>
+        <td>{user.role}</td>
+        <td className="flex gap-4 justify-center items-center">
+          <Link href={`/admin-dashboard/manage-user/${user?._id}`}>
+            <button className="hover:text-green-600 text-slate-400">
+              <BsEye size={24} />
+            </button>
+          </Link>
+          <Link href={`/admin-dashboard/edit-user/${user?._id}`}>
+            <button className="hover:text-green-600 text-slate-400">
+              <BiEdit size={24} />
+            </button>
+          </Link>
+          <button
+            onClick={() => handleDeleteUser(user?._id as string)}
+            className="hover:text-red-400 text-slate-400"
+          >
+            <MdDelete size={24} />
+          </button>
+        </td>
     </tr>
   );
 };

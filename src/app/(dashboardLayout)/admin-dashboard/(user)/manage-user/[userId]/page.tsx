@@ -1,37 +1,44 @@
 "use client";
 
+import { useGetUser } from "@/hooks/user.hook";
 import { Avatar } from "@heroui/avatar";
+import Link from "next/link";
 import { BiEdit } from "react-icons/bi";
 
-const ManageProduct = () => {
+const ManageProduct = ({ params }: { params: { userId: string } }) => {
+  const { data: user } = useGetUser(params.userId);
+  console.log(user);
   return (
     <div className="overflow-x-auto relative flex flex-col justify-center items-center my-6 h-1/12 w-1/2 bg-white  shadow-xl ">
       <div className="absolute top-4 right-4">
-        <button className="bg-none  border flex items-center justify-center w-12 h-12 m-0 p-0">
+        <Link href={`/admin-dashboard/edit-user/${user?._id}`} className="bg-none  border flex items-center justify-center w-12 h-12 m-0 p-0">
           <BiEdit className="text-slate-500" size={24} />
-        </button>
+        </Link>
       </div>
       <div>
-        <Avatar
-          className="w-44 h-44"
-          src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-        />
+      {user?.image ? (
+          <Avatar className="w-44 h-44" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+        ) : (
+          <Avatar className="w-44 h-44 text-5xl"  name={user?.name.slice(0, 1)} />
+        )}
       </div>
-      <div className="mt-14 text-xl  flex flex-col gap-4 w-9/12">
+      <div className="mt-14   flex flex-col gap-4 w-9/12">
         <p>
-          <span className="font-semibold">Name :</span> Kuddus
+          <span className="font-semibold">Name :</span> {user?.name}
         </p>
         <p>
-          <span className="font-semibold">Email :</span> kuddus@gmail.com
+          <span className="font-semibold">Email :</span> {user?.email}
         </p>
         <p>
-          <span className="font-semibold">Phone :</span> 01814676613
+          <span className="font-semibold">Phone :</span> {user?.phone}
         </p>
         <p>
-          <span className="font-semibold">Address :</span> Somewhere, No-Where
+          <span className="font-semibold">Address :</span> {user?.address}
         </p>
         <p>
-          <span className="font-semibold">Role :</span> Admin
+          <span className="font-semibold">Role :</span>{" "}
+          {user?.role &&
+            user?.role.charAt(0).toUpperCase() + user?.role.slice(1)}
         </p>
       </div>
     </div>

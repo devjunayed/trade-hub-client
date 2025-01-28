@@ -25,7 +25,7 @@ const EditUser = ({ params }: { params: { userId: string } }) => {
 
   useEffect(() => {
     if (user) {
-      const {  name, email, phone, address, role } = user[0];
+      const {  name, email, phone, address, role } = user;
       setFormData({ _id: params.userId, name, email, phone, address, role, password: "" });
     }
   }, [user]);

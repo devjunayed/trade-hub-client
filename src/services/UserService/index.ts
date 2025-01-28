@@ -30,7 +30,7 @@ export const getAllUser = async () => {
 export const getUser = async (userId: string) => {
   try {
     const { data } = await axiosInstance.get(`/user/${userId}`);
-    return data.data;
+    return data.data[0];
   } catch (error: any) {
     ThrowError(error);
   }

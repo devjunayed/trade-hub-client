@@ -63,7 +63,7 @@ export const useGetAllUser = () => {
   });
 };
 export const useGetUser = (userId: string) => {
-  return useQuery<TUser[], Error, TUser[]>({
+  return useQuery<TUser, Error, TUser>({
     queryKey: ["GET_USER"],
     queryFn: async () => await getUser(userId),
   });
