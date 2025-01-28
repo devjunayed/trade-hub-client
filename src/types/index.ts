@@ -48,8 +48,8 @@ export type TUser = {
   address: string;
   password: string;
   confirmPassword?: string;
-  role: TRole;
-  isDeleted: boolean;
+  role: string;
+  isDeleted?: boolean;
   createdAt?: string;
   updatedAt?: string;
 };

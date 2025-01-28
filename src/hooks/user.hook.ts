@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createUser, getAllUser } from "@/services/UserService";
+import { createUser, editUser, getAllUser, getUser } from "@/services/UserService";
 import { TUser } from "@/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -21,10 +21,32 @@ export const useCreateUser = () => {
     },
   });
 };
+export const useEditUser = () => {
+  return useMutation<unknown, Error, TUser>({
+    mutationKey: ["EDIT_USER"],
+    mutationFn: async (userData) => await editUser(userData),
+    onSuccess: () => {
+      toast.success("User creation successful", {
+        position: "top-center",
+      });
+    },
+    onError: (error) => {
+      toast.error(error.message, {
+        position: "top-center",
+      });
+    },
+  });
+};
 export const useGetAllUser = () => {
   return useQuery<TUser[], Error, TUser[]>({
     queryKey: ["GET_ALL_USER"],
     queryFn: async () => await getAllUser(),
+  });
+};
+export const useGetUser = (userId: string) => {
+  return useQuery<TUser[], Error, TUser[]>({
+    queryKey: ["GET_USER"],
+    queryFn: async () => await getUser(userId),
   });
 };
 

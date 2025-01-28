@@ -2,7 +2,7 @@
 import { useGetAllUser } from "@/hooks/user.hook";
 import { TUser } from "@/types";
 import React from "react";
-import UserTableRow from "./components/UserTableRow/UserTableRow";
+import UserTableRow from "../components/UserTableRow";
 
 const ManageProduct = () => {
   const { data: users } = useGetAllUser();

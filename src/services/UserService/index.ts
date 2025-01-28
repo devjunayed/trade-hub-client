@@ -7,6 +7,7 @@ import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
 import { ThrowError } from "@/utils/error";
 import { NextResponse } from "next/server";
+import { TUser } from "@/types";
 
 export const createUser = async (userData: any) => {
   try {
@@ -26,12 +27,21 @@ export const getAllUser = async () => {
   }
 };
 
-
-
-export const updateUser = async () => {
+export const getUser = async (userId: string) => {
   try {
-    cookies().delete("access-token");
-    cookies().delete("refresh-token");
+    const { data } = await axiosInstance.get(`/user/${userId}`);
+    return data.data;
+  } catch (error: any) {
+    ThrowError(error);
+  }
+};
+
+
+
+export const editUser = async (userData: TUser) => {
+  try {
+    const { data } = await axiosInstance.put(`/user/${userData._id}`, userData);
+    return data;
   } catch (error: any) {
     ThrowError(error);
   }
