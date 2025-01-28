@@ -3,6 +3,7 @@ import {
   IconBrandTabler,
   IconPackageImport,
   IconSettings,
+  IconUserCheck,
   IconUsers,
 } from "@tabler/icons-react";
 import { AiFillFolder, AiFillFolderAdd, AiFillProduct, AiOutlineFolderView } from "react-icons/ai";
@@ -56,9 +57,9 @@ export const adminLinks = [
         icon: <BiUserPlus className="text-white h-5 w-5" />,
       },
       {
-        label: "Manage Product",
-        href: "admin-dashboard/manage-product",
-        icon: <IconBox className="text-white h-5 w-5" />,
+        label: "Manage User",
+        href: "admin-dashboard/manage-user",
+        icon: <IconUserCheck className="text-white h-5 w-5" />,
       },
     ],
   },

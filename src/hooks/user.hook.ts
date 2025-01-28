@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createUser } from "@/services/UserService";
-import { useMutation } from "@tanstack/react-query";
+import { createUser, getAllUser } from "@/services/UserService";
+import { TUser } from "@/types";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
@@ -18,6 +19,12 @@ export const useCreateUser = () => {
         position: "top-center",
       });
     },
+  });
+};
+export const useGetAllUser = () => {
+  return useQuery<TUser[], Error, TUser[]>({
+    queryKey: ["GET_ALL_USER"],
+    queryFn: async () => await getAllUser(),
   });
 };
 

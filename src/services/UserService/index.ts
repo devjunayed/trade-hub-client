@@ -17,14 +17,10 @@ export const createUser = async (userData: any) => {
   }
 };
 
-export const getUser = async (userData: any) => {
+export const getAllUser = async () => {
   try {
-    const { data } = await axiosInstance.post("/auth/login", userData);
-    if (data?.success) {
-      cookies().set("access-token", data?.data?.accessToken);
-      cookies().set("refresh-token", data?.data?.refreshToken);
-    }
-    return data;
+    const { data } = await axiosInstance.get("/user");
+    return data.data;
   } catch (error: any) {
     ThrowError(error);
   }
