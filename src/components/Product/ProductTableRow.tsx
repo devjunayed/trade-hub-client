@@ -48,9 +48,9 @@ const ProductTableRow = ({
       <td>{product.category.title}</td>
       <td>{product.price} $</td>
       <td>{product.stockQuantity}</td>
-      <td className="flex h-full gap-4  items-center justify-center ">
-        <Link href={`/admin/edit-product/${product?._id}`}>
-          <button className="hover:text-green-600 text-slate-400">
+      <td className="">
+        <Link href={`/admin-dashboard/edit-product/${product?._id}`}>
+          <button className="hover:text-green-600 mr-4 text-slate-400">
             <BiEdit size={24} />
           </button>
         </Link>

@@ -87,20 +87,22 @@ const EditProduct = () => {
 
   return (
     <>
-    <div className="w-full relative max-w-lg  rounded-lg ">
-     <div className="absolute left-0 mt-10">
+    <div className="w-full relative rounded-lg ">
+     <div className="absolute flex items-center justify-center gap-2 left-4 top-4 ">
         <Button
-          onClick={() => window.history.back()}
-          className="bg-primary text-white text-xl"
+          onPress={() => window.history.back()}
+          className="bg-[#262626] text-white text-xl"
         >
           <BsArrowLeft />
         </Button>
-      </div>
-      <h1 className="text-2xl font-semibold text-center text-gray-800 my-4">
+      <h1 className="text-xl  font-semibold  text-gray-800 my-4">
         Edit Product
       </h1>
+      </div>
+      <div className="w-full h-full flex items-center justify-center">
+
       <form
-        className="p-6 h-[60vh] flex items-center justify-center flex-col overflow-y-auto"
+        className="p-6  max-w-lg   h-[60vh] flex items-center justify-center flex-col overflow-y-auto"
         onSubmit={handleSubmit}
       >
         <div className="mb-4 mt-36">
@@ -167,11 +169,12 @@ const EditProduct = () => {
         <button
           disabled={isPending}
           type="submit"
-          className="w-full flex justify-center py-2 mt-6 disabled:bg-gray-400 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none"
+          className="w-full flex justify-center py-2 mt-6 disabled:bg-gray-400 bg-[#262626] text-white rounded-md hover:bg-primary-dark focus:outline-none"
         >
           {isPending ? <CircleLoader size={24} color="white" /> : "Save"}
         </button>
       </form>
+        </div>
     </div>
     </>
   );
