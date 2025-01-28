@@ -11,8 +11,8 @@ const ManageProduct = () => {
       <table className="table">
         {/* head */}
         <thead>
-          <tr>
-            <th></th>
+          <tr className="bg-[#262626] text-white text-center">
+            <th>SL.</th>
             <th>Image</th>
             <th>Name</th>
             <th>Description</th>
@@ -23,7 +23,7 @@ const ManageProduct = () => {
           </tr>
         </thead>
         <tbody>
-          {products?.data?.map((product: TProduct, index: number) => (
+          {products?.map((product: TProduct, index: number) => (
             <ProductTableRow key={product._id} product={product} sl={index + 1} />
           ))}
         </tbody>

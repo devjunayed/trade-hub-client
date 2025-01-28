@@ -1,8 +1,9 @@
 import { useDeleteCategory } from "@/hooks/category.hook";
 import { TCategoryData } from "@/types";
-import { Button } from "@heroui/react";
 import Link from "next/link";
 import React from "react";
+import { BiEdit } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 
 const CategoryTableRow = ({
@@ -31,20 +32,22 @@ const CategoryTableRow = ({
   };
 
   return (
-    <tr key={category._id}>
+    <tr className="text-center " key={category._id}>
       <th>{sl}</th>
       <td>{category.title}</td>
       <td>{category.description}</td>
-      <td className="flex gap-4">
-        <Link href={`/admin/edit-category/${category?._id}`}>
-          <Button className="bg-green-500 text-white">Edit</Button>
+      <td className="flex gap-4 justify-center items-center">
+        <Link href={`/admin-dashboard/edit-category/${category?._id}`}>
+          <button className="hover:text-green-600 text-slate-400">
+            <BiEdit size={24} />
+          </button>
         </Link>
-        <Button
+        <button
           onClick={() => handleDeleteCategory(category?._id as string)}
-          className="bg-red-500 text-white"
+          className="hover:text-red-400 text-slate-400"
         >
-          Delete
-        </Button>
+          <MdDelete size={24} />
+        </button>
       </td>
     </tr>
   );

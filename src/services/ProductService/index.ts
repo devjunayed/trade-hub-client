@@ -55,7 +55,7 @@ export const getSingleProduct = async (productId: string) => {
 export const getAllProduct= async () => {
   try {
     const { data } = await axiosInstance.get("/product");
-    return data;
+    return data.data;
   } catch (error) {
     ThrowError(error);
   }

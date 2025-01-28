@@ -157,7 +157,7 @@ const AddProduct = () => {
         <button
           disabled={isPending}
           type="submit"
-          className="w-full flex justify-center py-2 mt-6 disabled:bg-gray-400 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none"
+          className="w-full flex justify-center py-2 mt-6 disabled:bg-gray-400 bg-[#262626] text-white rounded-md hover:bg-primary-dark focus:outline-none"
         >
           {isPending ? <CircleLoader size={24} color="white" /> : "Add product"}
         </button>

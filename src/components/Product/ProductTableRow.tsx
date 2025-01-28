@@ -1,10 +1,10 @@
-
 import { useDeleteProduct } from "@/hooks/product.hook";
 import { TProduct } from "@/types";
-import { Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { BiEdit } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 
 const ProductTableRow = ({
@@ -33,24 +33,33 @@ const ProductTableRow = ({
   };
 
   return (
-    <tr key={product._id}>
+    <tr className="text-center " key={product._id}>
       <th>{sl}</th>
-      <td><Image src={product.productImage} width={25} height={25} alt={`${product?.name}`} /></td>
+      <td>
+        <Image
+          src={product.productImage}
+          width={25}
+          height={25}
+          alt={`${product?.name}`}
+        />
+      </td>
       <td>{product.name}</td>
       <td>{product.description}</td>
       <td>{product.category.title}</td>
       <td>{product.price} $</td>
       <td>{product.stockQuantity}</td>
-      <td className="flex gap-4">
+      <td className="flex h-full gap-4  items-center justify-center ">
         <Link href={`/admin/edit-product/${product?._id}`}>
-          <Button className="bg-green-500 text-white">Edit</Button>
+          <button className="hover:text-green-600 text-slate-400">
+            <BiEdit size={24} />
+          </button>
         </Link>
-        <Button
+        <button
           onClick={() => handleDeleteproduct(product?._id as string)}
-          className="bg-red-500 text-white"
+          className="hover:text-red-400 text-slate-400"
         >
-          Delete
-        </Button>
+          <MdDelete size={24} />
+        </button>
       </td>
     </tr>
   );

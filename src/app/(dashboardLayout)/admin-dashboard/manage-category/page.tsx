@@ -11,7 +11,7 @@ const ManageCategories = () => {
       <table className="table">
         {/* head */}
         <thead>
-          <tr>
+          <tr className="text-center bg-[#262626] text-white">
             <th></th>
             <th>Title</th>
             <th>Description</th>

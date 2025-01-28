@@ -9,7 +9,11 @@ const EditCategory = ({ params }: { params: { categoryId: string } }) => {
   const { categoryId } = params;
   const { data } = useGetSingleCategory(categoryId);
 
-  const { mutate: handleUpdateCategory, isPending, isSuccess } = useUpdateCategory();
+  const {
+    mutate: handleUpdateCategory,
+    isPending,
+    isSuccess,
+  } = useUpdateCategory();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -30,8 +34,8 @@ const EditCategory = ({ params }: { params: { categoryId: string } }) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    handleUpdateCategory({ categoryId, categoryData: {...formData} });
-    if(isSuccess){
+    handleUpdateCategory({ categoryId, categoryData: { ...formData } });
+    if (isSuccess) {
       window.history.back();
     }
   };
@@ -40,8 +44,8 @@ const EditCategory = ({ params }: { params: { categoryId: string } }) => {
     <>
       <div className="m-8">
         <Button
-          onClick={() => window.history.back()}
-          className="bg-primary text-white text-xl"
+          onPress={() => window.history.back()}
+          className="bg-[#262626] text-white text-xl"
         >
           <BsArrowLeft />
         </Button>
@@ -79,7 +83,7 @@ const EditCategory = ({ params }: { params: { categoryId: string } }) => {
             <button
               disabled={isPending}
               type="submit"
-              className="mt-4 disabled:bg-gray-400 w-full py-2 text-center bg-primary hover:bg-primary-500 flex justify-center text-white rounded-lg"
+              className="mt-4 disabled:bg-gray-400 w-full py-2 text-center bg-[#262626] hover:bg-[#262626] flex justify-center text-white rounded-lg"
             >
               {isPending ? <CircleLoader size={24} color="white" /> : "Save"}
             </button>
