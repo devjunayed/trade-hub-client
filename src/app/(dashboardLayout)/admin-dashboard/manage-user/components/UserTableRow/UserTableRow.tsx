@@ -33,13 +33,13 @@ const UserTableRow = ({
   };
 
   return (
-    <tr key={user._id}>
+    <tr key={user._id} className="text-center w-full">
       <th>{sl}</th>
       <td>{user.name}</td>
       <td>{user.email}</td>
       <td>{user.phone}</td>
       <td>{user.role}</td>
-      <td className="flex gap-4">
+      <td className="flex gap-4 justify-center items-center">
         <Link href={`/admin-dashboard/edit-user/${user?._id}`}>
           <button className="hover:text-green-600 text-slate-400"><BiEdit size={24} /></button>
         </Link>

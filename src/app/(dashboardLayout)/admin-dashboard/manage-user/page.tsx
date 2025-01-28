@@ -13,8 +13,8 @@ const ManageProduct = () => {
       <table className="table min-w-full">
         {/* head */}
         <thead>
-          <tr>
-            <th></th>
+          <tr className="text-center bg-[#262626] text-white">
+            <th>SL.</th>
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
