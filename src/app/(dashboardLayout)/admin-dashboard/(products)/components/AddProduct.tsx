@@ -19,7 +19,6 @@ const AddProduct = () => {
 
   const { mutate: handleCreateProduct, isPending } = useCreateProduct();
 
-  const [imageFiles, setImageFiles] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     productImages: [] as string[],
     name: "",
@@ -29,29 +28,18 @@ const AddProduct = () => {
     category: "",
   });
 
-  const handleFileUpload = (imageUrl: string) => {
-    console.log({ imageUrl });
+  const handleFileUpload = (imageUrls: string[]) => {
 
-    if (imageUrl) {
-      console.log({ hitting: { imageUrl } });
+    console.log(imageUrls);
+
+    if (imageUrls.length > 0) {
+      
       setFormData((prev) => ({
         ...prev,
-        productImages: [...prev.productImages, imageUrl as string],
+        productImages: imageUrls,
       }));
     }
-    // const lastFile = files[files.length - 1];
-
-    // // Only process if the last file is new
-    // if (lastFile && lastFile.originFileObj) {
-    //   const image = new FormData();
-    //   image.append("image", lastFile.originFileObj);
-
-    //   // Trigger the image upload process
-    //   handleImageUpload(image);
-    // }
-
-    // // Update the file list in the state
-    // setImageFiles(files);
+   
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -78,6 +78,7 @@ import { toast } from "react-toastify";
   
   export const useGetSingleProduct = (productId: string) => {
     return useQuery<unknown, Error, {data: TProduct[]}>({
+      
       queryKey: ["GET_SINGLE_PRODUCT", productId],
       queryFn: async () => await getSingleProduct(productId),
       staleTime: 0,

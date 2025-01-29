@@ -18,7 +18,7 @@ const getBase64 = (file: FileType): Promise<string> =>
   });
 
 interface FileUploadProps {
-  handleFileUpload?: (files: string) => void; // Accepts array of file URLs (strings)
+  handleFileUpload?: (files: string[]) => void; // Accepts array of file URLs (strings)
   initialFileUrls?: string[]; // Accepts an array of initial image URLs for preview
 }
 
@@ -29,9 +29,12 @@ const FileUpload: React.FC<FileUploadProps> = ({
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState<any>([]);
-  const { mutate: handleImageUpload, data: imageUrl, isPending } = useUploadImage();
-
-
+  const {
+    mutate: handleImageUpload,
+    data: imageUrl,
+    isPending,
+  } = useUploadImage();
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   // Update fileList to show the initial files passed via props
   useEffect(() => {
@@ -44,10 +47,9 @@ const FileUpload: React.FC<FileUploadProps> = ({
         thumbUrl: url,
       }));
       setFileList(initialFiles);
+      setImageUrls(initialFileUrls);
     }
   }, [initialFileUrls]);
-
-
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
@@ -57,40 +59,54 @@ const FileUpload: React.FC<FileUploadProps> = ({
     setPreviewOpen(true);
   };
 
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
-    setFileList(newFileList);
+  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+    const newList = newFileList
+      .map((list) => {
+        console.log(list);
+        if (list.response) {
+          // if (!list.response.name.includes("https://")) {
+          //   return null;
+          // }
+          return list.response;
+        }
+        return list;
+      })
+      .filter((list)=> list.name.includes("https://") );
+
+    const newImagesLink = newList.map((list) => list.name) || [];
+      setImageUrls(newImagesLink)
+    setFileList(() => [...newList]);
+  };
+
+  console.log({ fileList });
 
   const customRequest = async ({ file, onSuccess, onError }: any) => {
     const formData = new FormData();
     formData.append("image", file);
-   
-    try {
 
-       handleImageUpload(formData, {
-        onSuccess: (data) =>{
+    try {
+      handleImageUpload(formData, {
+        onSuccess: (data) => {
           const uploadedFile = {
-            ...file,
-            url: data, // Set the uploaded image URL
-            thumbUrl: data, // Set thumbUrl for preview
-            status: "done", // Mark status as done
+            uid: data,
+            name: data,
+            status: "done",
+            url: data,
+            thumbUrl: data,
           };
-    
+
           // Update file list with the newly uploaded file
           setFileList((prevList: any) => [...prevList, uploadedFile]);
-          if (handleFileUpload) {
-            handleFileUpload(data as string);  // Call it only if it's defined
+         
+          if(handleFileUpload){
+            handleFileUpload([...imageUrls, uploadedFile.url as string])
           }
           onSuccess(uploadedFile);
-        }
-       })
-
-
-      
+        },
+      });
     } catch (error: any) {
-      toast.error("image Upload failed")
-      
+      toast.error("image Upload failed");
     }
-   
   };
 
   const uploadButton = (
