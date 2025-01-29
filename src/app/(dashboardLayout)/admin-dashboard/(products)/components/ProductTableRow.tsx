@@ -37,9 +37,10 @@ const ProductTableRow = ({
       <th>{sl}</th>
       <td>
         <Image
-          src={product.productImage}
-          width={25}
-          height={25}
+          src={product?.productImages[0]}
+          width={12}
+          height={12}
+          className="cover w-full"
           alt={`${product?.name}`}
         />
       </td>

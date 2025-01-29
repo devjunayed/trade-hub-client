@@ -21,7 +21,7 @@ export type TProduct = {
   price: number;
   stockQuantity: number;
   category: any;
-  productImage: string;
+  productImages: string[];
   isDeleted?: boolean;
 };
 

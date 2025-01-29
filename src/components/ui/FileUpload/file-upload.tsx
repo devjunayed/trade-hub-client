@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { cn } from "@/utils/utils";
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { IconUpload } from "@tabler/icons-react";
 import { useDropzone } from "react-dropzone";
+import { toast } from "react-toastify";
 
 const mainVariant = {
   initial: {
@@ -26,6 +28,8 @@ const secondaryVariant = {
   },
 };
 
+const MAX_FILES = 2; // Maximum number of files allowed to upload
+
 export const FileUpload = ({
   onChange,
 }: {
@@ -35,8 +39,14 @@ export const FileUpload = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (newFiles: File[]) => {
-    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
-    onChange && onChange(newFiles);
+    if (files.length + newFiles.length > MAX_FILES) {
+      toast.error(`You can only upload up to ${MAX_FILES} files.`)
+      return;
+    }
+
+    const filteredFiles = newFiles.slice(0, MAX_FILES - files.length);
+    setFiles((prevFiles) => [...prevFiles, ...filteredFiles]);
+    onChange && onChange(filteredFiles);
   };
 
   const handleClick = () => {
@@ -44,7 +54,7 @@ export const FileUpload = ({
   };
 
   const { getRootProps, isDragActive } = useDropzone({
-    multiple: false,
+    multiple: true, // Allow multiple files to be selected
     noClick: true,
     onDrop: handleFileChange,
     onDropRejected: (error) => {
@@ -53,7 +63,7 @@ export const FileUpload = ({
   });
 
   return (
-    <div className="w-full " {...getRootProps()}>
+    <div className="w-full" {...getRootProps()}>
       <motion.div
         onClick={handleClick}
         whileHover="animate"
@@ -63,15 +73,12 @@ export const FileUpload = ({
           ref={fileInputRef}
           id="file-upload-handle"
           type="file"
+          multiple // Allow multiple file uploads
           onChange={(e) => handleFileChange(Array.from(e.target.files || []))}
           className="hidden"
         />
-        {/* <div className="absolute inset-0">
-          <GridPattern />
-        </div> */}
         <div className="flex w-[260px] flex-col items-center justify-center">
-          
-          <div className="relative w-full mt-10 max-w-xl mx-auto">
+          <div className="relative flex w-full gap-4 mt-10  mx-auto">
             {files.length > 0 &&
               files.map((file, idx) => (
                 <motion.div
@@ -150,40 +157,9 @@ export const FileUpload = ({
                 )}
               </motion.div>
             )}
-
-            {!files.length && (
-              <motion.div
-                variants={secondaryVariant}
-                className="absolute opacity-0 border border-dashed border-sky-400 inset-0 z-30 bg-transparent flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md"
-              ></motion.div>
-            )}
           </div>
         </div>
       </motion.div>
     </div>
   );
 };
-
-export function GridPattern() {
-  const columns = 41;
-  const rows = 11;
-  return (
-    <div className="flex bg-gray-100 dark:bg-neutral-900 flex-shrink-0 flex-wrap justify-center items-center gap-x-px gap-y-px  scale-105">
-      {Array.from({ length: rows }).map((_, row) =>
-        Array.from({ length: columns }).map((_, col) => {
-          const index = row * columns + col;
-          return (
-            <div
-              key={`${col}-${row}`}
-              className={`w-10 h-10 flex flex-shrink-0 rounded-[2px] ${
-                index % 2 === 0
-                  ? "bg-gray-50 dark:bg-neutral-950"
-                  : "bg-gray-50 dark:bg-neutral-950 shadow-[0px_0px_1px_3px_rgba(255,255,255,1)_inset] dark:shadow-[0px_0px_1px_3px_rgba(0,0,0,1)_inset]"
-              }`}
-            />
-          );
-        })
-      )}
-    </div>
-  );
-}

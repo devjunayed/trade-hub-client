@@ -10,7 +10,7 @@ export const uploadImage = async (image: any) => {
       { method: "POST", body: image }
     );
     const data = await response.json();
-    return data;
+    return data.data.display_url;
   } catch (error) {
     ThrowError(error);
   }

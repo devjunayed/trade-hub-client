@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 const AddProduct = () => {
   const {
     mutate: handleImageUpload,
-    data: productImage,
+    data: uploadedImage,
     isSuccess: isImageUploadSuccess,
   } = useUploadImage();
 
@@ -26,7 +26,7 @@ const AddProduct = () => {
 
   const [files, setFiles] = useState<File[]>([]);
   const [formData, setFormData] = useState({
-    productImage: "",
+    productImages: [] as string[],
     name: "",
     description: "",
     price: "",
@@ -35,8 +35,13 @@ const AddProduct = () => {
   });
 
   useEffect(() => {
-    setFormData({ ...formData, productImage: productImage as string });
-  }, [productImage, isImageUploadSuccess]);
+    if (isImageUploadSuccess && typeof uploadedImage === "string") {
+      setFormData((prev) => ({
+        ...prev,
+        productImages: [...prev.productImages, uploadedImage],
+      }));
+    }
+  }, [uploadedImage, isImageUploadSuccess]);
 
   const handleFileUpload = (files: File[]) => {
     setFiles(files);
@@ -63,25 +68,20 @@ const AddProduct = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!productImage || productImage === "") {
+    if (!uploadedImage || uploadedImage === "") {
       toast.error("Image is required", {
         position: "top-center",
       });
     } else {
-      setFormData((prev) => ({
-        ...prev,
-        productImage: productImage as string,
-      }));
+      handleCreateProduct({
+        productImages: [...formData.productImages],
+        name: formData.name,
+        description: formData.description,
+        price: Number(formData.price),
+        stockQuantity: Number(formData.stockQuantity),
+        category: formData.category,
+      });
     }
-
-    handleCreateProduct({
-      productImage: formData.productImage,
-      name: formData.name,
-      description: formData.description,
-      price: Number(formData.price),
-      stockQuantity: Number(formData.stockQuantity),
-      category: formData.category,
-    });
   };
 
   return (
