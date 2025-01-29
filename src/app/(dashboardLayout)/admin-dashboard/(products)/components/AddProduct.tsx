@@ -2,29 +2,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import { FileUpload } from "@/components/ui/FileUpload/file-upload";
+import FileUpload from "@/components/ui/FileUpload/file-upload";
 import { useGetAllCategory } from "@/hooks/category.hook";
-import { useUploadImage } from "@/hooks/image.hook";
+
 import { useCreateProduct } from "@/hooks/product.hook";
 import { TCategoryData } from "@/types";
 import { Input, Select, SelectItem } from "@heroui/react";
-import { useState, FormEvent, useEffect } from "react";
+
+import { useState, FormEvent } from "react";
 import { CircleLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 const AddProduct = () => {
-  const {
-    mutate: handleImageUpload,
-    data: uploadedImage,
-    isSuccess: isImageUploadSuccess,
-  } = useUploadImage();
-
   const { data: categories, isPending: isGetCategoriesPending } =
     useGetAllCategory();
 
   const { mutate: handleCreateProduct, isPending } = useCreateProduct();
 
-  const [files, setFiles] = useState<File[]>([]);
+  const [imageFiles, setImageFiles] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     productImages: [] as string[],
     name: "",
@@ -34,20 +29,29 @@ const AddProduct = () => {
     category: "",
   });
 
-  useEffect(() => {
-    if (isImageUploadSuccess && typeof uploadedImage === "string") {
+  const handleFileUpload = (imageUrl: string) => {
+    console.log({ imageUrl });
+
+    if (imageUrl) {
+      console.log({ hitting: { imageUrl } });
       setFormData((prev) => ({
         ...prev,
-        productImages: [...prev.productImages, uploadedImage],
+        productImages: [...prev.productImages, imageUrl as string],
       }));
     }
-  }, [uploadedImage, isImageUploadSuccess]);
+    // const lastFile = files[files.length - 1];
 
-  const handleFileUpload = (files: File[]) => {
-    setFiles(files);
-    const formData = new FormData();
-    formData.append("image", files[0]);
-    handleImageUpload(formData);
+    // // Only process if the last file is new
+    // if (lastFile && lastFile.originFileObj) {
+    //   const image = new FormData();
+    //   image.append("image", lastFile.originFileObj);
+
+    //   // Trigger the image upload process
+    //   handleImageUpload(image);
+    // }
+
+    // // Update the file list in the state
+    // setImageFiles(files);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +72,9 @@ const AddProduct = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!uploadedImage || uploadedImage === "") {
+
+    console.log(formData.productImages.length);
+    if (formData.productImages.length === 0) {
       toast.error("Image is required", {
         position: "top-center",
       });
@@ -94,7 +100,7 @@ const AddProduct = () => {
         onSubmit={handleSubmit}
       >
         <div className="mb-4 mt-36">
-          <FileUpload onChange={handleFileUpload} />
+          <FileUpload handleFileUpload={handleFileUpload} />
         </div>
         <div className="flex flex-col gap-4 w-[80vw] max-w-full">
           <Input

@@ -6,10 +6,11 @@ export const useUploadImage = () => {
     return useMutation<unknown, Error, unknown>({
       mutationKey: ["UPLOAD_IMAGE"],
       mutationFn: async (image: unknown) => await uploadImage(image),
-      onSuccess: () => {
+      onSuccess: (data) => {
         toast.success("Image uploaded successfully", {
           position: 'top-center'
         });
+        return data;
       },
       onError: (error) => {
         toast.error(error.message, {

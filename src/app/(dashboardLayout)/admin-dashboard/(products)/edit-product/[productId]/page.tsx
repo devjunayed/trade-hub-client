@@ -27,7 +27,7 @@ const EditProduct = () => {
 
   const [files, setFiles] = useState<File[]>([]);
   const [formData, setFormData] = useState({
-    productImage: "",
+    productImages: [] as string[],
     name: "",
     description: "",
     price: "",
@@ -36,7 +36,7 @@ const EditProduct = () => {
   });
 
   useEffect(() => {
-    setFormData({ ...formData, productImage: productImage as string });
+    setFormData((prev)=>({ ...prev, productImages: [...prev.productImages, productImage as string] }));
   }, [productImage, isImageUploadSuccess]);
 
   const handleFileUpload = (files: File[]) => {
@@ -69,20 +69,17 @@ const EditProduct = () => {
         position: "top-center",
       });
     } else {
-      setFormData((prev) => ({
-        ...prev,
-        productImage: productImage as string,
-      }));
+     
+      handleCreateProduct({
+        productImages: [...formData.productImages],
+        name: formData.name,
+        description: formData.description,
+        price: Number(formData.price),
+        stockQuantity: Number(formData.stockQuantity),
+        category: formData.category,
+      });
     }
 
-    handleCreateProduct({
-      productImage: formData.productImage,
-      name: formData.name,
-      description: formData.description,
-      price: Number(formData.price),
-      stockQuantity: Number(formData.stockQuantity),
-      category: formData.category,
-    });
   };
 
   return (

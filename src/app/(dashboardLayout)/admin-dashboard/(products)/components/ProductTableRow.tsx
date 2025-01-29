@@ -38,9 +38,9 @@ const ProductTableRow = ({
       <td>
         <Image
           src={product?.productImages[0]}
-          width={12}
-          height={12}
-          className="cover w-full"
+          width={50}
+          height={50}
+          className=" w-7/12"
           alt={`${product?.name}`}
         />
       </td>
