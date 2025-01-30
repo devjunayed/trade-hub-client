@@ -18,15 +18,15 @@ Develop a full-stack e-commerce application using **Next.js** that allows both *
    - ✅ **Edit User:** Admin can modify user information, such as changing roles.
    - ✅ **Delete User:** Admin can delete user accounts as needed.
 -  **Product Management:**
-   -  **Add Product:** Admin can add new products to the inventory, providing details such as:
+   -  ✅ **Add Product:** Admin can add new products to the inventory, providing details such as:
       -  Product Name
       -  Description
       -  Price
       -  Stock Quantity
       -  Category
       -  Product Images
-   -  **Edit Product:** Admin can update existing product details.
-   -  **Delete Product:** Admin can remove products from the inventory.
+   -  ✅ **Edit Product:** Admin can update existing product details.
+   -  ✅ **Delete Product:** Admin can remove products from the inventory.
    -  **View Products:** Admin can see a list of all products with options to filter and search.
 -  **Product Categories Management:**
    -  **Add Category:** Admin can create new product categories to organize products.

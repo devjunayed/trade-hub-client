@@ -6,6 +6,7 @@ import React from "react";
 
 const ManageProduct = () => {
   const { data: products } = useGetAllProduct();
+  console.log(products)
   return (
     <div className="overflow-x-auto w-full mx-10">
       <table className="table">
@@ -15,7 +16,6 @@ const ManageProduct = () => {
             <th>SL.</th>
             <th>Image</th>
             <th>Name</th>
-            <th>Description</th>
             <th>Category</th>
             <th>Price</th>
             <th>Stock</th>

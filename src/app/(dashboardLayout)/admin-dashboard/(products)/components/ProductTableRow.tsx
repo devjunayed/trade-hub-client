@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { BiEdit } from "react-icons/bi";
+import { BsEye } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 
@@ -45,11 +46,15 @@ const ProductTableRow = ({
         />
       </td>
       <td>{product.name}</td>
-      <td>{product.description}</td>
       <td>{product.category.title}</td>
       <td>{product.price} $</td>
       <td>{product.stockQuantity}</td>
       <td className="">
+        <Link href={`/admin-dashboard/manage-product/${product?._id}`}>
+          <button className="hover:text-green-600 mr-4 text-slate-400">
+            <BsEye size={24} />
+          </button>
+        </Link>
         <Link href={`/admin-dashboard/edit-product/${product?._id}`}>
           <button className="hover:text-green-600 mr-4 text-slate-400">
             <BiEdit size={24} />
