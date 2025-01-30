@@ -57,6 +57,7 @@ import { toast } from "react-toastify";
         toast.success("Product deleted successfully", {
           position: "top-center",
         });
+        queryClient.removeQueries({ queryKey: ["GET_ALL_PRODUCT"] }); 
         queryClient.invalidateQueries({ queryKey: ["GET_ALL_PRODUCT"] });
       },
       onError: (error) => {

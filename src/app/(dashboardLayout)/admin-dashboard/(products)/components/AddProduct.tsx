@@ -28,18 +28,14 @@ const AddProduct = () => {
     category: "",
   });
 
+  const [resetKey, setResetKey] = useState(`${Date.now().toString()}`);
   const handleFileUpload = (imageUrls: string[]) => {
-
-    console.log(imageUrls);
-
     if (imageUrls.length > 0) {
-      
       setFormData((prev) => ({
         ...prev,
         productImages: imageUrls,
       }));
     }
-   
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,13 +44,15 @@ const AddProduct = () => {
   };
 
   const handleCategorySelect = (eventOrValue: any) => {
+    console.log(eventOrValue.target.value);
     const value =
       typeof eventOrValue === "string"
         ? eventOrValue
         : eventOrValue.target.value;
     setFormData({
       ...formData,
-      category: categories?.data[Number(value)]._id || "",
+      // category: categories?.data[Number(value)]._id || "",
+      category: value || ""
     });
   };
 
@@ -66,6 +64,10 @@ const AddProduct = () => {
       toast.error("Image is required", {
         position: "top-center",
       });
+    } else if (formData.category === "") {
+      toast.error("Choose category please", {
+        position: "top-center",
+      });
     } else {
       handleCreateProduct({
         productImages: [...formData.productImages],
@@ -75,6 +77,15 @@ const AddProduct = () => {
         stockQuantity: Number(formData.stockQuantity),
         category: formData.category,
       });
+      setFormData({
+        productImages: [] as string[],
+        name: "",
+        description: "",
+        price: "",
+        stockQuantity: "",
+        category: "",
+      });
+      setResetKey(`${Date.now().toString()}`);
     }
   };
 
@@ -88,7 +99,11 @@ const AddProduct = () => {
         onSubmit={handleSubmit}
       >
         <div className="mb-4 mt-36">
-          <FileUpload handleFileUpload={handleFileUpload} />
+          <FileUpload
+            resetKey={resetKey}
+            initialFileUrls={formData.productImages}
+            handleFileUpload={handleFileUpload}
+          />
         </div>
         <div className="flex flex-col gap-4 w-[80vw] max-w-full">
           <Input
@@ -96,12 +111,14 @@ const AddProduct = () => {
             variant="underlined"
             label="Name"
             name="name"
+            required
             value={formData.name}
             onChange={handleChange}
             className="w-full"
           />
           <Input
             type="text"
+            required
             variant="underlined"
             label="Description"
             name="description"
@@ -112,6 +129,7 @@ const AddProduct = () => {
 
           <Input
             type="number"
+            required
             variant="underlined"
             label="Price"
             name="price"
@@ -119,7 +137,7 @@ const AddProduct = () => {
             onChange={handleChange}
             className="w-full"
           />
-          <Input
+          <Input required
             type="number"
             variant="underlined"
             label="Stock Quantity"
@@ -130,16 +148,22 @@ const AddProduct = () => {
           />
 
           <Select
+           key={resetKey} 
             variant="underlined"
             name="category"
+            required
             label="Select a category"
             onChange={handleCategorySelect}
+            value={formData.category || ""}
+            selectionMode="single"
+
+           
           >
             {categories &&
             categories.data.length > 0 &&
             !isGetCategoriesPending ? (
               categories.data.map((category: TCategoryData, index) => (
-                <SelectItem key={index}>{category.title}</SelectItem>
+                <SelectItem value={category._id} key={category._id}>{category.title}</SelectItem>
               ))
             ) : (
               <SelectItem key={"no-categories"} isDisabled>

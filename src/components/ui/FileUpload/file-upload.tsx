@@ -18,13 +18,15 @@ const getBase64 = (file: FileType): Promise<string> =>
   });
 
 interface FileUploadProps {
-  handleFileUpload?: (files: string[]) => void; // Accepts array of file URLs (strings)
-  initialFileUrls?: string[]; // Accepts an array of initial image URLs for preview
+  handleFileUpload?: (files: string[]) => void; 
+  initialFileUrls?: string[];
+  resetKey?: string;
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({
   handleFileUpload,
   initialFileUrls = [],
+  resetKey
 }) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
@@ -50,6 +52,8 @@ const FileUpload: React.FC<FileUploadProps> = ({
       setImageUrls(initialFileUrls);
     }
   }, [initialFileUrls]);
+
+  useEffect(() => {setFileList([])},[resetKey])
 
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
