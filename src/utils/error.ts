@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function ThrowError(error: any){
-    console.log(error)
+    // console.log(error)
      // Check if the error response exists and return the message
+     console.log(error.message)
      if (error.response && error.response.data) {
         throw new Error(error.response.data.message || "An error occurred");
       }

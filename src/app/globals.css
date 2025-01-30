@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+.custom-search .ant-input-search-button {
+  @apply bg-[#262626] text-white border-[#262626] !important;
+}
+
+.ant-input-affix-wrapper,
+.ant-pagination-item-active{
+    @apply border-[#262626] !important;
+}
+
+
+.ant-pagination-item-active a{
+  @apply text-black !important;
+}
+
+.custom-search .ant-input-search-button {
+  @apply bg-[#262626] text-white border-[#262626] !important;
+}
+
+.custom-search .ant-input-search-button:hover {
+  @apply bg-gray-700 !important;
+}

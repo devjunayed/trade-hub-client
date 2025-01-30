@@ -6,8 +6,6 @@ import { TProduct } from "@/types";
 import { ThrowError } from "@/utils/error";
 
 export const uploadImageToImgBB = async (formData: any) => {
- 
-
   const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
   const response = await axiosInstance.post(
     `https://api.imgbb.com/1/upload?key=${apiKey}`,
@@ -19,7 +17,6 @@ export const uploadImageToImgBB = async (formData: any) => {
 
   return response.data.data.url as string;
 };
-
 
 export const createProduct = async (productData: TProduct) => {
   try {
@@ -52,9 +49,13 @@ export const getSingleProduct = async (productId: string) => {
     ThrowError(error);
   }
 };
-export const getAllProduct= async () => {
+export const getAllProduct = async (search: string, page: number) => {
   try {
-    const { data } = await axiosInstance.get("/product");
+    console.log(search);
+    const { data } = await axiosInstance.get(
+      `/product?page=1&searchTerm=${search}`
+    );
+    console.log(data);
     return data.data;
   } catch (error) {
     ThrowError(error);
