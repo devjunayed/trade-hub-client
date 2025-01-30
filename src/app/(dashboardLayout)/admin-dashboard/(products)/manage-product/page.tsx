@@ -22,6 +22,7 @@ const ManageProduct = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState<string>("");
   const [sort, setSort] = useState<string>("");
+  const [filter, setFilter] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
   const [meta, setMeta] = useState<TMeta>();
   const [products, setProducts] = useState<TProduct[]>();
@@ -31,14 +32,14 @@ const ManageProduct = () => {
   useEffect(() => {
     setIsLoading(true);
     const handleGetProducts = async () => {
-      const response = await getProducts(search, page, sort);
+      const response = await getProducts(search, page, sort, filter);
       console.log(response);
       setProducts(response.data);
       setMeta(response.meta);
     };
     handleGetProducts();
     setIsLoading(false);
-  }, [search, page, sort]);
+  }, [search, page, sort, filter]);
 
   const onPageChange: PaginationProps["onChange"] = (pageNumber) => {
     setPage(pageNumber);
@@ -50,6 +51,13 @@ const ManageProduct = () => {
         ? eventOrValue
         : eventOrValue.target.value;
     setSort(value);
+  };
+  const handleFilterChange = (eventOrValue: any) => {
+    const value =
+      typeof eventOrValue === "string"
+        ? eventOrValue
+        : eventOrValue.target.value;
+    setFilter(value);
   };
   return (
     <div className="overflow-x-auto relative w-full mx-10">
@@ -70,8 +78,8 @@ const ManageProduct = () => {
             variant="bordered"
             name="category"
             className="max-w-xs"
-            placeholder="Select a category"
-            onChange={() => {}}
+            placeholder="Filter category"
+            onChange={handleFilterChange}
             selectionMode="single"
           >
             {categories &&
