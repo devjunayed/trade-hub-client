@@ -7,7 +7,8 @@ import {
   IconUsers,
 } from "@tabler/icons-react";
 import { AiFillFolder, AiFillFolderAdd, AiFillProduct, AiOutlineFolderView } from "react-icons/ai";
-import { BiPhotoAlbum, BiUserPlus } from "react-icons/bi";
+import { BiPhotoAlbum, BiShoppingBag, BiUserPlus } from "react-icons/bi";
+import { MdShop } from "react-icons/md";
 
 export const adminLinks = [
   {
@@ -62,6 +63,11 @@ export const adminLinks = [
         icon: <IconUserCheck className="text-white h-5 w-5" />,
       },
     ],
+  },
+  {
+    label: "Orders",
+    icon: <BiShoppingBag  className="text-white h-5 w-5" />,
+    href: "admin-dashboard/orders"
   },
   {
     label: "Media",

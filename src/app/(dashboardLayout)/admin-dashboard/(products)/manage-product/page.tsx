@@ -78,23 +78,29 @@ const ManageProduct = () => {
             variant="bordered"
             name="category"
             className="max-w-xs"
+            defaultSelectedKeys={[""]}
             placeholder="Filter category"
             onChange={handleFilterChange}
             selectionMode="single"
           >
-            {categories &&
-            categories.data.length > 0 &&
-            !isGetCategoriesPending ? (
-              categories.data.map((category: TCategoryData, index) => (
-                <SelectItem value={category._id} key={category._id}>
-                  {category.title}
+            <SelectItem value={""} key={""}>
+              All
+            </SelectItem>
+            <>
+              {categories &&
+              categories.data.length > 0 &&
+              !isGetCategoriesPending ? (
+                categories.data.map((category: TCategoryData) => (
+                  <SelectItem value={category._id} key={category._id}>
+                    {category.title}
+                  </SelectItem>
+                ))
+              ) : (
+                <SelectItem key={"no-categories"} isDisabled>
+                  No categories available
                 </SelectItem>
-              ))
-            ) : (
-              <SelectItem key={"no-categories"} isDisabled>
-                No categories available
-              </SelectItem>
-            )}
+              )}
+            </>
           </Select>
           <Select
             variant="bordered"
