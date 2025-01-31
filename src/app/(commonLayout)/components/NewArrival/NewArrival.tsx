@@ -1,17 +1,37 @@
-import { getProducts } from "@/actions/getProducts";
+"use client";
 import { TProduct } from "@/types";
 import ProductCard from "../ProductCard/ProductCard";
+import { Button } from "@heroui/react";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { useState } from "react";
 
-const NewArrival = async () => {
-  const { data: products }: { data: TProduct[] } = await getProducts();
-  console.log(products);
+const NewArrival = ({ products }: { products: TProduct[] }) => {
+  const [sliced, setSliced] = useState(4);
 
   return (
-    <div className="mx-6 ">
+    <div className="px-6 w-full">
       <h1 className="text-3xl my-10">New Arrival</h1>
-      {products?.map((product) => (
-        <ProductCard key={product.name} product={product} />
-      ))}
+      <div className="grid grid-cols-4 items-center gap-10  justify-center">
+        {products?.slice(0, sliced).map((product) => (
+          <ProductCard key={product.name} product={product} />
+        ))}
+      </div>
+      <div className="w-full my-10 flex justify-center items-center">
+        <Button
+          onPress={() => setSliced(() => sliced === 4 ? 10 : 4)}
+          className="bg-[#262626]  text-white mx-auto text-center"
+        >
+          {sliced === 4 ? (
+            <>
+              <BsEye /> See more
+            </>
+          ) : (
+            <>
+              <BsEyeSlash /> Hide More{" "}
+            </>
+          )}
+        </Button>
+      </div>
     </div>
   );
 };
