@@ -18,10 +18,10 @@ const BestSelling = ({ products }: { products: TProduct[] }) => {
       </div>
       <div className="w-full my-10 flex justify-center items-center">
         <Button
-          onPress={() => setSliced(() => sliced === 4 ? 10 : 4)}
+          onPress={() => setSliced(() => sliced === 6 ? 10 : 6)}
           className="bg-[#262626]  text-white mx-auto text-center"
         >
-          {sliced === 4 ? (
+          {sliced === 6 ? (
             <>
               <BsEye /> See more
             </>

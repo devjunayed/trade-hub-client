@@ -72,7 +72,7 @@ export const useDeleteCategory = () => {
 };
 
 export const useGetAllCategory = () => {
-  return useQuery<unknown, Error, { data: TCategoryData[] }>({
+  return useQuery<{ data: TCategoryData[] }, Error, { data: TCategoryData[] }>({
     queryKey: ["GET_ALL_CATEGORY"],
     queryFn: async () => await getAllCategories(),
     staleTime: 0,
