@@ -9,7 +9,6 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link,
   Button,
   Dropdown,
   DropdownTrigger,
@@ -20,15 +19,17 @@ import Image from "next/image";
 import Logo from "@/app/assets/images/trade-hub.png";
 import { useUser } from "@/context/user.provider";
 import { logOutUser } from "@/services/AuthService";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import "./navbar.module.css";
 import { Avatar } from "@heroui/react";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { user } = useUser();
   const router = useRouter();
+  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -42,6 +43,17 @@ export default function NavBar() {
     await logOutUser();
     router.push("/login");
   };
+
+  const menusItems = [
+    {
+      label: "Home",
+      href: "/",
+    },
+    {
+      label: "Shop",
+      href: "/products",
+    },
+  ];
 
   const menuItems = [
     "Profile",
@@ -61,7 +73,7 @@ export default function NavBar() {
       maxWidth="2xl"
       className={`${
         theme === "light" ? "bg-white" : "bg-black"
-      } m-0 p-0     th-navbar`}
+      } m-0 p-0     th-navbar shadow-md`}
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent>
@@ -77,23 +89,24 @@ export default function NavBar() {
         </NavbarBrand>
       </NavbarContent>
 
-      {/* <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
-      </NavbarContent> */}
+      {/* Large screen menu */}
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        {menusItems.map((item) => (
+          <NavbarItem className="">
+            <Link
+              className={`${
+                (pathname.includes(item.href) && item.href !== "/") ||
+                (pathname === item.href)
+                  ? "text-primary"
+                  : "text-black"
+              }`}
+              href={item.href}
+            >
+              {item.label}
+            </Link>
+          </NavbarItem>
+        ))}
+      </NavbarContent>
 
       <NavbarContent justify="end">
         <div className="sm:block hidden">
@@ -174,7 +187,6 @@ export default function NavBar() {
               }
               className="w-full "
               href="#"
-              size="lg"
             >
               {item}
             </Link>
