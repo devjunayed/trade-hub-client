@@ -16,7 +16,7 @@ const Footer = () => {
         <nav>
           <h6 className="footer-title ">Address</h6>
           <p>Somewhere, no-where</p>
-          <p>Near the planet pluto</p>
+          <p>(Near the planet pluto)</p>
           <h6 className="footer-title ">Phone</h6>
           <a href="tel:+88017xxxxxxx">+88017xxxxxxx</a>
           <a href="tel:+88019xxxxxxx">+88019xxxxxxx</a>

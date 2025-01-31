@@ -4,6 +4,8 @@ import BannerBottomCategory from './components/BannerBottomCategory/BannerBottom
 import NewArrival from './components/NewArrival/NewArrival'
 import { getProducts } from '@/actions/getProducts'
 import { TProduct } from '@/types'
+import BestSelling from './components/BestSelling/BestSelling'
+import BrowseByCategory from './components/FeaturedProducts/FeaturedProducts'
 
 const HomePage = async() => {
   const { data: products }: { data: TProduct[] } = await getProducts();
@@ -13,6 +15,8 @@ const HomePage = async() => {
       <Banner />
       <BannerBottomCategory />
       <NewArrival products={products}/>
+      <BestSelling products={products}/>
+      <BrowseByCategory products={products}/>
     </div>
   )
 }

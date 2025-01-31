@@ -5,12 +5,12 @@ import { Button } from "@heroui/react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useState } from "react";
 
-const NewArrival = ({ products }: { products: TProduct[] }) => {
+const BestSelling = ({ products }: { products: TProduct[] }) => {
   const [sliced, setSliced] = useState(6);
 
   return (
     <div className="px-6 w-full">
-      <h1 className="text-3xl my-10">New Arrival</h1>
+      <h1 className="text-3xl my-10">Best Selling Products</h1>
       <div className="grid grid-cols-6 items-center gap-10  justify-center">
         {products?.slice(0, sliced).map((product) => (
           <ProductCard key={product.name} product={product} />
@@ -36,4 +36,4 @@ const NewArrival = ({ products }: { products: TProduct[] }) => {
   );
 };
 
-export default NewArrival;
+export default BestSelling;
