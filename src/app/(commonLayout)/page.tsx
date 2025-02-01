@@ -10,19 +10,18 @@ import BrowseByCategory from './components/FeaturedProducts/FeaturedProducts'
 const HomePage = async () => {
   const { data: products }: { data: TProduct[] } = await getProducts();
 
-  console.log({products});
   return (
     <div>
       <Banner />
       <BannerBottomCategory />
-      {products &&
+      {products.length > 0 &&
         <NewArrival products={products} />
       }
-      {products &&
+      {products.length > 0 &&
         <BestSelling products={products} />
       }
       {
-        products &&
+        products.length > 0 &&
         <BrowseByCategory products={products} />
       }
     </div>
