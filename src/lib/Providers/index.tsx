@@ -6,21 +6,18 @@ import UserProvider from "@/context/user.provider";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { Provider } from "react-redux";
-import { AppStore, store } from "@/redux/store";
-import { useRef } from "react";
+import {  persistor, store } from "@/redux/store";
+
+import { PersistGate } from "redux-persist/lib/integration/react";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient();
 
-  const storeRef = useRef<AppStore | null>(null)
-  if (!storeRef.current) {
-    // Create the store instance the first time this renders
-    storeRef.current = store()
-  }
-
-
+ 
   return (
-    <Provider store={storeRef.current}>
+    <Provider store={store}>
+
+<PersistGate loading={null} persistor={persistor}>
 
 
       <AntdRegistry>
@@ -39,6 +36,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           </NextThemesProvider>
         </HeroUIProvider>
       </AntdRegistry>
+      </PersistGate>
     </Provider>
   );
 }
