@@ -39,7 +39,7 @@ const ManageProduct = () => {
     };
     handleGetProducts();
 
-    if (products && products?.length > 0) {
+    if (products && products?.length >= 0) {
       setIsLoading(false);
     }
   }, [search, page, sort, filter, products]);
@@ -144,7 +144,7 @@ const ManageProduct = () => {
             <CircleLoader size={24} />
           </div>
         )}
-        {products && products.length === 0 && <div>No Data </div>}
+        {products && products.length === 0 && <div className="flex items-center justify-center min-h-[20vh]">No Products Found</div>}
         <div className="w-full flex justify-center my-10">
           {" "}
           <Pagination
