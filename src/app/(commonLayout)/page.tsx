@@ -7,16 +7,24 @@ import { TProduct } from '@/types'
 import BestSelling from './components/BestSelling/BestSelling'
 import BrowseByCategory from './components/FeaturedProducts/FeaturedProducts'
 
-const HomePage = async() => {
+const HomePage = async () => {
   const { data: products }: { data: TProduct[] } = await getProducts();
 
+  console.log({products});
   return (
     <div>
       <Banner />
       <BannerBottomCategory />
-      <NewArrival products={products}/>
-      <BestSelling products={products}/>
-      <BrowseByCategory products={products}/>
+      {products &&
+        <NewArrival products={products} />
+      }
+      {products &&
+        <BestSelling products={products} />
+      }
+      {
+        products &&
+        <BrowseByCategory products={products} />
+      }
     </div>
   )
 }

@@ -7,7 +7,7 @@ export const getProducts = async (
   sort: string = "-createdAt",
   filter: string = "",
 ) => {
-  try {
+ 
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/product?searchTerm=${search}&page=${page}&sort=${sort}&category=${filter}`,
       {
@@ -16,10 +16,12 @@ export const getProducts = async (
       }
     );
     const data = await response.json();
-    console.log({ data });
-    return data;
-  } catch (error: any) {
-    console.log(error.message);
-    return null;
-  }
+
+    if(data.success){
+      return data
+    }
+
+    
+    return {data: []};
+
 };

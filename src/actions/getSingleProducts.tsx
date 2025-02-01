@@ -13,6 +13,11 @@ export const getSingleProducts = async (
       }
     );
     const data = await response.json();
-    return data.data;
+    if(data.success){
+      return data.data
+    }
+
+    
+    return {data: []};
  
 };
