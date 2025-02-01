@@ -2,6 +2,7 @@
 export function ThrowError(error: any){
      // Check if the error response exists and return the message
      console.log(error.message)
+     console.log(error);
      if (error.response && error.response.data) {
         throw new Error(error.response.data.message || "An error occurred");
       }

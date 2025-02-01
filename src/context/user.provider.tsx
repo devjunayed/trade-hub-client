@@ -10,6 +10,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { CircleLoader } from "react-spinners";
 
 const UserContext = createContext<IUserProviderValues | undefined>(undefined);
 
@@ -35,13 +36,13 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     handleUser();
   }, [isLoading]);
 
-//   if (isLoading) {
-//     return (
-//       <div className="h-screen w-full flex justify-center items-center">
-//         <CircleLoader />
-//       </div>
-//     );
-//   }
+  if (isLoading) {
+    return (
+      <div className="h-screen w-full flex justify-center items-center">
+        <CircleLoader />
+      </div>
+    );
+  }
 
   return (
     <UserContext.Provider value={{ user, setUser, isLoading, setIsLoading }}>

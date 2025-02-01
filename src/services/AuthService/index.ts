@@ -69,7 +69,7 @@ export const setAccessToken = (accessToken: string) => {
 
 export const getNewAccessToken = async () => {
   try {
-    const refreshToken = cookies().get("refresh-token")?.value;
+    const refreshToken = cookies()?.get("refresh-token")?.value || "";
 
     const res = await axiosInstance({
       url: "/auth/refresh-token",
