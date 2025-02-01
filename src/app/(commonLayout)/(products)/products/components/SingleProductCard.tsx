@@ -10,9 +10,10 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { IconCurrencyTaka } from "@tabler/icons-react";
+import { Swiper as SwiperType} from "swiper/types";
 
 const SingleProductCard = ({ product }: { product: TProduct }) => {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   return (
     <Card

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { FaFacebook, FaFacebookMessenger } from "react-icons/fa";
 import { FaSquareWhatsapp } from "react-icons/fa6";
