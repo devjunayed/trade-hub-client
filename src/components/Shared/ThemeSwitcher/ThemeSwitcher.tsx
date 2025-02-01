@@ -2,7 +2,7 @@
 // app/components/ThemeSwitcher.tsx
 "use client";
 
-import {useTheme} from "next-themes";
+import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { MdLightMode } from "react-icons/md";
 import { MdOutlineLightMode } from "react-icons/md";
@@ -15,13 +15,13 @@ export function ThemeSwitcher() {
     setMounted(true)
   }, [])
 
-  if(!mounted) return null
+  if (!mounted) return null
 
 
   return (
     <div className="flex items-center">
-      <button className={`${theme === "light" && "hidden"}`} onClick={() => setTheme('light')}><MdLightMode size={28} /></button>
-      <button className={`${theme === "dark" && "hidden"}`} onClick={() => setTheme('dark')}><MdOutlineLightMode size={28} /></button>
+      <button className={`${theme === "light" && "hidden"}`} onClick={() => setTheme('light')}><MdLightMode size={24} /></button>
+      <button className={`${theme === "dark" && "hidden"}`} onClick={() => setTheme('dark')}><MdOutlineLightMode size={24} /></button>
     </div>
   )
 };

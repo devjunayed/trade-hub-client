@@ -67,7 +67,7 @@ const ManageProduct = () => {
   };
   return (
     <div className="overflow-x-auto  w-full px-6">
-      <BreadCrumb label={"Products"} path={"/products"} />
+      <BreadCrumb labels={["products"]} activePath={"/products"} />
 
       <div className=" h-full w-full">
         <div className=" mb-8 justify-between items-center w-full  flex top-0 left-0">
@@ -90,7 +90,7 @@ const ManageProduct = () => {
               </SelectItem>
               <>
                 {categories &&
-                categories.data.length > 0 &&
+                categories?.data?.length > 0 &&
                 !isGetCategoriesPending ? (
                   categories?.data?.map((category: TCategoryData) => (
                     <SelectItem value={category._id} key={category._id}>
@@ -144,7 +144,7 @@ const ManageProduct = () => {
             <CircleLoader size={24} />
           </div>
         )}
-        {products?.length === 0 && <div>No Data </div>}
+        {products && products.length === 0 && <div>No Data </div>}
         <div className="w-full flex justify-center my-10">
           {" "}
           <Pagination

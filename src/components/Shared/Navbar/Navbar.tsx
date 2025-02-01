@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React, { useEffect, useState } from "react";
 import {
@@ -7,9 +6,9 @@ import {
   NavbarContent,
   NavbarItem,
   NavbarMenuToggle,
+  Button,
   NavbarMenu,
   NavbarMenuItem,
-  Button,
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
@@ -19,23 +18,25 @@ import Image from "next/image";
 import Logo from "@/app/assets/images/trade-hub.png";
 import { useUser } from "@/context/user.provider";
 import { logOutUser } from "@/services/AuthService";
-import { usePathname, useRouter } from "next/navigation";
+import {  usePathname, useRouter } from "next/navigation";
 import "./navbar.module.css";
 import { Avatar } from "@heroui/react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 
 export default function NavBar() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user } = useUser();
   const router = useRouter();
-  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
+  
+  console.log(user)
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+  }, [user]);
 
   if (!mounted) return null;
 
@@ -92,17 +93,17 @@ export default function NavBar() {
       {/* Large screen menu */}
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {menusItems.map((item) => (
-          <NavbarItem className="">
+          <NavbarItem key={item?.label} className="">
             <Link
               className={`${
-                (pathname.includes(item.href) && item.href !== "/") ||
-                (pathname === item.href)
+                (pathname.includes(item?.href) && item?.href !== "/") ||
+                (pathname === item?.href)
                   ? "text-primary"
                   : "text-black"
               }`}
-              href={item.href}
+              href={item?.href}
             >
-              {item.label}
+              {item?.label}
             </Link>
           </NavbarItem>
         ))}
@@ -111,12 +112,35 @@ export default function NavBar() {
       <NavbarContent justify="end">
         <div className="sm:block hidden">
           {user && (
+          //    <div className="dropdown dropdown-end">
+          //    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+          //      <div className="w-10 rounded-full">
+          //      {user?.image ? (
+          //        <Avatar src={user?.image} />
+          //       ) : (
+          //        <Avatar name={user?.name?.slice(0, 1)} />
+          //      )}
+          //      </div>
+          //    </div>
+          //    <ul
+          //      tabIndex={0}
+          //      className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+          //      <li>
+          //        <a className="justify-between">
+          //          Profile
+          //          <span className="badge">New</span>
+          //        </a>
+          //      </li>
+          //      <li><a>Settings</a></li>
+          //      <li><a>Logout</a></li>
+          //    </ul>
+          //  </div>
             <Dropdown>
               <DropdownTrigger>
-                {user.image ? (
+                {user?.image ? (
                   <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
                 ) : (
-                  <Avatar name={user.name.slice(0, 1)} />
+                  <Avatar name={user?.name?.slice(0, 1)} />
                 )}
               </DropdownTrigger>
               <DropdownMenu aria-label="Static Actions">
@@ -126,7 +150,7 @@ export default function NavBar() {
                       theme === "light" ? "text-black" : "text-white"
                     }`}
                     href={`${
-                      user.role === "admin"
+                      user?.role === "admin"
                         ? "admin-dashboard"
                         : "user-dashboard"
                     }`}
@@ -143,7 +167,6 @@ export default function NavBar() {
                 >
                   <Button
                     className="w-full bg-transparent hover:text-white"
-                    as={Link}
                     onPress={handleLogout}
                   >
                     Logout

@@ -30,7 +30,7 @@ const TopNavbar = () => {
             </li>
 
             <li>
-              <BiCart size={28} />
+              <BiCart size={24} />
             </li>
           </ul>
         </div>
