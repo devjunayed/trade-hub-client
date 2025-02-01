@@ -3,7 +3,7 @@ import { TProduct } from "@/types";
 import { Card, CardBody, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { Button } from "@heroui/react";
-import { IconCoinTaka, IconCurrencyTaka } from "@tabler/icons-react";
+import {  IconCurrencyTaka } from "@tabler/icons-react";
 import Link from "next/link";
 import { useState } from "react";
 import { BiCart } from "react-icons/bi";

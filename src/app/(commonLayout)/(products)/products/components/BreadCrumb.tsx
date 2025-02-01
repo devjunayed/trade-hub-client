@@ -10,7 +10,7 @@ const BreadCrumb = ({ activePath, labels }: { activePath: string; labels: string
       <Link href="/">
         <BiHome size={24} />
       </Link>{" "}
-      {/* {labels.length > 1 &&
+      {labels.length > 1 &&
         labels.map((singleLabel) => (
           <div className="flex justify-center gap-2 items-center" key={singleLabel}>
             <FaAngleRight size={24} />{" "}
@@ -18,7 +18,7 @@ const BreadCrumb = ({ activePath, labels }: { activePath: string; labels: string
               {singleLabel}
             </Link>
           </div>
-        ))} */}
+        ))}
     </div>
   );
 };

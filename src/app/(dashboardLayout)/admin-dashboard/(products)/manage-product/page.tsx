@@ -1,14 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import ProductTableRow from "@/app/(dashboardLayout)/admin-dashboard/(products)/components/ProductTableRow";
-import { useGetAllProduct } from "@/hooks/product.hook";
 import { TCategoryData, TProduct } from "@/types";
 import React, { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import { CircleLoader } from "react-spinners";
 import { getProducts } from "@/actions/getProducts";
-import { Dropdown, Pagination, Space } from "antd";
+import {  Pagination } from "antd";
 import { PaginationProps, Select, SelectItem } from "@heroui/react";
-import { BiDownArrow } from "react-icons/bi";
 import { useGetAllCategory } from "@/hooks/category.hook";
 
 export type TMeta = {

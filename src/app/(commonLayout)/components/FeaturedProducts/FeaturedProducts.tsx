@@ -1,7 +1,7 @@
 "use client";
 import { TProduct } from "@/types";
 import ProductCard from "../ProductCard/ProductCard";
-import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { BsEye } from "react-icons/bs";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 

@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import ProductTableRow from "@/app/(dashboardLayout)/admin-dashboard/(products)/components/ProductTableRow";
 import { TCategoryData, TProduct } from "@/types";
 import React, { useEffect, useState } from "react";
 import { CircleLoader } from "react-spinners";
@@ -135,7 +135,7 @@ const ManageProduct = () => {
         </div>
 
         <div className="grid grid-flow-row-dense  grid-cols-5 h-full w-full gap-4">
-          {products?.map((product: TProduct, index: number) => (
+          {products?.map((product: TProduct) => (
             <ProductCard height="380" key={product._id} product={product} />
           ))}
         </div>

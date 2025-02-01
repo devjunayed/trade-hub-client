@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React, { useEffect, useState } from "react";
 import {
@@ -32,7 +33,6 @@ export default function NavBar() {
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
   
-  console.log(user)
 
   useEffect(() => {
     setMounted(true);

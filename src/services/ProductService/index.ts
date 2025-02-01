@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
@@ -49,11 +50,11 @@ export const getSingleProduct = async (productId: string) => {
     ThrowError(error);
   }
 };
-export const getAllProduct = async (search: string, page: number) => {
+export const getAllProduct = async (search: string, page: number = 1) => {
   try {
     console.log(search);
     const { data } = await axiosInstance.get(
-      `/product?page=1&searchTerm=${search}`
+      `/product?page=${page}&searchTerm=${search}`
     );
     console.log(data);
     return data.data;

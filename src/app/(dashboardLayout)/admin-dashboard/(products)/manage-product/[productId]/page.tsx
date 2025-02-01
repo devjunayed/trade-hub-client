@@ -3,7 +3,7 @@ import React from 'react'
 const SingleDashboardProduct = () => {
   return (
     <div>
-      "yo"
+      Hello dear
     </div>
   )
 }

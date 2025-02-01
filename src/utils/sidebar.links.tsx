@@ -8,7 +8,6 @@ import {
 } from "@tabler/icons-react";
 import { AiFillFolder, AiFillFolderAdd, AiFillProduct, AiOutlineFolderView } from "react-icons/ai";
 import { BiPhotoAlbum, BiShoppingBag, BiUserPlus } from "react-icons/bi";
-import { MdShop } from "react-icons/md";
 
 export const adminLinks = [
   {

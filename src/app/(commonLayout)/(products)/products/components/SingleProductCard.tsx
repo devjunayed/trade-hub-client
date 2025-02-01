@@ -34,7 +34,7 @@ const SingleProductCard = ({ product }: { product: TProduct }) => {
               className="mySwiper2"
             >
               {product?.productImages.map((imageLink) => (
-                <SwiperSlide>
+                <SwiperSlide key={imageLink}>
                   <Image
                     alt="Album cover"
                     className="object-cover w-full "
@@ -54,7 +54,7 @@ const SingleProductCard = ({ product }: { product: TProduct }) => {
               className="mySwiper mt-2"
             >
               {product?.productImages.map((imageLink) => (
-                <SwiperSlide>
+                <SwiperSlide key={imageLink}>
                   <Image
                     isZoomed
                     alt="Album cover"
