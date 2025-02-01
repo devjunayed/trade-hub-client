@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function ThrowError(error: any){
-    console.log(" I am from throw erro")
      // Check if the error response exists and return the message
      console.log(error.message)
      if (error.response && error.response.data) {
