@@ -2,7 +2,7 @@ import { CartItem } from "@/redux/features/cart/cartSlice";
 import {
   createOrder,
   deleteProduct,
-  getAllProduct,
+  getAllOrder,
   getSingleProduct,
   updateProduct,
 } from "@/services/OrderService";
@@ -73,7 +73,7 @@ export const useDeleteProduct = () => {
   });
 };
 
-export const useGetAllProduct = ({
+export const useGetAllOrder = ({
   search,
   page,
 }: {
@@ -82,7 +82,7 @@ export const useGetAllProduct = ({
 }) => {
   return useQuery<TProduct[], Error, TProduct[]>({
     queryKey: ["GET_ALL_PRODUCT"],
-    queryFn: async () => await getAllProduct(search, page),
+    queryFn: async () => await getAllOrder(search, page),
     staleTime: 0,
   });
 };

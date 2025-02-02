@@ -38,11 +38,10 @@ export const getSingleProduct = async (productId: string) => {
     ThrowError(error);
   }
 };
-export const getAllProduct = async (search?: string, page: number = 1) => {
+export const getAllOrder = async (search?: string, page: number = 1) => {
   try {
-    console.log(search);
     const { data } = await axiosInstance.get(
-      `/product?page=${page}&searchTerm=${search}`
+      `/order?page=${page}&searchTerm=${search}`
     );
     console.log(data);
     return data.data;

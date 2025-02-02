@@ -1,10 +1,5 @@
-import {
-  createProduct,
-  deleteProduct,
-  getAllProduct,
-  getSingleProduct,
-  updateProduct,
-} from "@/services/OrderService";
+
+import { createProduct, deleteProduct, getAllProduct, getSingleProduct, updateProduct } from "@/services/ProductService";
 import { TProduct } from "@/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
