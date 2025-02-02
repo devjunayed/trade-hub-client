@@ -1,4 +1,4 @@
 .th-navbar > header.max-w-\[1024px\]{
-    max-width: 1440px !important;
+    width: 100vw !important;
     margin: 0;
 }

@@ -43,8 +43,8 @@ const ProductCard = ({
             onMouseLeave={() => setCurrentImage(product.productImages[0])}
           />
         </CardBody>
-        <CardFooter className="text-small flex-grow flex flex-col items-center justify-between">
-          <b className="text-left">{product.name}</b>
+        <CardFooter className="text-small flex-grow flex flex-col items-center justify-between font-semibold">
+          <p className="text-left text-sm md:text-md">{product.name}</p>
           <p className="text-default-500  justify-end flex gap-1 items-center">
             <IconCurrencyTaka size={18} />
             {product.price}{" "}

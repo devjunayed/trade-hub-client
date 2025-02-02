@@ -19,7 +19,7 @@ import Image from "next/image";
 import Logo from "@/app/assets/images/trade-hub.png";
 import { useUser } from "@/context/user.provider";
 import { logOutUser } from "@/services/AuthService";
-import {  usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import "./navbar.module.css";
 import { Avatar } from "@heroui/react";
 import { useTheme } from "next-themes";
@@ -32,7 +32,6 @@ export default function NavBar() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
-  
 
   useEffect(() => {
     setMounted(true);
@@ -60,22 +59,10 @@ export default function NavBar() {
     },
   ];
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-  ];
-
   return (
     <Navbar
+      maxWidth="full"
       shouldHideOnScroll
-      maxWidth="2xl"
       className={`${
         theme === "light" ? "bg-white" : "bg-black"
       } m-0 p-0     th-navbar shadow-md`}
@@ -101,7 +88,7 @@ export default function NavBar() {
             <Link
               className={`${
                 (pathname.includes(item?.href) && item?.href !== "/") ||
-                (pathname === item?.href)
+                pathname === item?.href
                   ? "text-primary"
                   : "text-black"
               }`}
@@ -116,29 +103,6 @@ export default function NavBar() {
       <NavbarContent justify="end">
         <div className="sm:block hidden">
           {user && (
-          //    <div className="dropdown dropdown-end">
-          //    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-          //      <div className="w-10 rounded-full">
-          //      {user?.image ? (
-          //        <Avatar src={user?.image} />
-          //       ) : (
-          //        <Avatar name={user?.name?.slice(0, 1)} />
-          //      )}
-          //      </div>
-          //    </div>
-          //    <ul
-          //      tabIndex={0}
-          //      className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-          //      <li>
-          //        <a className="justify-between">
-          //          Profile
-          //          <span className="badge">New</span>
-          //        </a>
-          //      </li>
-          //      <li><a>Settings</a></li>
-          //      <li><a>Logout</a></li>
-          //    </ul>
-          //  </div>
             <Dropdown>
               <DropdownTrigger>
                 {user?.image ? (
@@ -162,8 +126,7 @@ export default function NavBar() {
                     Dashboard
                   </Link>
                 </DropdownItem>
-                <DropdownItem key="copy">Copy link</DropdownItem>
-                <DropdownItem key="edit">Edit file</DropdownItem>
+
                 <DropdownItem
                   key="delete"
                   className="text-danger"
@@ -183,11 +146,11 @@ export default function NavBar() {
 
         {!user && (
           <>
-            <NavbarItem className="flex">
+            <NavbarItem className="hidden md:flex">
               <Link href="/login">Login</Link>
             </NavbarItem>
-            <NavbarItem className="flex">
-              <Button as={Link} color="primary" href="/register" variant="flat">
+            <NavbarItem className="hidden md:flex">
+              <Button color="primary" href="/register" variant="flat">
                 Sign Up
               </Button>
             </NavbarItem>
@@ -200,43 +163,93 @@ export default function NavBar() {
         />
       </NavbarContent>
 
-      {/* Navbar Menu in small device 🔽*/}
-      <NavbarMenu className="bg-gray-200 text-white">
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem className="" key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              className="w-full "
-              href="#"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-        <NavbarMenuItem>
-          {" "}
-          {user && (
-            <NavbarItem className="flex">
-              <Button
-                className="w-full"
-                as={Link}
-                color="danger"
-                onPress={handleLogout}
-                variant="flat"
+      {/* Navbar Menu in small device 🔽 */}
+      <NavbarMenu className="bg-black flex  justify-center min-h-screen text-white w-full">
+        <NavbarMenuItem className="flex flex-col space-y-4 overflow-y-auto max-h-[80vh]">
+          {menusItems.map((item, index) => (
+            <NavbarItem className="" key={`${item}-${index}`}>
+              <Link
+                color={
+                  index === 2
+                    ? "primary"
+                    : index === menusItems.length - 1
+                    ? "danger"
+                    : "foreground"
+                }
+                className={`${
+                  pathname === item.href && "border-b-2 border-white"
+                }w-full py-2`}
+                href={item.href}
               >
-                Logout
-              </Button>
+                {item.label}
+              </Link>
             </NavbarItem>
+          ))}
+
+          {!user && (
+            <>
+              <NavbarItem className="flex items-center my-2 gap-4">
+                <Link
+                  className={`${
+                    pathname === "/login" && "border-b-2 border-white"
+                  }w-full py-2`}
+                  href="/login"
+                >
+                  Login
+                </Link>
+              </NavbarItem>
+              <NavbarItem className="flex items-center my-2 gap-4">
+                <Link
+                  className={`${
+                    pathname === "/register" && "border-b-2 border-white"
+                  } w-full py-2`}
+                  href="/register"
+                >
+                  Register
+                </Link>
+              </NavbarItem>
+            </>
+          )}
+
+          {user && (
+            <>
+              <NavbarItem className="flex items-center my-2 gap-4">
+                <Link
+                  className={`${
+                    (pathname === "admin-dashboard" ||
+                      pathname === "user-dashboard") &&
+                    "border-b-2 border-white"
+                  }w-full py-2`}
+                  href={
+                    user.role === "admin" ? "admin-dashboard" : "user-dashboard"
+                  }
+                >
+                  Dashboard
+                </Link>
+              </NavbarItem>
+              <NavbarItem className="flex items-center my-2 gap-4">
+                {user?.image ? (
+                  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+                ) : (
+                  <Avatar name={user?.name?.slice(0, 1)} />
+                )}
+                {user.name}
+              </NavbarItem>
+              <NavbarItem className="flex">
+                <Button
+                  className="w-full"
+                  color="danger"
+                  onPress={handleLogout}
+                  variant="flat"
+                >
+                  Logout
+                </Button>
+              </NavbarItem>
+            </>
           )}
         </NavbarMenuItem>
       </NavbarMenu>
-      {/* Navbar Menu in small device  🔼*/}
+      {/* Navbar Menu in small device 🔼 */}
     </Navbar>
   );
 }

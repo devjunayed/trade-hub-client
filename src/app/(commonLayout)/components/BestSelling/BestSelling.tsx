@@ -9,14 +9,14 @@ const BestSelling = ({ products }: { products: TProduct[] }) => {
   const [sliced, setSliced] = useState(6);
 
   return (
-    <div className="px-6 w-full">
-      <h1 className="text-3xl my-10">Best Selling Products</h1>
-      <div className="grid grid-cols-6 items-center gap-10  justify-center">
+    <div className="px-2 md:px-6 w-full">
+      <h1 className="text-lg md:text-3xl my-4 md:my-10">Best Selling Products</h1>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-center gap-4 md:gap-10  justify-center">
         {products?.slice(0, sliced).map((product) => (
           <ProductCard key={product.name} product={product} />
         ))}
       </div>
-      <div className="w-full my-10 flex justify-center items-center">
+      <div className="w-full gap-4 my-10 flex justify-center items-center">
         <Button
           onPress={() => setSliced(() => sliced === 6 ? 10 : 6)}
           className="bg-[#262626]  text-white mx-auto text-center"
