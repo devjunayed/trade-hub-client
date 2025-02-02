@@ -21,7 +21,7 @@ const Banner = () => {
         loop={true}
         className="mySwiper max-h-[70vh] relative w-full"
         autoplay={{
-          delay: 5000,
+          delay: 20000,
 
           disableOnInteraction: true,
         }}

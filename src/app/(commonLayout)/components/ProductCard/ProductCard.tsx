@@ -19,13 +19,12 @@ const ProductCard = ({
 }) => {
   const [currentImage, setCurrentImage] = useState(product.productImages[0]);
   return (
-    <Link key={product.name} href={`/products/${product._id}`}>
+    <Link key={product.name} passHref  href={`/products/${product._id}`}>
       <Card
         isPressable
         shadow="sm"
         style={{ minHeight: height ? `${height}px` : "300px" }}
          className="w-full group "
-        onPress={() => console.log("item pressed")}
       >
         <CardBody className="overflow-visible p-0">
           <Image
