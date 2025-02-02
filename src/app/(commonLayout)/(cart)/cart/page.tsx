@@ -25,12 +25,14 @@ import NewArrival from "../../components/NewArrival/NewArrival";
 
 import { TProduct } from "@/types";
 import { getProducts } from "@/actions/getProducts";
+import { useCreateOrder } from "@/hooks/order.hook";
 
 const CartPage = () => {
   const [products, setProducts] = useState<TProduct[]>();
   const cart = useAppSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const {mutate: handleOrder} = useCreateOrder();
 
   useEffect(() => {
     setIsLoading(true);
@@ -42,8 +44,8 @@ const CartPage = () => {
     setIsLoading(false);
   }, []);
 
-  const handleOrder  = () => {
-
+  const handleCheckout  = () => {
+    handleOrder(cart.items);
   }
 
   return (
@@ -118,7 +120,7 @@ const CartPage = () => {
             </TableBody>
           </Table>
           <div className="mt-10 text-center">
-            <Button   size="large" variant="filled" onClick={handleOrder}><BiPackage /> Order Now</Button>
+            <Button   size="large" variant="filled" onClick={handleCheckout}><BiPackage /> Checkout</Button>
           </div>
             </div>
         )}

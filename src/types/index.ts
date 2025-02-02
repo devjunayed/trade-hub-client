@@ -34,6 +34,17 @@ export type TLoginResponse = {
     refreshToken: string;
   };
 };
+export type TRegisterResponse = {
+  success: boolean;
+  message: string;
+  data: {
+    accessToken: string;
+    name: string;
+    role?: string;
+    id?: string;
+    refreshToken: string;
+  };
+};
 
 export enum TRole{
   USER = 'user',

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import Image from "next/image";
@@ -8,13 +9,14 @@ import { useUserRegistration } from "@/hooks/auth.hook";
 import { CircleLoader } from "react-spinners";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@/context/user.provider";
+import { jwtDecode } from "jwt-decode";
 
 const Register = () => {
-  const { mutate: handleUserRegistration, isPending, isSuccess } = useUserRegistration();
+  const { mutate: handleUserRegistration,  data: registerResponse, isPending, isSuccess } = useUserRegistration();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
   const router = useRouter();
-  const {user} = useUser();
+  const {isLoading, setIsLoading} = useUser();
 
   // Handle form submission
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -24,17 +26,27 @@ const Register = () => {
     handleUserRegistration(userData);
   };
 
+
+
   useEffect(() => {
-    if (!isPending && isSuccess) {
-      if (redirect) {
-        router.push(redirect);
-      }
+    if (registerResponse && registerResponse?.data?.accessToken && isSuccess) {
       
-      if(user){
-        router.push('/')
+      setIsLoading(false);
+      if (!isLoading) {
+        const decodedToken = jwtDecode(registerResponse?.data?.accessToken) as any;
+
+        if (redirect) {
+          router.push(redirect);
+        }
+        if (decodedToken?.role === "admin") {
+          router.push("/admin-dashboard");
+        }
+        if (decodedToken?.role === "user") {
+          router.push("/user-dashboard");
+        }
       }
     }
-  }, [isPending, isSuccess,user]);
+  }, [isSuccess, registerResponse]);
 
   return (
 

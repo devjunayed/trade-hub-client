@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface CartItem {
+export interface CartItem {
   id: string;
   name: string;
   price: number;
@@ -8,7 +8,7 @@ interface CartItem {
   image?: string;
 }
 
-interface CartState {
+export interface CartState {
   items: CartItem[];
   total: number;
 }

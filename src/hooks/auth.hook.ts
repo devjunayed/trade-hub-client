@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { loginUser, registerUser } from "@/services/AuthService";
-import { TLoginResponse } from "@/types";
+import { TLoginResponse, TRegisterResponse } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 
 
@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 
 
 export const useUserRegistration = () => {
-  return useMutation<unknown, Error, unknown>({
+  return useMutation<TRegisterResponse, Error, unknown>({
     mutationKey: ["USER_REGISTRATION"],
     mutationFn: async (userData) => await registerUser(userData),
     onSuccess: () => {
