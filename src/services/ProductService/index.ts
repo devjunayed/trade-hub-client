@@ -50,7 +50,7 @@ export const getSingleProduct = async (productId: string) => {
     ThrowError(error);
   }
 };
-export const getAllProduct = async (search: string, page: number = 1) => {
+export const getAllProduct = async (search?: string, page: number = 1) => {
   try {
     console.log(search);
     const { data } = await axiosInstance.get(

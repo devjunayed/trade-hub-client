@@ -73,10 +73,10 @@ export const useDeleteProduct = () => {
 
 export const useGetAllProduct = ({
   search,
-  page,
+  page
 }: {
-  search: string;
-  page: number;
+  search?: string;
+  page?: number;
 }) => {
   return useQuery<TProduct[], Error, TProduct[]>({
     queryKey: ["GET_ALL_PRODUCT"],

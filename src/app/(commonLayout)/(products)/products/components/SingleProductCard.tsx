@@ -23,7 +23,6 @@ const SingleProductCard = ({ product }: { product: TProduct }) => {
   const [itemCount, setItemCount] = useState(1);
   const dispatch = useDispatch();
 
-
   const handleAddToCart = () => {
     dispatch(
       addToCart({
@@ -33,13 +32,12 @@ const SingleProductCard = ({ product }: { product: TProduct }) => {
         quantity: itemCount,
         image: product.productImages[0],
       })
-    )
+    );
 
-    toast.success("Product added to the cart" ,{
-      position: "top-center"
-    })
-
-  }
+    toast.success("Product added to the cart", {
+      position: "top-center",
+    });
+  };
 
   return (
     <Card
@@ -103,21 +101,22 @@ const SingleProductCard = ({ product }: { product: TProduct }) => {
               {product.description.length > 1000 && isExcerpt
                 ? `${product.description.slice(0, 1000)} `
                 : product.description}{" "}
-              {product.description.length > 1000 && isExcerpt ? (
+              {product.description.length > 1000 && isExcerpt && (
                 <span
                   onClick={() => setIsExcerpt((prev) => !prev)}
                   className="font-bold  cursor-pointer"
                 >
                   &#40; Read More &#41;
                 </span>
-              ) : (
+              )}
+              {!isExcerpt && (
                 <span
                   onClick={() => setIsExcerpt((prev) => !prev)}
                   className="font-bold  cursor-pointer"
                 >
                   &#40; Hide More &#41;
                 </span>
-              )}{" "}
+              )}
             </p>
             <div className="flex text-lg md:text-lg mt-4 items-center justify-between">
               <p className="flex font-bold   items-center justify-center h-full ">

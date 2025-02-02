@@ -14,7 +14,7 @@ const BreadCrumb = ({ activePath, labels }: { activePath: string; labels: string
         labels.map((singleLabel) => (
           <div className="flex text-white justify-center gap-2 items-center" key={singleLabel}>
             <FaAngleRight size={24} />{" "}
-            <Link className={`${activePath === singleLabel && "border-b"} border-white py-1 `} href={singleLabel}>
+            <Link className={`${activePath === singleLabel && "border-b"} border-white py-1 `} href={`/${singleLabel}`}>
               {singleLabel}
             </Link>
           </div>
