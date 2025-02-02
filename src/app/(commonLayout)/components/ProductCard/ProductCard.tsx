@@ -21,7 +21,6 @@ const ProductCard = ({
   return (
     <Link key={product.name} passHref  href={`/products/${product._id}`}>
       <Card
-        isPressable
         shadow="sm"
         style={{ minHeight: height ? `${height}px` : "300px" }}
          className="w-full group "

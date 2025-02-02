@@ -95,10 +95,10 @@ const SingleProductCard = ({ product }: { product: TProduct }) => {
             </Swiper>
           </div>
 
-          <div className="h-full p-10 flex flex-col col-span-6 md:col-span-6">
-            <h1 className="text-xl md:text-3xl">{product.name}</h1>
-            <h4>{product.category.title}</h4>
-            <p className="mt-4">
+          <div className="h-full md:p-10 flex flex-col col-span-6 md:col-span-6">
+            <h1 className="text-lg md:text-3xl">{product.name}</h1>
+            <h4 className="text-gray-600">{product.category.title}</h4>
+            <p className="mt-4 text-black dark:text-white ">
               {product.description.length > 1000 && isExcerpt
                 ? `${product.description.slice(0, 1000)} `
                 : product.description}{" "}
@@ -135,11 +135,11 @@ const SingleProductCard = ({ product }: { product: TProduct }) => {
                 </Button>
                 <p>{itemCount}</p>
                 <Button
-                  className="p-6"
+                  className="p-6 "
                   disabled={itemCount === 1 ? true : false}
                   onClick={() => setItemCount((prev) => prev - 1)}
                 >
-                  <BiMinus size={18} />
+                  <BiMinus  size={18} />
                 </Button>
               </div>
               <div className="flex items-center justify-center">
