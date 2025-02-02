@@ -4,9 +4,13 @@ import React from "react";
 import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
 import Marquee from "react-fast-marquee";
 import { BiCart } from "react-icons/bi";
+import { useAppSelector } from "@/redux/hook";
+import Link from "next/link";
 
 const TopNavbar = () => {
   const { user } = useUser();
+  const cart = useAppSelector((state) => state.cart);
+
   return (
     <>
       <div className="bg-black text-white justify-between py-2 flex px-6">
@@ -15,11 +19,16 @@ const TopNavbar = () => {
           <div className={`flex ${user ? "w-[88%]" : "w-full"}`}>
             <Marquee className="flex " autoFill={true}>
               <div className=" flex">
-              <span className="ml-64">Return delivery is applicable on few terms</span>
-              <span className="ml-64">Return delivery is applicable on few terms</span>
-              <span className="ml-64">Return delivery is applicable on few terms</span>
-     
-                </div>
+                <span className="ml-64">
+                  Return delivery is applicable on few terms
+                </span>
+                <span className="ml-64">
+                  Return delivery is applicable on few terms
+                </span>
+                <span className="ml-64">
+                  Return delivery is applicable on few terms
+                </span>
+              </div>
             </Marquee>
           </div>
         </div>
@@ -29,8 +38,13 @@ const TopNavbar = () => {
               <ThemeSwitcher />
             </li>
 
-            <li>
-              <BiCart size={24} />
+            <li className="">
+              <Link href="/cart">
+                <BiCart className="relative" size={24} />
+                <span className="absolute top-0 right-3 badge-sm badge">
+                  {cart.items.length}
+                </span>
+              </Link>
             </li>
           </ul>
         </div>

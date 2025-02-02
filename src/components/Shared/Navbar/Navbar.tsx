@@ -54,6 +54,10 @@ export default function NavBar() {
       label: "Shop",
       href: "/products",
     },
+    {
+      label: "Cart",
+      href: "/cart",
+    },
   ];
 
   const menuItems = [
