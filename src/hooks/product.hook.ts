@@ -4,7 +4,7 @@ import {
   getAllProduct,
   getSingleProduct,
   updateProduct,
-} from "@/services/ProductService";
+} from "@/services/OrderService";
 import { TProduct } from "@/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
@@ -73,7 +73,7 @@ export const useDeleteProduct = () => {
 
 export const useGetAllProduct = ({
   search,
-  page
+  page,
 }: {
   search?: string;
   page?: number;

@@ -5,7 +5,7 @@ import {
   getAllProduct,
   getSingleProduct,
   updateProduct,
-} from "@/services/ProductService";
+} from "@/services/OrderService";
 import { TProduct } from "@/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
@@ -19,6 +19,7 @@ export const useCreateOrder = () => {
       toast.success("Order placed successfully", {
         position: "top-center",
       });
+     
       queryClient.invalidateQueries({ queryKey: ["GET_ALL_ORDERS"] });
     },
     onError: (error) => {
@@ -74,7 +75,7 @@ export const useDeleteProduct = () => {
 
 export const useGetAllProduct = ({
   search,
-  page
+  page,
 }: {
   search?: string;
   page?: number;

@@ -24,9 +24,10 @@ const SingleProductCard = ({ product }: { product: TProduct }) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
+    console.log(itemCount);
     dispatch(
       addToCart({
-        id: product?._id as string,
+        productId: product?._id as string,
         name: product.name,
         price: product.price,
         quantity: itemCount,

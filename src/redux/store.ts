@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./features/cart/cartSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; 
+import paymentMiddleware from "./middleware/paymentMiddleware";
 
 const persistConfig = {
   key: "root", 
@@ -18,7 +19,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, 
-    }),
+    }).concat(paymentMiddleware),
 });
 
 export const persistor = persistStore(store);

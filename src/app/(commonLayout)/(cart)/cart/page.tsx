@@ -25,14 +25,13 @@ import NewArrival from "../../components/NewArrival/NewArrival";
 
 import { TProduct } from "@/types";
 import { getProducts } from "@/actions/getProducts";
-import { useCreateOrder } from "@/hooks/order.hook";
+import { createOrder } from "@/services/OrderService";
 
 const CartPage = () => {
   const [products, setProducts] = useState<TProduct[]>();
   const cart = useAppSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const {mutate: handleOrder} = useCreateOrder();
 
   useEffect(() => {
     setIsLoading(true);
@@ -44,8 +43,13 @@ const CartPage = () => {
     setIsLoading(false);
   }, []);
 
-  const handleCheckout  = () => {
-    handleOrder(cart.items);
+  const handleCheckout  = async () => {
+   const checkoutResponse = await createOrder(cart.items);
+   if(checkoutResponse.success){
+    localStorage.setItem("clearCartAfterRedirect", "true");
+     window.location.replace(checkoutResponse.data.paymentURL);
+    }
+    
   }
 
   return (
@@ -68,9 +72,9 @@ const CartPage = () => {
             <TableBody>
               <>
                 {cart?.items.map((item) => (
-                  <TableRow key={item.id}>
+                  <TableRow key={item?.productId}>
                     <TableCell>
-                      <Image className="w-12 h-12" src={item.image} alt="" />
+                      <Image className="w-12 h-12" src={item?.image} alt="" />
                     </TableCell>
                     <TableCell>{item.name}</TableCell>
                     <TableCell>{item.price}</TableCell>
@@ -78,15 +82,15 @@ const CartPage = () => {
                       {" "}
                       <div className="flex items-center gap-4">
                         <Button
-                          onClick={() => dispatch(increaseQuantity(item.id))}
+                          onClick={() => dispatch(increaseQuantity(item.productId))}
                           className=""
                         >
                           <BiPlus />
                         </Button>
-                        {item.quantity}
+                        {item?.quantity}
                         <Button
-                          onClick={() => dispatch(decreaseQuantity(item.id))}
-                          disabled={item.quantity === 1}
+                          onClick={() => dispatch(decreaseQuantity(item.productId))}
+                          disabled={item?.quantity === 1}
                           className=""
                         >
                           <BiMinus />
@@ -95,7 +99,7 @@ const CartPage = () => {
                     </TableCell>
                     <TableCell>{item.price * item.quantity}</TableCell>
                     <TableCell>
-                      <Button danger onClick={() => dispatch(removeFromCart(item.id))}>
+                      <Button danger onClick={() => dispatch(removeFromCart(item.productId))}>
                         <MdClose />
                       </Button>
                     </TableCell>
@@ -119,7 +123,7 @@ const CartPage = () => {
               </>
             </TableBody>
           </Table>
-          <div className="mt-10 text-center">
+          <div className="my-10 text-center">
             <Button   size="large" variant="filled" onClick={handleCheckout}><BiPackage /> Checkout</Button>
           </div>
             </div>

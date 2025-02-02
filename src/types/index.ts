@@ -45,6 +45,12 @@ export type TRegisterResponse = {
     refreshToken: string;
   };
 };
+export type TResponse = {
+  statusCode?: number;
+  success: boolean;
+  message: string;
+  data: object | any;
+};
 
 export enum TRole{
   USER = 'user',
