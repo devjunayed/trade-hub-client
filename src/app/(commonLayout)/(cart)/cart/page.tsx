@@ -43,14 +43,15 @@ const CartPage = () => {
     setIsLoading(false);
   }, []);
 
-  const handleCheckout  = async () => {
-   const checkoutResponse = await createOrder(cart.items);
-   if(checkoutResponse.success){
-    localStorage.setItem("clearCartAfterRedirect", "true");
-     window.location.replace(checkoutResponse.data.paymentURL);
+  const handleCheckout = async () => {
+    const checkoutResponse = await createOrder(cart.items);
+    if (checkoutResponse.success) {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("clearCartAfterRedirect", "true");
+        window.location.replace(checkoutResponse.data.paymentURL);
+      }
     }
-    
-  }
+  };
 
   return (
     <div className="px-6 w-full">
@@ -58,75 +59,85 @@ const CartPage = () => {
 
       <div>
         {cart.items.length > 0 && (
-            <div>
-
-          <Table aria-label="Example table with dynamic content">
-            <TableHeader>
-              <TableColumn>Image</TableColumn>
-              <TableColumn>Name</TableColumn>
-              <TableColumn>Price</TableColumn>
-              <TableColumn>Quantity</TableColumn>
-              <TableColumn>Subtotal</TableColumn>
-              <TableColumn>Actions</TableColumn>
-            </TableHeader>
-            <TableBody>
-              <>
-                {cart?.items.map((item) => (
-                  <TableRow key={item?.productId}>
-                    <TableCell>
-                      <Image className="w-12 h-12" src={item?.image} alt="" />
-                    </TableCell>
-                    <TableCell>{item.name}</TableCell>
-                    <TableCell>{item.price}</TableCell>
-                    <TableCell>
-                      {" "}
-                      <div className="flex items-center gap-4">
+          <div>
+            <Table aria-label="Example table with dynamic content">
+              <TableHeader>
+                <TableColumn>Image</TableColumn>
+                <TableColumn>Name</TableColumn>
+                <TableColumn>Price</TableColumn>
+                <TableColumn>Quantity</TableColumn>
+                <TableColumn>Subtotal</TableColumn>
+                <TableColumn>Actions</TableColumn>
+              </TableHeader>
+              <TableBody>
+                <>
+                  {cart?.items.map((item) => (
+                    <TableRow key={item?.productId}>
+                      <TableCell>
+                        <Image className="w-12 h-12" src={item?.image} alt="" />
+                      </TableCell>
+                      <TableCell>{item.name}</TableCell>
+                      <TableCell>{item.price}</TableCell>
+                      <TableCell>
+                        {" "}
+                        <div className="flex items-center gap-4">
+                          <Button
+                            onClick={() =>
+                              dispatch(increaseQuantity(item.productId))
+                            }
+                            className=""
+                          >
+                            <BiPlus />
+                          </Button>
+                          {item?.quantity}
+                          <Button
+                            onClick={() =>
+                              dispatch(decreaseQuantity(item.productId))
+                            }
+                            disabled={item?.quantity === 1}
+                            className=""
+                          >
+                            <BiMinus />
+                          </Button>
+                        </div>
+                      </TableCell>
+                      <TableCell>{item.price * item.quantity}</TableCell>
+                      <TableCell>
                         <Button
-                          onClick={() => dispatch(increaseQuantity(item.productId))}
-                          className=""
+                          danger
+                          onClick={() =>
+                            dispatch(removeFromCart(item.productId))
+                          }
                         >
-                          <BiPlus />
+                          <MdClose />
                         </Button>
-                        {item?.quantity}
-                        <Button
-                          onClick={() => dispatch(decreaseQuantity(item.productId))}
-                          disabled={item?.quantity === 1}
-                          className=""
-                        >
-                          <BiMinus />
-                        </Button>
-                      </div>
-                    </TableCell>
-                    <TableCell>{item.price * item.quantity}</TableCell>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  <TableRow
+                    className="border-t-gray-200 border-t-1"
+                    key={"total amount"}
+                  >
+                    <TableCell>{""}</TableCell>
+                    <TableCell>{""}</TableCell>
+                    <TableCell>{""}</TableCell>
+                    <TableCell>{"Total"}</TableCell>
+                    <TableCell>{cart.total}</TableCell>
                     <TableCell>
-                      <Button danger onClick={() => dispatch(removeFromCart(item.productId))}>
-                        <MdClose />
+                      <Button danger onClick={() => dispatch(clearCart())}>
+                        Clear all
                       </Button>
                     </TableCell>
                   </TableRow>
-                ))}
-                <TableRow
-                  className="border-t-gray-200 border-t-1"
-                  key={"total amount"}
-                >
-                  <TableCell>{""}</TableCell>
-                  <TableCell>{""}</TableCell>
-                  <TableCell>{""}</TableCell>
-                  <TableCell>{"Total"}</TableCell>
-                  <TableCell>{cart.total}</TableCell>
-                  <TableCell>
-                    <Button danger onClick={() => dispatch(clearCart())}>
-                      Clear all
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              </>
-            </TableBody>
-          </Table>
-          <div className="my-10 text-center">
-            <Button   size="large" variant="filled" onClick={handleCheckout}><BiPackage /> Checkout</Button>
-          </div>
+                </>
+              </TableBody>
+            </Table>
+            <div className="my-10 text-center">
+              <Button size="large" variant="filled" onClick={handleCheckout}>
+                <BiPackage /> Checkout
+              </Button>
             </div>
+          </div>
         )}
         {cart.items.length === 0 && (
           <div className="flex items-center justify-center mb-6 w-full min-h-[40vh] ">
