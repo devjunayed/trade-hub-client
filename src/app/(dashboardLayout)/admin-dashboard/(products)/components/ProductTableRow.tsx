@@ -34,7 +34,7 @@ const ProductTableRow = ({
   };
 
   return (
-    <tr className="text-center " key={product._id}>
+    <tr className="text-center w-full" key={product._id}>
       <td className="">{sl}</td>
       <td>
         <Image
@@ -45,12 +45,12 @@ const ProductTableRow = ({
           alt={`${product?.name}`}
         />
       </td>
-      <td className="">{product.name}</td>
+      <td >{product.name}</td>
       <td>{product.category.title}</td>
-      <td>{product.price} $</td>
+      <td className="min-w-[90px]">{product.price} $</td>
       <td>{product.stockQuantity}</td>
       <td className="">
-        <div className="flex items-center justify-center min-h-[100%]">
+        <div className="flex flex-wrap gap-2 items-center justify-center min-h-[100%]">
           <Link
             className="hover:text-green-600  text-slate-400"
             href={`/admin-dashboard/manage-product/${product?._id}`}
