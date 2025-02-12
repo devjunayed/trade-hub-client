@@ -67,7 +67,7 @@ const ProductTableRowPhone = ({
       <td className="p-2 border flex gap-2 justify-center items-center">
         {/* View Button */}
         <Link
-          href={`/product/${product._id}`}
+          href={`/admin-dashboard/manage-product/${product._id}`}
           className="text-blue-600 hover:text-blue-800"
         >
           <BsEye size={20} />
@@ -75,7 +75,7 @@ const ProductTableRowPhone = ({
 
         {/* Edit Button */}
         <Link
-          href={`/edit-product/${product._id}`}
+          href={`/admin-dashboard/edit-product/${product._id}`}
           className="text-yellow-600 hover:text-yellow-800"
         >
           <BiEdit size={20} />

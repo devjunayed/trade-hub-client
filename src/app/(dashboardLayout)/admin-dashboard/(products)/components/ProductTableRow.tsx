@@ -52,20 +52,20 @@ const ProductTableRow = ({
       <td className="">
         <div className="flex flex-wrap gap-2 items-center justify-center min-h-[100%]">
           <Link
-            className="hover:text-green-600  text-slate-400"
+            className="hover:text-blue-800  text-blue-600"
             href={`/admin-dashboard/manage-product/${product?._id}`}
           >
             <BsEye size={24} />
           </Link>
           <Link
-            className="hover:text-green-600  text-slate-400"
+            className="hover:text-yellow-800  text-yellow-600"
             href={`/admin-dashboard/edit-product/${product?._id}`}
           >
             <BiEdit size={24} />
           </Link>
           <button
             onClick={() => handleDeleteproduct(product?._id as string)}
-            className="hover:text-red-400 text-slate-400"
+            className="hover:text-red-800 text-red-600"
           >
             <MdDelete size={24} />
           </button>
