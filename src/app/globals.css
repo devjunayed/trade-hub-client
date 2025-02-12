@@ -25,3 +25,10 @@
 .custom-search .ant-input-search-button:hover {
   @apply bg-gray-700 !important;
 }
+
+
+
+td{
+  width: auto !important;
+  white-space: no-wrap !important;
+}

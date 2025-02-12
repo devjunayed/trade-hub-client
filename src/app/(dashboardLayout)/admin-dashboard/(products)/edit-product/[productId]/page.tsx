@@ -47,7 +47,6 @@ const EditProduct = ({ params }: { params: { productId: string } }) => {
 
   // getting image url exchange of file
   const handleFileUpload = (imageUrls: string[]) => {
-    console.log({ imageUrls });
     setFormData((prev) => ({
       ...prev,
       productImages: [...imageUrls],
@@ -72,7 +71,6 @@ const EditProduct = ({ params }: { params: { productId: string } }) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(formData);
     if (formData.productImages.length <= 0) {
       toast.error("Image is required", {
         position: "top-center",

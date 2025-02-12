@@ -33,7 +33,6 @@ const ManageProduct = () => {
     setIsLoading(true);
     const handleGetProducts = async () => {
       const response = await getProducts(search, page, sort, filter);
-      console.log(response);
       setProducts(response.data);
       setMeta(response.meta);
     };

@@ -15,7 +15,7 @@ const Login = () => {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
   const router = useRouter();
-  const { isLoading, setIsLoading} = useUser();
+  const {user, isLoading, setIsLoading} = useUser();
   const {
     mutate: handleLogin,
     data: loginResponse,
@@ -52,7 +52,7 @@ const Login = () => {
         }
       }
     }
-  }, [isSuccess, loginResponse]);
+  }, [isSuccess, loginResponse, user, isLoading]);
 
   return (
     <div className="flex items-center justify-center w-full h-screen bg-gray-100">

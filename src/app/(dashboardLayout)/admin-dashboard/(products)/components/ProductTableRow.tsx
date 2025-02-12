@@ -35,37 +35,41 @@ const ProductTableRow = ({
 
   return (
     <tr className="text-center " key={product._id}>
-      <th>{sl}</th>
+      <td className="">{sl}</td>
       <td>
         <Image
+        className="mx-auto"
           src={product?.productImages[0]}
           width={50}
           height={50}
-          className=" w-7/12"
           alt={`${product?.name}`}
         />
       </td>
-      <td>{product.name}</td>
+      <td className="">{product.name}</td>
       <td>{product.category.title}</td>
       <td>{product.price} $</td>
       <td>{product.stockQuantity}</td>
       <td className="">
-        <Link href={`/admin-dashboard/manage-product/${product?._id}`}>
-          <button className="hover:text-green-600 mr-4 text-slate-400">
+        <div className="flex items-center justify-center min-h-[100%]">
+          <Link
+            className="hover:text-green-600  text-slate-400"
+            href={`/admin-dashboard/manage-product/${product?._id}`}
+          >
             <BsEye size={24} />
-          </button>
-        </Link>
-        <Link href={`/admin-dashboard/edit-product/${product?._id}`}>
-          <button className="hover:text-green-600 mr-4 text-slate-400">
+          </Link>
+          <Link
+            className="hover:text-green-600  text-slate-400"
+            href={`/admin-dashboard/edit-product/${product?._id}`}
+          >
             <BiEdit size={24} />
+          </Link>
+          <button
+            onClick={() => handleDeleteproduct(product?._id as string)}
+            className="hover:text-red-400 text-slate-400"
+          >
+            <MdDelete size={24} />
           </button>
-        </Link>
-        <button
-          onClick={() => handleDeleteproduct(product?._id as string)}
-          className="hover:text-red-400 text-slate-400"
-        >
-          <MdDelete size={24} />
-        </button>
+        </div>
       </td>
     </tr>
   );

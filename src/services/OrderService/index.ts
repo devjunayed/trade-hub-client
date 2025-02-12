@@ -43,7 +43,6 @@ export const getAllOrder = async (search?: string, page: number = 1) => {
     const { data } = await axiosInstance.get(
       `/order?page=${page}&searchTerm=${search}`
     );
-    console.log(data);
     return data.data;
   } catch (error) {
     ThrowError(error);

@@ -44,7 +44,6 @@ const AddProduct = () => {
   };
 
   const handleCategorySelect = (eventOrValue: any) => {
-    console.log(eventOrValue.target.value);
     const value =
       typeof eventOrValue === "string"
         ? eventOrValue
@@ -59,7 +58,6 @@ const AddProduct = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    console.log(formData.productImages.length);
     if (formData.productImages.length === 0) {
       toast.error("Image is required", {
         position: "top-center",

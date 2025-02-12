@@ -32,7 +32,6 @@ const ManageProduct = () => {
     setIsLoading(true);
     const handleGetProducts = async () => {
       const response = await getProducts(search, page, sort, filter);
-      console.log(response);
       setProducts(response.data);
       setMeta(response.meta);
     };
@@ -59,12 +58,12 @@ const ManageProduct = () => {
     setFilter(value);
   };
   return (
-    <div className="overflow-x-auto relative w-full mx-10">
-      <div className="absolute justify-between items-center w-full  flex top-0 left-0">
-        <div className="flex  flex-1 justify-start">
+    <div className="  md:overflow-x-auto relative w-full px-4 xl:px-10">
+      <div className=" gap-4 min-w-full md:mt-4  flex-row justify-between items-center w-full  flex  ">
+        <div className="flex justify-center items-center w-full  md:flex-1 md:justify-start">
           <SearchBar setSearch={setSearch} />
         </div>
-        <div className="flex-1 flex justify-center">
+        <div className="md:flex-1 justify-center hidden w-full md:flex md:justify-center">
           {" "}
           <Pagination
             defaultCurrent={meta?.page || page}
@@ -72,11 +71,11 @@ const ManageProduct = () => {
             onChange={onPageChange}
           />
         </div>
-        <div className="justify-end gap-4 flex flex-1">
+        <div className="w-full md:justify-end gap-4 flex md:flex-1">
           <Select
             variant="bordered"
             name="category"
-            className="max-w-xs"
+            className="max-w-lg md:max-w-xs"
             defaultSelectedKeys={[""]}
             placeholder="Filter category"
             onChange={handleFilterChange}
@@ -104,7 +103,7 @@ const ManageProduct = () => {
           <Select
             variant="bordered"
             name="sort"
-            className="max-w-xs"
+            className="max-w-lg md:max-w-xs"
             placeholder="Sort"
             onChange={handleSortSelect}
             selectionMode="single"
@@ -130,7 +129,7 @@ const ManageProduct = () => {
           </Select>
         </div>
       </div>
-      <table className="table mt-12">
+      <table  className="table w-full  mt-4">
         {/* head */}
         <thead>
           <tr className="bg-[#262626] text-white text-center">
@@ -143,7 +142,7 @@ const ManageProduct = () => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="overflow-y-auto">
           {products?.map((product: TProduct, index: number) => (
             <ProductTableRow
               key={product._id}

@@ -8,7 +8,6 @@ export default function SearchBar({
   setSearch: Dispatch<SetStateAction<string>>;
 }) {
   const onSearch = (e : any) => {
-    console.log(e.target.value)
     setSearch(()=> e.target.value);
   };
 

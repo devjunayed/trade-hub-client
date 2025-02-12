@@ -12,14 +12,14 @@ const TopNavbar = () => {
   const cart = useAppSelector((state) => state.cart);
 
   return (
-    <div className="bg-black text-white py-2 flex justify-between items-center md:px-6">
+    <div className="bg-black text-white pl-4 py-2 flex justify-between items-center md:px-6">
       {/* Left Section */}
       <div className="flex items-center flex-shrink-0">
-        {user && <p className="hidden md:block">Howdy, {user?.name}</p>}
+        {user && <p className="hidden md:block pr-2">Howdy, {user?.name}</p>}
       </div>
 
       {/* Middle Section (Marquee) */}
-      <div className="flex-1 mx-4 w-full overflow-hidden">
+      <div className="flex-1  w-full overflow-hidden">
         <Marquee autoFill={true}>
           <div className="flex">
             <span className="mx-4">Return delivery is applicable on few terms</span>
@@ -30,7 +30,7 @@ const TopNavbar = () => {
       </div>
 
       {/* Right Section */}
-      <div className="flex-shrink-0 flex justify-end">
+      <div className="flex-shrink-0 px-4 flex justify-end">
         <ul className="flex gap-2 items-center">
           <li>
             <ThemeSwitcher />

@@ -48,11 +48,9 @@ const App: React.FC = () => {
       setFileList(info.fileList);
     }
 
-    console.log(info);
   };
 
   const handleSave = () => {
-    console.log({hitting: "hitting"})
     if (fileList.length > 0 && fileList[0].originFileObj) {
       const imageData = new FormData();
       imageData.append("image", fileList[0].originFileObj);

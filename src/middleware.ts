@@ -15,7 +15,6 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const accessToken = cookies()?.get("access-token")?.value;
-  // console.log(accessToken)
 
   if (!accessToken) {
     if (AuthRoutes.includes(pathname)) {
