@@ -19,7 +19,7 @@ export function SidebarWrapper({
     <div
       className={cn(
         "rounded-md flex flex-col md:flex-row w-full bg-gray-100  flex-1 mx-auto border border-neutral-200 overflow-hidden ",
-        "h-[calc(100vh-104px)]"
+        "h-[calc(100vh-92px)]"
       )}
     >
       <Sidebar open={open} setOpen={setOpen}>

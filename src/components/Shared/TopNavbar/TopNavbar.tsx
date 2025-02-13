@@ -12,10 +12,10 @@ const TopNavbar = () => {
   const cart = useAppSelector((state) => state.cart);
 
   return (
-    <div className="bg-black text-white pl-4 py-2 flex justify-between items-center md:px-6">
+    <div className="bg-black text-sm text-white pl-4 py-1 flex justify-between items-center md:px-6">
       {/* Left Section */}
       <div className="flex items-center flex-shrink-0">
-        {user && <p className="hidden md:block pr-2">Howdy, {user?.name}</p>}
+        {user && <p className=" hidden md:block pr-2">Howdy, {user?.name}</p>}
       </div>
 
       {/* Middle Section (Marquee) */}
@@ -37,8 +37,8 @@ const TopNavbar = () => {
           </li>
           <li className="flex items-center ">
             <Link href="/cart" className="relative  md:pr-2 pr-6">
-              <BiCart size={24} />
-              <span className="absolute -top-2 md:-right-2 right-2 badge-sm badge">
+              <BiCart size={18} />
+              <span className="absolute -top-1 md:-right-2 right-2 badge-xs badge">
                 {cart.items.length}
               </span>
             </Link>

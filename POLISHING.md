@@ -47,3 +47,14 @@
 - **Project Live Site Link**
 - **Project Github Repo Link (Frontend + Backend)**
 - **Project Admin & User Credential (Email & Password)**
+
+
+
+1. topbar height
+2. nabar should have more menu
+3. products card gap must be reduced
+4. rating or review section in homepage
+5. product detail page description not showing or is white
+6. dashboard navbar should be bit unique
+7. add product should be some thing power full 
+
