@@ -13,14 +13,14 @@ const BannerSlide = ({ data, isActive }: { data: any; isActive: boolean }) => {
         backgroundImage: `url(${data.image})`,
       }}
     >
-      <div className="hero-overlay bg-opacity-60"></div>
+      <div className="hero-overlay bg-black bg-opacity-60"></div>
       <div className="hero-content text-neutral-content text-center">
         <div className="max-w-md">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="mb-5 text-xl md:text-3xl xl:text-5xl font-bold font-serif"
+            className="mb-5 text-xl md:text-2xl xl:text-3xl font-bold font-serif"
           >
             {data.title}
           </motion.h1>
@@ -28,7 +28,7 @@ const BannerSlide = ({ data, isActive }: { data: any; isActive: boolean }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-            className="mb-5 text-sm md:text-md font-serif"
+            className="mb-5 text-base md:text-md font-serif"
           >
             {data.subtitle}
           </motion.p>

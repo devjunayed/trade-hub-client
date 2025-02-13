@@ -1,6 +1,6 @@
 "use client";
 import Loading from "@/components/Shared/Loading";
-import NavBar from "@/components/Shared/Navbar/Navbar";
+import DashboardNavBar from "@/components/Shared/Navbar/DashboardNavbar";
 import TopNavbar from "@/components/Shared/TopNavbar/TopNavbar";
 import { SidebarWrapper } from "@/components/ui/SidebarWrapper";
 import { useUser } from "@/context/user.provider";
@@ -18,7 +18,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="min-h-screen">
       <TopNavbar />
-      <NavBar />
+      <DashboardNavBar />
       <SidebarWrapper links={adminLinks}>
         {children}
       </SidebarWrapper>
