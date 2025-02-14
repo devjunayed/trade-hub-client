@@ -25,7 +25,8 @@ import NewArrival from "../../components/NewArrival/NewArrival";
 
 import { TProduct } from "@/types";
 import { getProducts } from "@/actions/getProducts";
-import { createOrder } from "@/services/OrderService";
+// import { createOrder } from "@/services/OrderService";
+import Link from "next/link";
 
 const CartPage = () => {
   const [products, setProducts] = useState<TProduct[]>();
@@ -43,22 +44,22 @@ const CartPage = () => {
     setIsLoading(false);
   }, []);
 
-  const handleCheckout = async () => {
-    const checkoutResponse = await createOrder(cart.items);
-    if (checkoutResponse.success) {
-      if (typeof window !== "undefined") {
-        localStorage.setItem("clearCartAfterRedirect", "true");
-        window.location.replace(checkoutResponse.data.paymentURL);
-      }
-    }
-  };
+  // const handleCheckout = async () => {
+  //   const checkoutResponse = await createOrder(cart.items);
+  //   if (checkoutResponse.success) {
+  //     if (typeof window !== "undefined") {
+  //       localStorage.setItem("clearCartAfterRedirect", "true");
+  //       window.location.replace(checkoutResponse.data.paymentURL);
+  //     }
+  //   }
+  // };
 
   return (
     <div className="px-6 w-full">
       <BreadCrumb activePath="cart" labels={["cart"]} />
 
       <div>
-        {cart.items.length > 0 && (
+        {cart?.items.length > 0 && (
           <div>
             <Table aria-label="Example table with dynamic content">
               <TableHeader>
@@ -132,10 +133,10 @@ const CartPage = () => {
                 </>
               </TableBody>
             </Table>
-            <div className="my-10 text-center">
-              <Button size="large" variant="filled" onClick={handleCheckout}>
+            <div className="my-10 w-full">
+              <Link href="/checkout" className="py-2 mx-auto md:w-[150px] rounded-lg bg-none hover:bg-none hover:text-blue-400 hover:border-blue-400 w-full flex items-center justify-center gap-2 border">
                 <BiPackage /> Checkout
-              </Button>
+              </Link>
             </div>
           </div>
         )}
