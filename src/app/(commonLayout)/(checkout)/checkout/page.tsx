@@ -65,10 +65,9 @@ const CheckOutPage = () => {
 
     if (formValues.paymentMethod === "manual") {
       if (
-        finalData.manualPaymentMethod !== "bkash" &&
-        finalData.manualPaymentMethod !== "nagad"
+        !["bkash", "nagad"].includes(finalData?.manualPaymentMethod as string)
       ) {
-        toast.error("choose one bkash or nagad");
+        toast.error("Choose either Bkash or Nagad");
       }
     }
   };
@@ -137,9 +136,7 @@ const CheckOutPage = () => {
                   value={paymentMethod}
                   onChange={(e) => {
                     console.log(e.target.value);
-                    setPaymentMethod(
-                      () => e.target.value as "manual" | "automatic"
-                    );
+                    setPaymentMethod(e.target.value as "manual" | "automatic");
                   }}
                 >
                   <SelectItem key={"automatic"} value="automatic">
@@ -179,17 +176,20 @@ const CheckOutPage = () => {
                         </div>
                         <Input
                           type="tel"
+                          name="manualPaymentPhone"
                           label="Your Phone Number"
                           placeholder="+8801XXXXXXXXX"
                           required
                         />
                         <Input
+                          name="transactionId"
                           type="text"
                           label="Transaction ID (TrxID)"
                           placeholder="Enter TrxID"
                           required
                         />
                         <Input
+                          name="moneySent"
                           type="number"
                           label="Amount"
                           placeholder="Enter Amount"
@@ -211,18 +211,21 @@ const CheckOutPage = () => {
                           <p>Please insert the details below.</p>
                         </div>
                         <Input
+                          name="manualPaymentPhone"
                           type="tel"
                           label="Your Phone Number"
                           placeholder="+8801XXXXXXXXX"
                           required
                         />
                         <Input
+                          name="transactionId"
                           type="text"
                           label="Transaction ID (TrxID)"
                           placeholder="Enter TrxID"
                           required
                         />
                         <Input
+                          name="moneySent"
                           type="number"
                           label="Amount"
                           placeholder="Enter Amount"
