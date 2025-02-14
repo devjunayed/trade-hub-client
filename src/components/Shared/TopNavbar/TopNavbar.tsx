@@ -39,7 +39,7 @@ const TopNavbar = () => {
             <Link href="/cart" className="relative  md:pr-2 pr-6">
               <BiCart size={18} />
               <span className="absolute -top-1 md:-right-2 right-2 badge-xs badge">
-                {cart.items.length}
+                {cart.products.length}
               </span>
             </Link>
           </li>

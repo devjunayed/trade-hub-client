@@ -25,8 +25,11 @@ import BreadCrumb from "../../(products)/products/components/BreadCrumb";
 import { FaFirstOrder } from "react-icons/fa6";
 import { createOrder } from "@/services/OrderService";
 import { toast } from "react-toastify";
+import { TOrder } from "@/types";
+import { useRouter } from "next/navigation";
 
 const CheckOutPage = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart);
   const [paymentMethod, setPaymentMethod] = useState<"manual" | "automatic">(
@@ -35,6 +38,10 @@ const CheckOutPage = () => {
   const [manualPaymentMethod, setManualPaymentMethod] = useState<
     "bkash" | "nagad"
   >();
+
+  if (cart.products.length === 0 && router) {
+    router.push("/");
+  }
 
   useEffect(() => {
     dispatch(updateTotal());
@@ -51,10 +58,11 @@ const CheckOutPage = () => {
     const formValues = Object.fromEntries(formData.entries());
 
     const finalData = { ...formValues, manualPaymentMethod, ...cart };
-    console.log(finalData);
 
     if (formValues.paymentMethod === "automatic") {
-      const checkoutResponse = await createOrder(cart.items);
+      const checkoutResponse = await createOrder(
+        finalData as unknown as TOrder
+      );
       if (checkoutResponse.success) {
         if (typeof window !== "undefined") {
           localStorage.setItem("clearCartAfterRedirect", "true");
@@ -68,6 +76,17 @@ const CheckOutPage = () => {
         !["bkash", "nagad"].includes(finalData?.manualPaymentMethod as string)
       ) {
         toast.error("Choose either Bkash or Nagad");
+      }
+
+      const checkoutResponse = await createOrder(
+        finalData as unknown as TOrder
+      );
+      if (checkoutResponse.success) {
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("persist:root");
+        }
+        toast.success("Order is placed wait for review...");
+        router.push("/")
       }
     }
   };
@@ -252,7 +271,7 @@ const CheckOutPage = () => {
 
         {/* Cart Summary (Takes 1/3 Width) */}
         <div className="lg:col-span-1">
-          {cart.items.length > 0 ? (
+          {cart.products.length > 0 ? (
             <Card className="w-full p-4 shadow-lg bg-white">
               <h3 className="text-xl font-semibold mb-4 text-center">
                 Order Summary
@@ -266,12 +285,12 @@ const CheckOutPage = () => {
                   <TableColumn>Subtotal</TableColumn>
                 </TableHeader>
                 <TableBody>
-                  {cart.items.map((item) => (
-                    <TableRow key={item.productId}>
-                      <TableCell>{item.name}</TableCell>
-                      <TableCell>{item.quantity}</TableCell>
+                  {cart.products.map((product) => (
+                    <TableRow key={product.productId}>
+                      <TableCell>{product.name}</TableCell>
+                      <TableCell>{product.quantity}</TableCell>
                       <TableCell className="text-sm font-semibold">
-                        ${(item.price * item.quantity).toFixed(2)}
+                        ${(product.price * product.quantity).toFixed(2)}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -306,7 +325,9 @@ const CheckOutPage = () => {
               {/* Total Amount */}
               <div className="flex justify-between text-lg font-semibold">
                 <span>Total:</span>
-                <span>${(cart.total + cart.deliveryCharge).toFixed(2)}</span>
+                <span>
+                  ${(cart.totalPrice + cart.deliveryCharge).toFixed(2)}
+                </span>
               </div>
             </Card>
           ) : (

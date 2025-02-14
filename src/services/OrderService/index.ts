@@ -3,13 +3,12 @@
 "use server";
 
 import axiosInstance from "@/lib/AxiosInstance";
-import { CartItem } from "@/redux/features/cart/cartSlice";
-import { TProduct } from "@/types";
+import { TOrder, TProduct } from "@/types";
 import { ThrowError } from "@/utils/error";
 
-export const createOrder = async (cartData: CartItem[]) => {
+export const createOrder = async (orderData: TOrder) => {
   try {
-    const { data } = await axiosInstance.post("/order", { products: cartData });
+    const { data } = await axiosInstance.post("/order", orderData);
     return data;
   } catch (error) {
     ThrowError(error);

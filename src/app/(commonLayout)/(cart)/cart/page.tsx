@@ -48,7 +48,7 @@ const CartPage = () => {
       <BreadCrumb activePath="cart" labels={["cart"]} />
 
       <div>
-        {cart?.items.length > 0 && (
+        {cart?.products.length > 0 && (
           <div>
             <Table aria-label="Example table with dynamic content">
               <TableHeader>
@@ -61,7 +61,7 @@ const CartPage = () => {
               </TableHeader>
               <TableBody>
                 <>
-                  {cart?.items.map((item) => (
+                  {cart?.products.map((item) => (
                     <TableRow key={item?.productId}>
                       <TableCell>
                         <Image className="w-12 h-12" src={item?.image} alt="" />
@@ -112,7 +112,7 @@ const CartPage = () => {
                     <TableCell>{""}</TableCell>
                     <TableCell>{""}</TableCell>
                     <TableCell>{"Total"}</TableCell>
-                    <TableCell>{cart.total}</TableCell>
+                    <TableCell>{cart.totalPrice}</TableCell>
                     <TableCell>
                       <Button danger onClick={() => dispatch(clearCart())}>
                         Clear all
@@ -129,7 +129,7 @@ const CartPage = () => {
             </div>
           </div>
         )}
-        {cart.items.length === 0 && (
+        {cart.products.length === 0 && (
           <div className="flex items-center justify-center mb-6 w-full min-h-[40vh] ">
             Cart is empty
           </div>

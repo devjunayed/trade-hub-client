@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CartItem } from "@/redux/features/cart/cartSlice";
 import { ReactNode } from "react";
 
 export interface TLinkItem {
@@ -71,3 +72,33 @@ export type TUser = {
   createdAt?: string;
   updatedAt?: string;
 };
+
+
+export type TOrderProducts = {
+  productId: string;
+  quantity: number;
+};
+
+export type TOrder = {
+  userId?: string;
+  transactionId?: string;
+  products: CartItem[];
+  totalPrice: {
+    type: number;
+    required: true;
+  };
+  paymentStatus?: "pending" | "paid" | "canceled";
+  city: string;
+  deliveryCharge: number;
+  deliveryMethod: "express" | "standard" | "pickup";
+  email: string;
+  manualPaymentMethod?: "bkash" | "nagad";
+  manualPaymentPhone?: string;
+  moneySent?: string;
+  name: string;
+  paymentMethod: "manual" | "automatic";
+  phone: string;
+  postalCode: string;
+  shippingAddress: string;
+};
+
