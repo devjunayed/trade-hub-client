@@ -1,4 +1,3 @@
-import { CartItem } from "@/redux/features/cart/cartSlice";
 import {
   createOrder,
   deleteProduct,
@@ -6,13 +5,13 @@ import {
   getSingleProduct,
   updateProduct,
 } from "@/services/OrderService";
-import { TProduct } from "@/types";
+import { TOrder, TProduct } from "@/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 export const useCreateOrder = () => {
   const queryClient = useQueryClient();
-  return useMutation<unknown, Error, CartItem[]>({
+  return useMutation<unknown, Error, TOrder>({
     mutationKey: ["CREATE_ORDER"],
     mutationFn: async (cartData) => await createOrder(cartData),
     onSuccess: () => {
