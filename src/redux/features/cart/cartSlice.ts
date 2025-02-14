@@ -12,20 +12,20 @@ export interface CartState {
   items: CartItem[];
   total: number;
   deliveryMethod: "express" | "standard" | "pickup";
-  deliveryCost: number;
+  deliveryCharge: number;
 }
 
 const initialState: CartState = {
   items: [],
   total: 0,
   deliveryMethod: "standard",
-  deliveryCost: 5.00, // Default to Standard Delivery
+  deliveryCharge: 5.00, 
 };
 
-// Function to calculate total (including delivery)
-const calculateTotal = (items: CartItem[], deliveryCost: number) => {
+
+const calculateTotal = (items: CartItem[]) => {
   const itemsTotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  return itemsTotal + deliveryCost;
+  return itemsTotal;
 };
 
 export const cartSlice = createSlice({
@@ -39,12 +39,12 @@ export const cartSlice = createSlice({
       } else {
         state.items.push({ ...action.payload });
       }
-      state.total = calculateTotal(state.items, state.deliveryCost);
+      state.total = calculateTotal(state.items);
     },
 
     removeFromCart: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item.productId !== action.payload);
-      state.total = calculateTotal(state.items, state.deliveryCost);
+      state.total = calculateTotal(state.items);
     },
 
     increaseQuantity: (state, action: PayloadAction<string>) => {
@@ -52,7 +52,7 @@ export const cartSlice = createSlice({
       if (item) {
         item.quantity += 1;
       }
-      state.total = calculateTotal(state.items, state.deliveryCost);
+      state.total = calculateTotal(state.items);
     },
 
     decreaseQuantity: (state, action: PayloadAction<string>) => {
@@ -64,13 +64,13 @@ export const cartSlice = createSlice({
           state.items = state.items.filter((cartItem) => cartItem.productId !== action.payload);
         }
       }
-      state.total = calculateTotal(state.items, state.deliveryCost);
+      state.total = calculateTotal(state.items);
     },
 
     clearCart: (state) => {
       state.items = [];
       state.total = 0;
-      state.deliveryCost = 5.00; // Reset to default standard delivery
+      state.deliveryCharge = 5.00; 
       state.deliveryMethod = "standard";
     },
 
@@ -79,22 +79,22 @@ export const cartSlice = createSlice({
 
       switch (action.payload) {
         case "express":
-          state.deliveryCost = 10.00;
+          state.deliveryCharge = 10.00;
           break;
         case "standard":
-          state.deliveryCost = 5.00;
+          state.deliveryCharge = 5.00;
           break;
         case "pickup":
-          state.deliveryCost = 0.00;
+          state.deliveryCharge = 0.00;
           break;
       }
       
-      state.total = calculateTotal(state.items, state.deliveryCost);
+      state.total = calculateTotal(state.items);
     },
 
-    // ✅ Update total whenever needed
+   
     updateTotal: (state) => {
-      state.total = calculateTotal(state.items, state.deliveryCost);
+      state.total = calculateTotal(state.items);
     },
   },
 });
@@ -106,7 +106,7 @@ export const {
   decreaseQuantity, 
   clearCart, 
   setDeliveryMethod,
-  updateTotal // ✅ Now available!
+  updateTotal 
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

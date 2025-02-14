@@ -25,7 +25,6 @@ import NewArrival from "../../components/NewArrival/NewArrival";
 
 import { TProduct } from "@/types";
 import { getProducts } from "@/actions/getProducts";
-// import { createOrder } from "@/services/OrderService";
 import Link from "next/link";
 
 const CartPage = () => {
@@ -43,16 +42,6 @@ const CartPage = () => {
     handleGetProducts();
     setIsLoading(false);
   }, []);
-
-  // const handleCheckout = async () => {
-  //   const checkoutResponse = await createOrder(cart.items);
-  //   if (checkoutResponse.success) {
-  //     if (typeof window !== "undefined") {
-  //       localStorage.setItem("clearCartAfterRedirect", "true");
-  //       window.location.replace(checkoutResponse.data.paymentURL);
-  //     }
-  //   }
-  // };
 
   return (
     <div className="px-6 w-full">

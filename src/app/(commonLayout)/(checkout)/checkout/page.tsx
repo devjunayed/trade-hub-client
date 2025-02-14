@@ -22,8 +22,9 @@ import {
   SelectItem,
 } from "@heroui/react";
 import BreadCrumb from "../../(products)/products/components/BreadCrumb";
-import { Button } from "antd";
 import { FaFirstOrder } from "react-icons/fa6";
+import { createOrder } from "@/services/OrderService";
+import { toast } from "react-toastify";
 
 const CheckOutPage = () => {
   const dispatch = useAppDispatch();
@@ -32,8 +33,8 @@ const CheckOutPage = () => {
     "manual"
   );
   const [manualPaymentMethod, setManualPaymentMethod] = useState<
-    "bkash" | "nagad" | null
-  >(null);
+    "bkash" | "nagad"
+  >();
 
   useEffect(() => {
     dispatch(updateTotal());
@@ -43,16 +44,32 @@ const CheckOutPage = () => {
     dispatch(setDeliveryMethod(method));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
     const formValues = Object.fromEntries(formData.entries());
 
+    const finalData = { ...formValues, manualPaymentMethod, ...cart };
+    console.log(finalData);
+
     if (formValues.paymentMethod === "automatic") {
+      const checkoutResponse = await createOrder(cart.items);
+      if (checkoutResponse.success) {
+        if (typeof window !== "undefined") {
+          localStorage.setItem("clearCartAfterRedirect", "true");
+          window.location.replace(checkoutResponse.data.paymentURL);
+        }
+      }
     }
 
     if (formValues.paymentMethod === "manual") {
+      if (
+        finalData.manualPaymentMethod !== "bkash" &&
+        finalData.manualPaymentMethod !== "nagad"
+      ) {
+        toast.error("choose one bkash or nagad");
+      }
     }
   };
 
@@ -116,6 +133,7 @@ const CheckOutPage = () => {
                 <Select
                   name="paymentMethod"
                   label="Payment Method"
+                  defaultSelectedKeys={[paymentMethod]}
                   value={paymentMethod}
                   onChange={(e) => {
                     console.log(e.target.value);
@@ -151,13 +169,13 @@ const CheckOutPage = () => {
                     {manualPaymentMethod === "bkash" && (
                       <div className="space-y-4">
                         <div className="text-sm text-gray-600">
-                          <h6 className="py-2 border-b-1 text-black ">Please follow the instructions bellow :</h6>
+                          <h6 className="py-2 border-b-1 text-black ">
+                            Please follow the instructions bellow :
+                          </h6>
                           <p className="mt-2">
                             Send Money to <b>+8801814676613 </b>then,
                           </p>
-                          <p>
-                            Please insert the details below.
-                          </p>
+                          <p>Please insert the details below.</p>
                         </div>
                         <Input
                           type="tel"
@@ -183,14 +201,14 @@ const CheckOutPage = () => {
                     {/* Nagad Expandable Content */}
                     {manualPaymentMethod === "nagad" && (
                       <div className="space-y-4">
-                         <div className="text-sm text-gray-600">
-                          <h6 className="py-2 border-b-1 text-black ">Please follow the instructions bellow :</h6>
+                        <div className="text-sm text-gray-600">
+                          <h6 className="py-2 border-b-1 text-black ">
+                            Please follow the instructions bellow :
+                          </h6>
                           <p className="mt-2">
                             Send Money to <b>+8801814676613 </b>then,
                           </p>
-                          <p>
-                            Please insert the details below.
-                          </p>
+                          <p>Please insert the details below.</p>
                         </div>
                         <Input
                           type="tel"
@@ -217,17 +235,14 @@ const CheckOutPage = () => {
               </div>
 
               <Divider />
-                <div className="w-3/12 mx-auto text-center">
-                  
-              <Button
-                className="w-full   bg-none "
-                onSubmit={handleSubmit}
-                type="default"
-
-              >
-              <FaFirstOrder />  Confirm Order
-              </Button>
-                </div>
+              <div className="w-3/12 mx-auto text-center">
+                <button
+                  className="w-full hover:text-blue-400 hover:border-blue-400 border-1 flex items-center justify-center  gap-2 py-2  bg-none "
+                  type="submit"
+                >
+                  <FaFirstOrder /> Confirm Order
+                </button>
+              </div>
             </form>
           </Card>
         </div>
@@ -288,7 +303,7 @@ const CheckOutPage = () => {
               {/* Total Amount */}
               <div className="flex justify-between text-lg font-semibold">
                 <span>Total:</span>
-                <span>${cart.total.toFixed(2)}</span>
+                <span>${(cart.total + cart.deliveryCharge).toFixed(2)}</span>
               </div>
             </Card>
           ) : (
