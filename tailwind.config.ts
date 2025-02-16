@@ -3,8 +3,9 @@ import type { Config } from "tailwindcss";
 import {heroui} from "@heroui/react";
 
 const config: Config = {
+  darkMode: "class",
   daisyui: {
-    themes: ['light']
+    themes: ['class']
   },
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",

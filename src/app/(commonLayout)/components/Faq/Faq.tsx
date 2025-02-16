@@ -71,7 +71,7 @@ export default function Faq() {
             aria-label={faq.question}
             title={faq.question}
           >
-          <ReactMarkdown  className="prose max-w-none text-gray-700 leading-relaxed" rehypePlugins={[rehypeRaw]}>{faq.answer}</ReactMarkdown>
+          <ReactMarkdown  className=" prose max-w-none dark:text-slate-400 text-black  leading-relaxed" rehypePlugins={[rehypeRaw]}>{faq.answer}</ReactMarkdown>
           </AccordionItem>
         ))}
       </Accordion>
