@@ -6,6 +6,7 @@ import { getProducts } from '@/actions/getProducts'
 import { TProduct } from '@/types'
 import BestSelling from './components/BestSelling/BestSelling'
 import BrowseByCategory from './components/FeaturedProducts/FeaturedProducts'
+import Faq from './components/Faq/Faq'
 
 const HomePage = async () => {
   const { data: products }: { data: TProduct[] } = await getProducts();
@@ -24,6 +25,8 @@ const HomePage = async () => {
         products.length > 0 &&
         <BrowseByCategory products={products} />
       }
+
+      <Faq />
     </div>
   )
 }
