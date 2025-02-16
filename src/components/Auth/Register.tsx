@@ -10,6 +10,7 @@ import { CircleLoader } from "react-spinners";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@/context/user.provider";
 import { jwtDecode } from "jwt-decode";
+import { BiUserPlus } from "react-icons/bi";
 
 const Register = () => {
   const { mutate: handleUserRegistration,  data: registerResponse, isPending, isSuccess } = useUserRegistration();
@@ -179,7 +180,7 @@ const Register = () => {
                 type="submit"
                 className="w-full flex justify-center py-2 mt-6 disabled:bg-gray-400 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none"
               >
-                {isPending ? <CircleLoader size={24} color="white" /> : "Register"}
+                {isPending ? <CircleLoader size={24} color="white" /> : <span className="flex gap-2 justify-center items-center"><BiUserPlus size={19} /> Sign up</span>}
               </button>
             </form>
           </div>

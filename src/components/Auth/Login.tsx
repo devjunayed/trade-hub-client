@@ -3,19 +3,22 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { FormEvent, useEffect } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import LogoImg from "@/app/assets/images/trade-hub.png";
 import { useUserLogin } from "@/hooks/auth.hook";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CircleLoader } from "react-spinners";
 import { jwtDecode } from "jwt-decode";
 import { useUser } from "@/context/user.provider";
+import { BiLogIn } from "react-icons/bi";
+import { FaUser, FaUserShield } from "react-icons/fa";
 
 const Login = () => {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
+  const [userCred, setUserCred] = useState({ email: "", password: "" });
   const router = useRouter();
-  const {user, isLoading, setIsLoading} = useUser();
+  const { user, isLoading, setIsLoading } = useUser();
   const {
     mutate: handleLogin,
     data: loginResponse,
@@ -36,7 +39,6 @@ const Login = () => {
 
   useEffect(() => {
     if (loginResponse?.data?.accessToken && isSuccess) {
-      
       setIsLoading(false);
       if (!isLoading) {
         const decodedToken = jwtDecode(loginResponse?.data?.accessToken) as any;
@@ -81,6 +83,29 @@ const Login = () => {
 
         {/* Right Side */}
         <div className="w-full bg-white sm:w-1/2 p-8 flex flex-col justify-center">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <button
+              onClick={() =>
+                setUserCred({ email: "admin@gmail.com", password: "admin123" })
+              }
+              className="w-full flex justify-center py-2 disabled:bg-gray-400 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none "
+            >
+              <span className="flex items-center justify-center gap-2">
+                <FaUserShield size={22} /> Admin Login
+              </span>
+            </button>
+            <button
+              onClick={() =>
+                setUserCred({ email: "user@gmail.com", password: "user123" })
+              }
+              className="w-full flex justify-center py-2  disabled:bg-gray-400 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none"
+            >
+              <span className="flex gap-2 items-center justify-center">
+                {" "}
+                <FaUser size={18} /> User Login
+              </span>
+            </button>
+          </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label
@@ -93,8 +118,10 @@ const Login = () => {
                 type="email"
                 id="email"
                 name="email"
+                value={userCred.email}
                 className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
                 placeholder="Email"
+                onChange={(e)=> setUserCred({...userCred, email: e.target.value})}
                 required
               />
             </div>
@@ -106,11 +133,13 @@ const Login = () => {
                 Password
               </label>
               <input
+                value={userCred.password}
                 type="password"
                 id="password"
                 name="password"
                 className="w-full border-primary px-4 py-2 border rounded-md outline-none focus:border-accent"
                 placeholder="Password"
+                onChange={(e)=> setUserCred({...userCred, password: e.target.value})}
                 required
               />
             </div>
@@ -119,7 +148,13 @@ const Login = () => {
               type="submit"
               className="w-full flex justify-center py-2 mt-6 disabled:bg-gray-400 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none"
             >
-              {isPending ? <CircleLoader size={24} color="white" /> : "Sign In"}
+              {isPending ? (
+                <CircleLoader size={24} color="white" />
+              ) : (
+                <span className="flex gap-2 items-center justify-center">
+                  <BiLogIn size={18} /> Sign In
+                </span>
+              )}
             </button>
           </form>
         </div>
