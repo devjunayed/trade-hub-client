@@ -22,7 +22,6 @@ import { logOutUser } from "@/services/AuthService";
 import { usePathname, useRouter } from "next/navigation";
 import "./navbar.module.css";
 import { Avatar } from "@heroui/react";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 
 export default function NavBar() {
@@ -30,7 +29,6 @@ export default function NavBar() {
   const { user } = useUser();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -63,17 +61,15 @@ export default function NavBar() {
     <Navbar
       maxWidth="full"
       shouldHideOnScroll
-      className={`${
-        theme === "light" ? "bg-white" : "bg-black"
-      } m-0 p-0     th-navbar shadow-md`}
+      className={"m-0 p-0  dark:bg-gray-900  th-navbar shadow-md"}
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent>
         <NavbarBrand>
           <Link
-            className={`${
-              theme === "dark" && "bg-white px-4 py-1"
-            }  rounded-sm`}
+            className={`
+              dark:bg-white dark:px-4 dark:py-1
+             rounded-sm`}
             href="/"
           >
             <Image height={150} width={120} src={Logo} alt="Logo image" />
@@ -82,15 +78,15 @@ export default function NavBar() {
       </NavbarContent>
 
       {/* Large screen menu */}
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-4" justify="end">
         {menusItems.map((item) => (
           <NavbarItem key={item?.label} className="">
             <Link
               className={`${
                 (pathname.includes(item?.href) && item?.href !== "/") ||
                 pathname === item?.href
-                  ? "text-primary"
-                  : "text-black"
+                  ? "dark:text-white text-primary"
+                  : "dark:text-slate-400 text-black"
               }`}
               href={item?.href}
             >
@@ -114,9 +110,7 @@ export default function NavBar() {
               <DropdownMenu aria-label="Static Actions">
                 <DropdownItem key="new" className="text-black">
                   <Link
-                    className={`${
-                      theme === "light" ? "text-black" : "text-white"
-                    }`}
+                    className={`text-black dark:text-white`}
                     href={`${
                       user?.role === "admin"
                         ? "admin-dashboard"

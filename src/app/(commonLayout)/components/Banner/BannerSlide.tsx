@@ -20,7 +20,7 @@ const BannerSlide = ({ data, isActive }: { data: any; isActive: boolean }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="mb-5 text-xl md:text-2xl xl:text-3xl font-bold font-serif"
+            className="mb-5 text-gray-200 text-xl md:text-2xl xl:text-3xl font-bold font-serif"
           >
             {data.title}
           </motion.h1>
@@ -28,7 +28,7 @@ const BannerSlide = ({ data, isActive }: { data: any; isActive: boolean }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-            className="mb-5 text-base md:text-md font-serif"
+            className="mb-5 text-gray-400 md:text-md font-serif"
           >
             {data.subtitle}
           </motion.p>

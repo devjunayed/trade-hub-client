@@ -50,7 +50,7 @@ const SidebarLinkWithNested = ({ link }: { link: any }) => {
         onClick={() => link.subLinks && setIsOpen(!isOpen)}
       />
       {link.subLinks && isOpen && (
-        <div className="p-2 pl-8 rounded-lg bg-gray-800">
+        <div className="p-2 pl-8 rounded-lg bg-gray-900">
           {link.subLinks.map((subLink: any, idx: number) => (
             <SidebarLink
               onClick={() => setIsOpen(!isOpen)}

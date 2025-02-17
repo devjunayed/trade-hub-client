@@ -12,10 +12,10 @@ const HomePage = async () => {
   const { data: products }: { data: TProduct[] } = await getProducts();
 
   return (
-    <div>
+    <div className='bg-white dark:bg-gray-900'>
       <Banner />
       <BannerBottomCategory />
-      {products.length > 0 &&
+      {products.length > 0 && 
         <NewArrival products={products} />
       }
       {products.length > 0 &&

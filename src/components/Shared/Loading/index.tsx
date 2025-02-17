@@ -4,7 +4,7 @@ import { CircleLoader } from 'react-spinners'
 const Loading = () => {
   return (
     <div className='min-h-screen w-full flex justify-center items-center'>
-      <CircleLoader />
+      <CircleLoader className='text-gray-900 dark:text-white' />
     </div>
   )
 }
