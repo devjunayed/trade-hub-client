@@ -3,7 +3,7 @@
 "use server";
 
 import axiosInstance from "@/lib/AxiosInstance";
-import { TOrder, TProduct } from "@/types";
+import { TOrder } from "@/types";
 import { ThrowError } from "@/utils/error";
 
 export const createOrder = async (orderData: TOrder) => {
@@ -14,44 +14,58 @@ export const createOrder = async (orderData: TOrder) => {
     ThrowError(error);
   }
 };
-export const updateProduct = async (
-  productId: string,
-  productData: TProduct
-) => {
-  try {
-    const { data } = await axiosInstance.patch(
-      `/product/${productId}`,
-      productData
-    );
-    return data;
-  } catch (error) {
-    ThrowError(error);
-  }
-};
+// export const updateOrder = async (
+//   productId: string,
+//   productData: TOrder
+// ) => {
+//   try {
+//     const { data } = await axiosInstance.patch(
+//       `/product/${productId}`,
+//       productData
+//     );
+//     return data;
+//   } catch (error) {
+//     ThrowError(error);
+//   }
+// };
 
-export const getSingleProduct = async (productId: string) => {
-  try {
-    const { data } = await axiosInstance.get(`/product/${productId}`);
-    return data;
-  } catch (error) {
-    ThrowError(error);
-  }
-};
-export const getAllOrder = async (search?: string, page: number = 1) => {
+export const getUserOrders = async ({
+  page,
+  search,
+  sort,
+  filter,
+}: {
+  page?: number;
+  search?: string;
+  sort?: string;
+  filter?: string;
+}) => {
   try {
     const { data } = await axiosInstance.get(
-      `/order?page=${page}&searchTerm=${search}`
+      `/order/user-orders/?searchTerm=${search}&page=${page}&sort=${sort}&category=${filter}`
     );
-    return data.data;
-  } catch (error) {
-    ThrowError(error);
-  }
-};
-export const deleteProduct = async (productId: string) => {
-  try {
-    const { data } = await axiosInstance.delete(`/product/${productId}`);
+
+    console.log(data)
     return data;
   } catch (error) {
     ThrowError(error);
   }
 };
+// export const getAllOrder = async (search?: string, page: number = 1) => {
+//   try {
+//     const { data } = await axiosInstance.get(
+//       `/order?page=${page}&searchTerm=${search}`
+//     );
+//     return data.data;
+//   } catch (error) {
+//     ThrowError(error);
+//   }
+// };
+// export const deleteOrder = async (productId: string) => {
+//   try {
+//     const { data } = await axiosInstance.delete(`/product/${productId}`);
+//     return data;
+//   } catch (error) {
+//     ThrowError(error);
+//   }
+// };

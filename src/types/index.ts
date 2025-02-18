@@ -75,19 +75,19 @@ export type TUser = {
 
 
 export type TOrderProducts = {
+  _id?: string;
   productId: string;
   quantity: number;
 };
 
 export type TOrder = {
+  _id?: string;
   userId?: string;
   transactionId?: string;
   products: CartItem[];
-  totalPrice: {
-    type: number;
-    required: true;
-  };
-  paymentStatus?: "pending" | "paid" | "canceled";
+  totalPrice: number;
+  paymentStatus?: "pending" | "due" | "processing" | "paid" | "canceled";
+  orderStatus?: "processing" | "shipping" | "canceled" | "completed";
   city: string;
   deliveryCharge: number;
   deliveryMethod: "express" | "standard" | "pickup";
@@ -102,3 +102,9 @@ export type TOrder = {
   shippingAddress: string;
 };
 
+export type TMeta = {
+  page: number;
+  limit: number;
+  total: number;
+  totalPage: number;
+}
