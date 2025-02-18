@@ -8,6 +8,7 @@ import { useGetAllCategory } from "@/hooks/category.hook";
 import { useGetUserOrders } from "@/hooks/order.hook";
 import OrderTableRow from "../components/OrderTableRow";
 import SearchBar from "@/app/(dashboardLayout)/admin-dashboard/(products)/components/SearchBar";
+import { CircleLoader } from "react-spinners";
 
 export type TMeta = {
   page: number;
@@ -146,11 +147,10 @@ const ManageOrders = () => {
           <tr className="bg-[#262626] text-white text-center">
             <th>SL.</th>
             <th>Products</th>
-            <th>TrxId</th>
             <th>Amount</th>
-            <th>Payment Method</th>
             <th>Payment Status</th>
             <th>Order Status</th>
+            <th>Order Date</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -190,11 +190,11 @@ const ManageOrders = () => {
         </div>
       </div>
 
-      {/* {isLoading && (
+      {isOrderPending && (
         <div>
           <CircleLoader size={24} />
         </div>
-      )} */}
+      )}
       {orders?.meta.total === 0 && <div>No Data </div>}
     </div>
   );

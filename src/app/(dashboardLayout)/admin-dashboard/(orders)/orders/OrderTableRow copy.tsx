@@ -3,6 +3,7 @@ import { capitalize } from "@/utils/capitalize";
 import Link from "next/link";
 import Moment from "react-moment";
 import React from "react";
+import { BiEdit } from "react-icons/bi";
 import { BsEye } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
 
@@ -11,10 +12,19 @@ const OrderTableRow = ({ order, sl }: { order: TOrder; sl: number }) => {
     <tr className="text-center w-full" key={order._id}>
       <td className="">{sl}</td>
       <td className="">
-       {(order.products[0].productId as TProduct).name} ...
+        {order.products.map((product, index) => (
+          <p key={index}>
+            {(product.productId as TProduct).name as string} {!index && "/"}
+          </p>
+        ))}
       </td>
+      <td>{order.transactionId}</td>
       <td>{order?.totalPrice}</td>
-      
+      <td>
+        {capitalize(order.paymentMethod)}{" "}
+        {order.paymentMethod === "manual" && "/"}{" "}
+        {capitalize(order.manualPaymentMethod)}
+      </td>
       <td>{capitalize(order.paymentStatus)}</td>
       <td>
         <p className="flex items-center gap-2 justify-center">
@@ -44,6 +54,12 @@ const OrderTableRow = ({ order, sl }: { order: TOrder; sl: number }) => {
             href={`/admin-dashboard/manage-order/${order?._id}`}
           >
             <BsEye size={24} />
+          </Link>
+          <Link
+            className="hover:text-yellow-800  text-yellow-600"
+            href={`/admin-dashboard/edit-order/${order?._id}`}
+          >
+            <BiEdit size={24} />
           </Link>
           <button
             onClick={() => {}}

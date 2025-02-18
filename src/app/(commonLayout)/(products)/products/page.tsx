@@ -69,7 +69,7 @@ const ManageProduct = () => {
       <BreadCrumb labels={["products"]} activePath={"/products"} />
 
       <div className=" h-full w-full">
-        <div className=" mb-8 justify-between items-center w-full  flex top-0 left-0">
+        <div className=" mb-8 gap-4 justify-between items-center w-full  flex top-0 left-0">
           <div className="flex  flex-1 justify-start">
             <SearchBar setSearch={setSearch} />
           </div>
