@@ -14,7 +14,7 @@ const OrderTableRow = ({ order, sl }: { order: TOrder; sl: number }) => {
       <td className="">
         {order.products.map((product, index) => (
           <p key={index}>
-            {(product.productId as TProduct).name as string} {!index && "/"}
+            {(product.productId as unknown as TProduct).name as string} {!index && "/"}
           </p>
         ))}
       </td>
