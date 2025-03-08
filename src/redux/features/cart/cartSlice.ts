@@ -1,8 +1,7 @@
-import { TProduct } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"; 
 
 export interface CartItem {
-  productId: string | TProduct;
+  productId: string ;
   name: string;
   price: number;
   quantity: number;

@@ -2,10 +2,10 @@
 import { useUser } from "@/context/user.provider";
 import React from "react";
 import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
-import Marquee from "react-fast-marquee";
 import { BiCart } from "react-icons/bi";
 import { useAppSelector } from "@/redux/hook";
 import Link from "next/link";
+import TopNavbarMiddle from "./TopNavbarMiddle";
 
 const TopNavbar = () => {
   const { user } = useUser();
@@ -20,20 +20,10 @@ const TopNavbar = () => {
         </div>
 
         {/* Middle Section (Marquee) */}
-        <div className="flex-1  w-full overflow-hidden">
-          <Marquee direction="down" autoFill={true}>
-            <div className="flex">
-              <span className="mx-4">
-                Return delivery is applicable on few terms
-              </span>
-              <span className="mx-4">
-                Return delivery is applicable on few terms
-              </span>
-              <span className="mx-4">
-                Return delivery is applicable on few terms
-              </span>
-            </div>
-          </Marquee>
+        <div className="relative flex-1 flex flex-col justify-center w-full ">
+          
+          <TopNavbarMiddle />
+     
         </div>
 
         {/* Right Section */}

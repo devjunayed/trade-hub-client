@@ -62,7 +62,7 @@ const CartPage = () => {
               <TableBody>
                 <>
                   {cart?.products.map((item) => (
-                    <TableRow key={item?.productId}>
+                    <TableRow key={item?.productId as string}>
                       <TableCell>
                         <Image className="w-12 h-12" src={item?.image} alt="" />
                       </TableCell>
@@ -73,7 +73,7 @@ const CartPage = () => {
                         <div className="flex items-center gap-4">
                           <Button
                             onClick={() =>
-                              dispatch(increaseQuantity(item.productId))
+                              dispatch(increaseQuantity(item.productId as string))
                             }
                             className=""
                           >
@@ -82,7 +82,7 @@ const CartPage = () => {
                           {item?.quantity}
                           <Button
                             onClick={() =>
-                              dispatch(decreaseQuantity(item.productId))
+                              dispatch(decreaseQuantity(item.productId as string))
                             }
                             disabled={item?.quantity === 1}
                             className=""
@@ -96,7 +96,7 @@ const CartPage = () => {
                         <Button
                           danger
                           onClick={() =>
-                            dispatch(removeFromCart(item.productId))
+                            dispatch(removeFromCart(item.productId as string))
                           }
                         >
                           <MdClose />
