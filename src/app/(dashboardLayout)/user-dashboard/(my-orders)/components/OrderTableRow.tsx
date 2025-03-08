@@ -41,7 +41,7 @@ const OrderTableRow = ({ order, sl }: { order: TOrder; sl: number }) => {
         <div className="flex flex-wrap gap-2 items-center justify-center min-h-[100%]">
           <Link
             className="hover:text-blue-800  text-blue-600"
-            href={`/admin-dashboard/manage-order/${order?._id}`}
+            href={`/user-dashboard/my-orders/${order?._id}`}
           >
             <BsEye size={24} />
           </Link>
