@@ -11,7 +11,7 @@ const OrderTableRow = ({ order, sl }: { order: TOrder; sl: number }) => {
     <tr className="text-center w-full" key={order._id}>
       <td className="">{sl}</td>
       <td className="">
-       {(order.products[0].productId as TProduct).name} ...
+       {(order.products[0].productId as unknown as TProduct).name} ...
       </td>
       <td>{order?.totalPrice}</td>
       
