@@ -26,5 +26,8 @@
   @apply bg-gray-700 !important;
 }
 
+.reset-padding{
+  @apply p-0 !important;
+}
 
 

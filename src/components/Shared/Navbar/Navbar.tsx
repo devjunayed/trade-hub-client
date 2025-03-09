@@ -6,7 +6,7 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenuToggle, 
+  NavbarMenuToggle,
   Button,
   NavbarMenu,
   NavbarMenuItem,
@@ -59,9 +59,10 @@ export default function NavBar() {
 
   return (
     <Navbar
-      maxWidth="full"
+    classNames={{wrapper: "reset-padding"}}
+    maxWidth="full"
       shouldHideOnScroll
-      className={"m-0 p-0  dark:bg-gray-900  th-navbar shadow-md"}
+      className={"m-0 p-0 reset-padding dark:bg-gray-900  th-navbar shadow-md"}
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent>
