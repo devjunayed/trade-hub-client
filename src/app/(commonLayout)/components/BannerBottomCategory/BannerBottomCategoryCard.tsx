@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card } from "@heroui/card";
 import { Image } from "@heroui/image";
-import { Button } from "@heroui/react";
+import Link from "next/link";
 
 const BannerBottomCategoryCard = ({ data }: { data: any }) => {
   return (
@@ -11,7 +11,7 @@ const BannerBottomCategoryCard = ({ data }: { data: any }) => {
     >
       <div className="absolute flex z-10  flex-col items-center justify-center gap-6">
         <p className="text-md md:text-xl text-center text-white uppercase font-bold">{data.title}</p>
-        <Button>Shop Now</Button>
+        <Link href="/products" className="border-b border-white py-2 text-white">Shop Now</Link>
       </div>
       <Image
         isZoomed

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button } from "@heroui/react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const BannerSlide = ({ data, isActive }: { data: any; isActive: boolean }) => {
   return (
@@ -28,7 +28,7 @@ const BannerSlide = ({ data, isActive }: { data: any; isActive: boolean }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-            className="mb-5 text-gray-400 md:text-md font-serif"
+            className="mb-5 text-gray-300 md:text-md font-serif"
           >
             {data.subtitle}
           </motion.p>
@@ -37,7 +37,7 @@ const BannerSlide = ({ data, isActive }: { data: any; isActive: boolean }) => {
             animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
           >
-            <Button size="md" className="">Shop Now</Button>
+            <Link href="/products"  className=" border-b py-2 text-white border-white">Shop Now</Link>
           </motion.div>
         </div>
       </div>
