@@ -59,7 +59,7 @@ export default function Faq() {
       ];
       
   return (
-    <div className="md:px-6 px-4 my-6">
+    <div className="md:px-6 px-4 my-6 max-w-7xl mx-auto">
       <h1 className="text-lg md:text-3xl my-4 md:my-10">
         Frequently Asked Questions
       </h1>

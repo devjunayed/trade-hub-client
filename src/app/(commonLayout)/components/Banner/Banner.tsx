@@ -15,7 +15,7 @@ const Banner = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-7xl mx-auto px-0 md:px-6">
       <Swiper
         slidesPerView={1}
         loop={true}

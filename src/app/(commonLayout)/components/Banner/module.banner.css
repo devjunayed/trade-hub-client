@@ -26,17 +26,27 @@
   margin-right: auto;
 }
 
+.swiper-pagination-bullet{
+  fill: white !important;
+  color: white !important;
+  stroke: white !important;
+  border-radius: 5px !important;
+  background-color: white !important;
+}
+
 .swiper-pagination-bullet-active{
   fill: white !important;
   color: white !important;
   stroke: white !important;
+  padding: 0px 10px !important;
+  border-radius: 5px !important;
   background-color: white !important;
 }
 
 .swiper-button-next,
 .swiper-button-prev {
   
-
+  display: none !important;
   right: 10px;
   padding: 30px;
   color: white !important;
@@ -46,5 +56,6 @@
 
 
 .swiper-button-prev:after, .swiper-button-next:after {
+  
   font-size: 20px !important;
 }

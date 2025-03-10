@@ -5,8 +5,8 @@ import { FaSquareWhatsapp } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <>
-      <footer className="footer bg-black text-white p-4 md:p-10">
+    <div className="bg-black w-full">
+      <footer className="footer max-w-7xl mx-auto text-white p-4 md:p-10">
         <aside>
           <img   className="w-32 bg-white px-4 py-2 rounded-sm" src="/trade-hub.png" alt="" />
           <p>
@@ -38,7 +38,7 @@ const Footer = () => {
           </p>
         </aside>
       </footer>
-    </>
+    </div>
   );
 };
 

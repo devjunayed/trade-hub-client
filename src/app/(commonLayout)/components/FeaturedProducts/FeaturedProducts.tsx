@@ -7,9 +7,9 @@ import { Button } from "@heroui/react";
 
 const FeaturedProducts = ({ products }: { products: TProduct[] }) => {
   return (
-    <div className="px-2 md:px-6 w-full">
+    <div className="px-2 md:px-6 max-w-7xl mx-auto ">
       <h1 className="text-lg md:text-3xl my-4 md:my-10">Featured Products</h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-center gap-4 md:gap-10  justify-center">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 items-center gap-2 md:gap-4  justify-center">
         {products?.map((product) => (
           <ProductCard key={product.name} product={product} />
         ))}
