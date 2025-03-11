@@ -7,12 +7,14 @@ import { AiFillProduct } from "react-icons/ai";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { TOrderDataStats,  useGetOrderStats } from "@/hooks/stats.hook";
 import { MdSurfing } from "react-icons/md";
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 const DashboardPage = () => {
   const { data: ordersStats, isLoading: isOrdersStatsLoading } =
     useGetOrderStats();
   return (
     <div className="px-10">
+      <GoogleAnalytics trackPageViews />
       <div className="flex gap-4 flex-wrap my-6 justify-center">
       <SummaryCard
           icon={<MdSurfing size={24} />}
