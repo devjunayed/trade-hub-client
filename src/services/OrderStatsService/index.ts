@@ -5,7 +5,8 @@ import { ThrowError } from "@/utils/error";
 export const getOrderStats = async () => {
   try {
     const { data } = await axiosInstance.get("/stats/orders-stats");
-    return data.data;
+    console.log(data)
+    return data;
   } catch (error) {
     ThrowError(error);
   }

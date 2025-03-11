@@ -1,14 +1,24 @@
+"use client"
 import React from "react";
 import SellsChart from "./components/SellsChart/SellsChart";
 import SummaryCard from "./components/SummaryCard/SummaryCard";
-import { BiChart,  BiPackage, BiUser } from "react-icons/bi";
+import { BiChart, BiPackage, BiUser } from "react-icons/bi";
 import { AiFillProduct } from "react-icons/ai";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import { TOrderDataStats,  useGetOrderStats } from "@/hooks/stats.hook";
+import { MdSurfing } from "react-icons/md";
 
-const page = () => {
+const DashboardPage = () => {
+  const { data: ordersStats, isLoading: isOrdersStatsLoading } =
+    useGetOrderStats();
   return (
     <div className="px-10">
       <div className="flex gap-4 flex-wrap my-6 justify-center">
+      <SummaryCard
+          icon={<MdSurfing size={24} />}
+          title="Total Visitors "
+          count={ordersStats?.meta.totalRevenue as number}
+        />
         <SummaryCard
           icon={<BiUser size={24} />}
           title="Total Users"
@@ -22,19 +32,23 @@ const page = () => {
         <SummaryCard
           icon={<BiPackage size={24} />}
           title="Total Orders"
-          count={50}
+          count={ordersStats?.meta.totalOrders as number}
         />
         <SummaryCard
           icon={<BiChart size={24} />}
           endIcon={<FaBangladeshiTakaSign size={12} />}
           title="Total Revenue"
-          count={50}
+          count={ordersStats?.meta.totalRevenue as number}
         />
+      
       </div>
       <h1 className="my-4 text-xl">The Orders of last 30 days</h1>
-      <SellsChart />
+      <SellsChart
+        ordersStats={ordersStats?.data as unknown as TOrderDataStats[] }
+        isOrdersStatsLoading={isOrdersStatsLoading}
+      />
     </div>
   );
 };
 
-export default page;
+export default DashboardPage;

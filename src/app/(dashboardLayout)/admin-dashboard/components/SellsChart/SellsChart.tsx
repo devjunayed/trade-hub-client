@@ -1,5 +1,5 @@
 "use client";
-import { useGetOrderStats } from "@/hooks/stats.hook";
+import { TOrderDataStats } from "@/hooks/stats.hook";
 import {
   XAxis,
   YAxis,
@@ -11,9 +11,15 @@ import {
   Bar,
 } from "recharts";
 
-const SellsChart = () => {
-  const { data: ordersStats, isLoading: isOrdersStatsLoading } =
-    useGetOrderStats();
+
+interface TSellsChart {
+  isOrdersStatsLoading: boolean;
+  ordersStats: TOrderDataStats[]
+
+}
+
+const SellsChart = ({isOrdersStatsLoading, ordersStats}: TSellsChart) => {
+  
 
 
   return (
