@@ -14,7 +14,7 @@ const DashboardPage = () => {
     useGetOrderStats();
   return (
     <div className="px-10">
-      <GoogleAnalytics trackPageViews />
+      <GoogleAnalytics gtagUrl="/gtag.js" trackPageViews />
       <div className="flex gap-4 flex-wrap my-6 justify-center">
       <SummaryCard
           icon={<MdSurfing size={24} />}
