@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { IconCurrencyTaka } from "@tabler/icons-react";
 import { Swiper as SwiperType } from "swiper/types";
-import { BiCartAdd, BiMinus, BiPlus } from "react-icons/bi";
+import { BiCartAdd, BiMinus, BiPlus, BiSolidShoppingBag } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { Button } from "antd";
 import { addToCart } from "@/redux/features/cart/cartSlice";
@@ -127,26 +127,32 @@ const SingleProductCard = ({ product }: { product: TProduct }) => {
             <div className="mt-14 mx-auto w-full">
               <div className="flex gap-4 justify-center items-center text-xl">
                 <Button
+                  className="p-6 "
+                  disabled={itemCount === 1 ? true : false}
+                  onClick={() => setItemCount((prev) => prev - 1)}
+                >
+                  <BiMinus size={18} />
+                </Button>
+                <p>{itemCount}</p>
+                <Button
                   className="p-6"
                   onClick={() => setItemCount((prev) => prev + 1)}
                 >
                   <BiPlus size={18} />
                 </Button>
-                <p>{itemCount}</p>
-                <Button
-                  className="p-6 "
-                  disabled={itemCount === 1 ? true : false}
-                  onClick={() => setItemCount((prev) => prev - 1)}
-                >
-                  <BiMinus  size={18} />
-                </Button>
               </div>
-              <div className="flex items-center justify-center">
+              <div className="flex gap-4 items-center justify-center">
                 <Button
                   onClick={handleAddToCart}
                   className=" p-6 text-center mt-10 w-full"
                 >
                   <BiCartAdd size={18} /> Add to Cart
+                </Button>
+                <Button
+                  onClick={handleAddToCart}
+                  className=" p-6 bg-black text-white text-center mt-10 w-full"
+                >
+                  <BiSolidShoppingBag size={18} /> Shop Now
                 </Button>
               </div>
             </div>

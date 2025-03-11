@@ -92,7 +92,7 @@ const CheckOutPage = () => {
   };
 
   return (
-    <div className="px-6">
+    <div className="px-6 max-w-7xl mx-auto">
       <BreadCrumb activePath="checkout" labels={["Checkout"]} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

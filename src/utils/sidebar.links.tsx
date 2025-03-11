@@ -7,7 +7,7 @@ import {
   IconUsers,
 } from "@tabler/icons-react";
 import { AiFillFolder, AiFillFolderAdd, AiFillProduct, AiOutlineFolderView } from "react-icons/ai";
-import { BiHome, BiPhotoAlbum, BiShoppingBag, BiUserPlus } from "react-icons/bi";
+import { BiHome,  BiShoppingBag, BiUserPlus } from "react-icons/bi";
 import { BsPersonFillGear } from "react-icons/bs";
 import { FaBoxOpen } from "react-icons/fa";
 
@@ -75,16 +75,16 @@ export const adminLinks = [
     icon: <BiShoppingBag  className="text-white h-5 w-5" />,
     href: "admin-dashboard/orders"
   },
-  {
-    label: "Media",
-    icon: <BiPhotoAlbum  className="text-white h-5 w-5" />,
-    href: "admin-dashboard/manage-image"
-  },
-  {
-    label: "Settings",
-    href: "admin-dashboard/settings",
-    icon: <IconSettings className="text-white h-5 w-5" />,
-  },
+  // {
+  //   label: "Media",
+  //   icon: <BiPhotoAlbum  className="text-white h-5 w-5" />,
+  //   href: "admin-dashboard/manage-image"
+  // },
+  // {
+  //   label: "Settings",
+  //   href: "admin-dashboard/settings",
+  //   icon: <IconSettings className="text-white h-5 w-5" />,
+  // },
 ];
 export const userLinks = [
   {

@@ -65,7 +65,7 @@ const ManageProduct = () => {
     setFilter(value);
   };
   return (
-    <div className="overflow-x-auto  w-full px-6">
+    <div className="overflow-x-auto  max-w-7xl mx-auto px-6">
       <BreadCrumb labels={["products"]} activePath={"/products"} />
 
       <div className=" h-full w-full">

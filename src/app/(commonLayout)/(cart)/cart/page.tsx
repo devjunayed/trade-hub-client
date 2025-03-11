@@ -44,7 +44,7 @@ const CartPage = () => {
   }, []);
 
   return (
-    <div className="px-6 w-full">
+    <div className="px-6 max-w-7xl mx-auto">
       <BreadCrumb activePath="cart" labels={["cart"]} />
 
       <div>
@@ -71,16 +71,7 @@ const CartPage = () => {
                       <TableCell>
                         {" "}
                         <div className="flex items-center gap-4">
-                          <Button
-                            onClick={() =>
-                              dispatch(increaseQuantity(item.productId as string))
-                            }
-                            className=""
-                          >
-                            <BiPlus />
-                          </Button>
-                          {item?.quantity}
-                          <Button
+                        <Button
                             onClick={() =>
                               dispatch(decreaseQuantity(item.productId as string))
                             }
@@ -89,6 +80,16 @@ const CartPage = () => {
                           >
                             <BiMinus />
                           </Button>
+                          {item?.quantity}
+                          <Button
+                            onClick={() =>
+                              dispatch(increaseQuantity(item.productId as string))
+                            }
+                            className=""
+                          >
+                            <BiPlus />
+                          </Button>
+                        
                         </div>
                       </TableCell>
                       <TableCell>{item.price * item.quantity}</TableCell>
