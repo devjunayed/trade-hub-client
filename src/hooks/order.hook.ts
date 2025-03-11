@@ -1,5 +1,5 @@
-import { createOrder, getUserOrders } from "@/services/OrderService";
-import { TMeta, TOrder } from "@/types";
+import { createOrder, getAllOrder, getUserOrders } from "@/services/OrderService";
+import { TMeta, TOrder, TProduct } from "@/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
@@ -23,19 +23,19 @@ export const useCreateOrder = () => {
   });
 };
 
-// export const useGetAllOrder = ({
-//   search,
-//   page,
-// }: {
-//   search?: string;
-//   page?: number;
-// }) => {
-//   return useQuery<TProduct[], Error, TProduct[]>({
-//     queryKey: ["GET_ALL_PRODUCT"],
-//     queryFn: async () => await getUserOrders(search, page),
-//     staleTime: 0,
-//   });
-// };
+export const useGetAllOrder = ({
+  search,
+  page
+}: {
+  search?: string;
+  page?: number;
+}) => {
+  return useQuery<TProduct[], Error, TProduct[]>({
+    queryKey: ["GET_ALL_PRODUCT"],
+    queryFn: async () => await getAllOrder(search, page),
+    staleTime: 0,
+  });
+};
 export const useGetUserOrders = ({
   search,
   page,

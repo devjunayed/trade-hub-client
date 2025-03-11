@@ -51,21 +51,21 @@ export const getUserOrders = async ({
     ThrowError(error);
   }
 };
-// export const getAllOrder = async (search?: string, page: number = 1) => {
-//   try {
-//     const { data } = await axiosInstance.get(
-//       `/order?page=${page}&searchTerm=${search}`
-//     );
-//     return data.data;
-//   } catch (error) {
-//     ThrowError(error);
-//   }
-// };
-// export const deleteOrder = async (productId: string) => {
-//   try {
-//     const { data } = await axiosInstance.delete(`/product/${productId}`);
-//     return data;
-//   } catch (error) {
-//     ThrowError(error);
-//   }
-// };
+export const getAllOrder = async (search?: string, page: number = 1) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/order?page=${page}${search ? `&searchTerm=${search}` : ""}`
+    );
+    return data.data;
+  } catch (error) {
+    ThrowError(error);
+  }
+};
+export const deleteOrder = async (productId: string) => {
+  try {
+    const { data } = await axiosInstance.delete(`/product/${productId}`);
+    return data;
+  } catch (error) {
+    ThrowError(error);
+  }
+};
