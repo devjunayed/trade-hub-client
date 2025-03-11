@@ -8,7 +8,13 @@ export interface TOrderDataStats {
 
 export interface TOrderStats {
   data: TOrderDataStats[];
-  meta: { totalOrders: number; totalRevenue: number };
+  meta: {
+    totalOrders: number;
+    totalRevenue: number;
+    totalUsers: number;
+    totalProducts: number;
+    totalVisitors: number;
+  };
 }
 
 export const useGetOrderStats = () => {
