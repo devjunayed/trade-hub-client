@@ -15,7 +15,6 @@ const SellsChart = () => {
   const { data: ordersStats, isLoading: isOrdersStatsLoading } =
     useGetOrderStats();
 
-  console.log("Orders Stats:", ordersStats); // Debugging log
 
   return (
     <div className="max-w-6xl mx-auto overflow-x-auto  overflow-y-hidden bg-gray-100 p-4 ">
