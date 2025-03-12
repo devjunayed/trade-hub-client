@@ -37,6 +37,8 @@ const OrderTableRow = ({ order, sl }: { order: TOrder; sl: number }) => {
                 <Moment format="DD MMM, YY">{order.createdAt}</Moment>
               </span>
             }
+            centered
+            height={"100%"}
             width={"80%"}
             footer={false}
             open={isOpen}

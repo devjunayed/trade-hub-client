@@ -2,7 +2,8 @@ import { capitalize } from "@/utils/capitalize";
 
 const OrderStatus = ({orderStatus}: {orderStatus: string}) => {
   return (
-    <div className="flex items-center gap-2 justify-center">
+    <div className="flex items-center gap-2 ">
+              {capitalize(orderStatus)}
       {orderStatus === "processing" && (
         <span className="bg-[#FACC15] rounded-full block w-1 h-1 p-2"></span>
       )}
@@ -15,7 +16,7 @@ const OrderStatus = ({orderStatus}: {orderStatus: string}) => {
       {orderStatus === "completed" && (
         <span className="bg-[#22C55E] rounded-full block w-1 h-1 p-2"></span>
       )}
-      {capitalize(orderStatus)}
+
     </div>
   );
 };

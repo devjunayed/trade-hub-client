@@ -18,29 +18,85 @@ import { AnyObject } from "antd/es/_util/type";
 const ViewProductInfo = ({ order }: { order: AnyObject }) => {
   console.log(order);
   return (
-    <div className="">
-      <div className="my-4 flex justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold">Payment Method:</span>
-          <span>{capitalize(order.paymentMethod)}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="font-semibold">Transaction ID:</span>
-          <span>{capitalize(order.transactionId)}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="font-semibold">Payment Status:</span>
-          <span className="bg-green-400 rounded block text-gray-600 px-2">
-            {capitalize(order.paymentStatus)}
-          </span>
-        </div>
+    <div className="overflow-y-scroll">
+      <div className="my-4">
+        <Table hideHeader>
+          <TableHeader>
+            <TableColumn>{""}</TableColumn>
+            <TableColumn>{""}</TableColumn>
+            <TableColumn>{""}</TableColumn>
+            <TableColumn>{""}</TableColumn>
+            <TableColumn>{""}</TableColumn>
+            <TableColumn>{""}</TableColumn>
+          </TableHeader>
 
-        <div className="flex items-center gap-2">
-          <span className="font-semibold">Order Status:</span>
-          <OrderStatus orderStatus={order.orderStatus as string} />
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-semibold">Payment Method :</TableCell>
+              <TableCell>{capitalize(order.paymentMethod)}</TableCell>
+              <TableCell className="font-semibold">Transaction ID :</TableCell>
+              <TableCell>{order.transactionId}</TableCell>
+              <TableCell className="font-semibold">Payment Status :</TableCell>
+              <TableCell>
+                {" "}
+                <span className="bg-green-400 rounded block text-center text-gray-600 px-2">
+                  {capitalize(order.paymentStatus)}
+                </span>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-semibold">Order Status :</TableCell>
+              <TableCell> <OrderStatus orderStatus={order.orderStatus as string} /></TableCell>
+              <TableCell className="font-semibold">
+                Delivery Charge :
+              </TableCell>
+              <TableCell>{order.deliveryCharge}</TableCell>
+              <TableCell className="font-semibold">Delivery Method :</TableCell>
+              <TableCell>{capitalize(order.deliveryMethod)}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+  
+      <div>
+        <h1 className="text-lg font-semibold">Billing Information</h1>
+        <div className="my-4">
+          <Table hideHeader>
+            <TableHeader>
+              <TableColumn>{""}</TableColumn>
+              <TableColumn>{""}</TableColumn>
+              <TableColumn>{""}</TableColumn>
+              <TableColumn>{""}</TableColumn>
+              <TableColumn>{""}</TableColumn>
+              <TableColumn>{""}</TableColumn>
+            </TableHeader>
+
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-semibold">Name :</TableCell>
+                <TableCell>{order.name}</TableCell>
+                <TableCell className="font-semibold">Email :</TableCell>
+                <TableCell>{order.email}</TableCell>
+                <TableCell className="font-semibold">Phone :</TableCell>
+                <TableCell>{order.phone}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-semibold">City :</TableCell>
+                <TableCell>{order.city}</TableCell>
+                <TableCell className="font-semibold">
+                  Shipping Address :
+                </TableCell>
+                <TableCell>{order.shippingAddress}</TableCell>
+                <TableCell className="font-semibold">Postal Code :</TableCell>
+                <TableCell>{order.postalCode}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </div>
       </div>
       <div>
+      <h1 className="text-lg font-semibold">Products Information</h1>
+        <div className="my-4">
         <Table aria-label="Example table with dynamic content">
           <TableHeader>
             <TableColumn>Image</TableColumn>
@@ -87,6 +143,7 @@ const ViewProductInfo = ({ order }: { order: AnyObject }) => {
             </>
           </TableBody>
         </Table>
+        </div>
       </div>
     </div>
   );
