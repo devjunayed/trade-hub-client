@@ -149,7 +149,7 @@ const SingleProductCard = ({ product }: { product: TProduct }) => {
                   <BiCartAdd size={18} /> Add to Cart
                 </Button>
                 <Button
-                  onClick={handleAddToCart}
+                  href={`/checkout?productId=${product._id}&quantity=${itemCount}`}
                   className=" p-6 bg-black text-white text-center mt-10 w-full"
                 >
                   <BiSolidShoppingBag size={18} /> Shop Now

@@ -92,13 +92,13 @@ const CheckOutPage = () => {
   };
 
   return (
-    <div className="px-6 max-w-7xl mx-auto">
+    <div className="px-2 md:px-6 max-w-7xl mx-auto">
       <BreadCrumb activePath="checkout" labels={["Checkout"]} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Checkout Form (Takes 2/3 Width) */}
         <div className="lg:col-span-2">
-          <Card className="w-full p-6 shadow-lg bg-white">
+          <Card className="w-full p-2 md:p-6 shadow-lg bg-white">
             <h2 className="text-2xl font-semibold mb-4">Checkout</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input
@@ -154,7 +154,6 @@ const CheckOutPage = () => {
                   defaultSelectedKeys={[paymentMethod]}
                   value={paymentMethod}
                   onChange={(e) => {
-                    console.log(e.target.value);
                     setPaymentMethod(e.target.value as "manual" | "automatic");
                   }}
                 >
@@ -257,9 +256,9 @@ const CheckOutPage = () => {
               </div>
 
               <Divider />
-              <div className="w-3/12 mx-auto text-center">
+              <div className="w-full md:w-3/12 mx-auto text-center">
                 <button
-                  className="w-full hover:text-blue-400 hover:border-blue-400 border-1 flex items-center justify-center  gap-2 py-2  bg-none "
+                  className="w-full rounded border-small hover:text-blue-400 hover:border-blue-400  border-gray-300 flex items-center justify-center  gap-2 py-2  bg-none "
                   type="submit"
                 >
                   <FaFirstOrder /> Confirm Order

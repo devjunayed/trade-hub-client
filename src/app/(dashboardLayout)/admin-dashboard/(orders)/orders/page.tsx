@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import ProductTableRow from "@/app/(dashboardLayout)/admin-dashboard/(products)/components/ProductTableRow";
-import { TCategoryData, TProduct } from "@/types";
+import { TCategoryData,  TProduct } from "@/types";
 import React, { useEffect, useState } from "react";
 import { CircleLoader } from "react-spinners";
 import { getProducts } from "@/actions/getProducts";
@@ -10,6 +9,8 @@ import { PaginationProps, Select, SelectItem } from "@heroui/react";
 import { useGetAllCategory } from "@/hooks/category.hook";
 import SearchBar from "../components/SearchBar";
 import ProductTableRowPhone from "../components/ProductTableRowPhone";
+import { useGetAllOrder } from "@/hooks/order.hook";
+import OrderTableRowAdmin from "./OrderTableRowAdmin";
 
 export type TMeta = {
   page: number;
@@ -28,6 +29,8 @@ const ManageProduct = () => {
   const [products, setProducts] = useState<TProduct[]>();
   const { data: categories, isPending: isGetCategoriesPending } =
     useGetAllCategory();
+
+    const {data: Orders} = useGetAllOrder({search, page});
 
   useEffect(() => {
     setIsLoading(true);
@@ -134,20 +137,22 @@ const ManageProduct = () => {
         {/* head */}
         <thead>
           <tr className="bg-[#262626] text-white text-center">
-            <th>SL.</th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Stock</th>
+          <th>SL.</th>
+            <th>Products</th>
+            <th>TrxId</th>
+            <th>Amount</th>
+            <th>Payment Method</th>
+            <th>Payment Status</th>
+            <th>Order Status</th>
+            <th>Order Date</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody className="overflow-y-auto min-h-[60vh]">
-          {products?.map((product: TProduct, index: number) => (
-            <ProductTableRow
-              key={product._id}
-              product={product}
+          {Orders?.map((order: any, index: number) => (
+            <OrderTableRowAdmin
+              key={order._id}
+              order={order}
               sl={
                 meta && meta?.page > 1 ? meta.page * 10 + index + 1 : index + 1
               }

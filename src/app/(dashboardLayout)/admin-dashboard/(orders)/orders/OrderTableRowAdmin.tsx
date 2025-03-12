@@ -7,7 +7,7 @@ import { BiEdit } from "react-icons/bi";
 import { BsEye } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
 
-const OrderTableRow = ({ order, sl }: { order: TOrder; sl: number }) => {
+const OrderTableRowAdmin = ({ order, sl }: { order: TOrder; sl: number }) => {
   return (
     <tr className="text-center w-full" key={order._id}>
       <td className="">{sl}</td>
@@ -41,6 +41,9 @@ const OrderTableRow = ({ order, sl }: { order: TOrder; sl: number }) => {
         {order.orderStatus === "completed" && (
           <span className="bg-[#22C55E] rounded-full block w-1 h-1 p-2"></span>
         )}
+        {/* {order?.orderStatus === "pending" && (
+          <span className="bg-gray-400 rounded-full block w-1 h-1 p-2"></span>
+        )} */}
         {capitalize(order.orderStatus)}
         </p>
       </td>
@@ -73,4 +76,4 @@ const OrderTableRow = ({ order, sl }: { order: TOrder; sl: number }) => {
   );
 };
 
-export default OrderTableRow;
+export default OrderTableRowAdmin;
