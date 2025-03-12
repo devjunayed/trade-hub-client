@@ -76,7 +76,7 @@ export type TUser = {
 
 export type TOrderProducts = {
   _id?: string;
-  productId: string;
+  productId: string | TProduct;
   quantity: number;
 };
 
@@ -84,7 +84,7 @@ export type TOrder = {
   _id?: string;
   userId?: string;
   transactionId?: string;
-  products: CartItem[];
+  products: CartItem[] | TOrderProducts[];
   totalPrice: number;
   paymentStatus?: "pending" | "due" | "processing" | "paid" | "canceled";
   orderStatus?: "processing" | "shipping" | "canceled" | "completed";

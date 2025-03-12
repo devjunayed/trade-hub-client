@@ -22,9 +22,6 @@ const ManageOrders = () => {
   const [search, setSearch] = useState<string>("");
   const [sort, setSort] = useState<string>("");
   const [filter, setFilter] = useState<string>("");
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [meta, setMeta] = useState<TMeta>();
-  // const [orders, setOrders] = useState<TOrderProducts[]>();
   const { data: categories, isPending: isGetCategoriesPending } =
     useGetAllCategory();
   const { data: orders, isPending: isOrderPending } = useGetUserOrders({
@@ -34,16 +31,7 @@ const ManageOrders = () => {
     sort,
   });
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   const handleGetUserOrders = async () => {
-  //     // const response = await getUserOrders(search, page, sort, filter);
-  //     setOrders(response.data);
-  //     setMeta(response.meta);
-  //   };
-  //   handleGetUserOrders();
-  //   setIsLoading(false);
-  // }, [search, page, sort, filter]);
+
 
   const onPageChange: PaginationProps["onChange"] = (pageNumber) => {
     setPage(pageNumber);
@@ -168,30 +156,10 @@ const ManageOrders = () => {
           ))}
         </tbody>
       </table>
-      <div className="md:hidden overflow-y-auto w-full max-h-[60vh] mt-4 border">
-        <table className="w-full">
-          {/* {orders?.map((order: TProduct, index: number) => (
-            <ProductTableRowPhone
-              key={order._id}
-              order={order}
-              sl={
-                meta && meta?.page > 1 ? meta.page * 10 + index + 1 : index + 1
-              }
-            />
-          ))} */}
-        </table>
-        <div className="w-full my-6 pb-6 flex md:hidden justify-center">
-          {" "}
-          {/* <Pagination
-          defaultCurrent={meta?.page || page}
-          total={meta?.total}
-          onChange={onPageChange}
-        /> */}
-        </div>
-      </div>
+ 
 
       {isOrderPending && (
-        <div>
+        <div className="flex items-center justify-center h-full">
           <CircleLoader size={24} />
         </div>
       )}
