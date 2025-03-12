@@ -15,8 +15,7 @@ import React from "react";
 import OrderStatus from "./OrderStatus";
 import { AnyObject } from "antd/es/_util/type";
 
-const ViewProductInfo = ({ order }: { order: AnyObject }) => {
-  console.log(order);
+const ViewOrdersInfo = ({ order }: { order: AnyObject }) => {
   return (
     <div className="overflow-y-scroll">
       <div className="my-4">
@@ -149,4 +148,4 @@ const ViewProductInfo = ({ order }: { order: AnyObject }) => {
   );
 };
 
-export default ViewProductInfo;
+export default ViewOrdersInfo;

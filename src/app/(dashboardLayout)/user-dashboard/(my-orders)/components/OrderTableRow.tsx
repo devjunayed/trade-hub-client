@@ -5,9 +5,9 @@ import React from "react";
 import { BsEye } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
 import { Modal } from "antd";
-import ViewProductInfo from "./ViewProductInfo";
 import { localPriceFormat } from "@/utils/localPriceFormat";
 import OrderStatus from "./OrderStatus";
+import ViewOrdersInfo from "./ViewOrdersInfo";
 
 const OrderTableRow = ({ order, sl }: { order: TOrder; sl: number }) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -44,7 +44,7 @@ const OrderTableRow = ({ order, sl }: { order: TOrder; sl: number }) => {
             open={isOpen}
             onCancel={() => setIsOpen(false)}
           >
-            <ViewProductInfo order={order} />
+            <ViewOrdersInfo order={order} />
           </Modal>
           <button
             onClick={() => setIsOpen(true)}

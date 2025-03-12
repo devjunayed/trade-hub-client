@@ -1,20 +1,23 @@
 import { TOrder, TProduct } from "@/types";
 import { capitalize } from "@/utils/capitalize";
-import Link from "next/link";
 import Moment from "react-moment";
-import React from "react";
-import { BiEdit } from "react-icons/bi";
+import React, { useState } from "react";
 import { BsEye } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
+import OrderStatus from "@/app/(dashboardLayout)/user-dashboard/(my-orders)/components/OrderStatus";
+import { Modal } from "antd";
+import ViewOrdersInfoAdmin from "./ViewOrdersInfoAdmin";
 
 const OrderTableRowAdmin = ({ order, sl }: { order: TOrder; sl: number }) => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <tr className="text-center w-full" key={order._id}>
       <td className="">{sl}</td>
       <td className="">
         {order.products.map((product, index) => (
           <p key={index}>
-            {(product.productId as unknown as TProduct).name as string} {!index && "/"}
+            {(product.productId as unknown as TProduct).name as string}{" "}
+            {!index && "/"}
           </p>
         ))}
       </td>
@@ -27,43 +30,35 @@ const OrderTableRowAdmin = ({ order, sl }: { order: TOrder; sl: number }) => {
       </td>
       <td>{capitalize(order.paymentStatus)}</td>
       <td>
-        <p className="flex items-center gap-2 justify-center">
-
-        {order.orderStatus === "processing" && (
-          <span className="bg-[#FACC15] rounded-full block w-1 h-1 p-2"></span>
-        )}
-        {order.orderStatus === "shipping" && (
-          <span className="bg-[#3882F6] rounded-full block w-1 h-1 p-2"></span>
-        )}
-        {order.orderStatus === "canceled" && (
-          <span className="bg-[#EF4444] rounded-full block w-1 h-1 p-2"></span>
-        )}
-        {order.orderStatus === "completed" && (
-          <span className="bg-[#22C55E] rounded-full block w-1 h-1 p-2"></span>
-        )}
-        {/* {order?.orderStatus === "pending" && (
-          <span className="bg-gray-400 rounded-full block w-1 h-1 p-2"></span>
-        )} */}
-        {capitalize(order.orderStatus)}
-        </p>
+        <OrderStatus orderStatus={order.orderStatus as string} />
       </td>
       <td>
         <Moment format="DD MMM, YY">{order.createdAt}</Moment>
       </td>
       <td className="">
         <div className="flex flex-wrap gap-2 items-center justify-center min-h-[100%]">
-          <Link
+          <Modal
+            title={
+              <span className="flex items-center gap-1">
+                Order Details of
+                <Moment format="DD MMM, YY">{order.createdAt}</Moment>
+              </span>
+            }
+            centered
+            height={"100%"}
+            width={"80%"}
+            open={isOpen}
+            onCancel={() => setIsOpen(false)}
+          >
+            <ViewOrdersInfoAdmin order={order} />
+          </Modal>
+          <button
+            onClick={() => setIsOpen(true)}
             className="hover:text-blue-800  text-blue-600"
-            href={`/admin-dashboard/manage-order/${order?._id}`}
           >
             <BsEye size={24} />
-          </Link>
-          <Link
-            className="hover:text-yellow-800  text-yellow-600"
-            href={`/admin-dashboard/edit-order/${order?._id}`}
-          >
-            <BiEdit size={24} />
-          </Link>
+          </button>
+
           <button
             onClick={() => {}}
             className="hover:text-red-800 text-red-600"

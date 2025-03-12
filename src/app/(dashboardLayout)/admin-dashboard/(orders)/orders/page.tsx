@@ -1,16 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { TCategoryData,  TProduct } from "@/types";
+import { TCategoryData } from "@/types";
 import React, { useEffect, useState } from "react";
 import { CircleLoader } from "react-spinners";
-import { getProducts } from "@/actions/getProducts";
 import { Pagination } from "antd";
 import { PaginationProps, Select, SelectItem } from "@heroui/react";
 import { useGetAllCategory } from "@/hooks/category.hook";
 import SearchBar from "../components/SearchBar";
-import ProductTableRowPhone from "../components/ProductTableRowPhone";
 import { useGetAllOrder } from "@/hooks/order.hook";
-import OrderTableRowAdmin from "./OrderTableRowAdmin";
+import OrderTableRowAdmin from "../components/OrderTableRowAdmin";
 
 export type TMeta = {
   page: number;
@@ -25,21 +24,14 @@ const ManageProduct = () => {
   const [sort, setSort] = useState<string>("");
   const [filter, setFilter] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
-  const [meta, setMeta] = useState<TMeta>();
-  const [products, setProducts] = useState<TProduct[]>();
   const { data: categories, isPending: isGetCategoriesPending } =
     useGetAllCategory();
 
-    const {data: Orders} = useGetAllOrder({search, page});
+  const { data: orders, refetch } = useGetAllOrder({ search, page });
 
   useEffect(() => {
     setIsLoading(true);
-    const handleGetProducts = async () => {
-      const response = await getProducts(search, page, sort, filter);
-      setProducts(response.data);
-      setMeta(response.meta);
-    };
-    handleGetProducts();
+    refetch();
     setIsLoading(false);
   }, [search, page, sort, filter]);
 
@@ -70,8 +62,8 @@ const ManageProduct = () => {
         <div className="md:flex-1 justify-center hidden w-full md:flex md:justify-center">
           {" "}
           <Pagination
-            defaultCurrent={meta?.page || page}
-            total={meta?.total}
+            defaultCurrent={orders?.meta?.page || page}
+            total={orders?.meta?.total}
             onChange={onPageChange}
           />
         </div>
@@ -112,7 +104,11 @@ const ManageProduct = () => {
             onChange={handleSortSelect}
             selectionMode="single"
           >
-            <SelectItem className="w-full" key={"-createdAt"} value={"-createdAt"}>
+            <SelectItem
+              className="w-full"
+              key={"-createdAt"}
+              value={"-createdAt"}
+            >
               Newest to Oldest
             </SelectItem>
             <SelectItem key={"createdAt"} value={"createdAt"}>
@@ -137,7 +133,7 @@ const ManageProduct = () => {
         {/* head */}
         <thead>
           <tr className="bg-[#262626] text-white text-center">
-          <th>SL.</th>
+            <th>SL.</th>
             <th>Products</th>
             <th>TrxId</th>
             <th>Amount</th>
@@ -149,19 +145,21 @@ const ManageProduct = () => {
           </tr>
         </thead>
         <tbody className="overflow-y-auto min-h-[60vh]">
-          {Orders?.map((order: any, index: number) => (
+          {orders?.data?.map((order: any, index: number) => (
             <OrderTableRowAdmin
               key={order._id}
               order={order}
               sl={
-                meta && meta?.page > 1 ? meta.page * 10 + index + 1 : index + 1
+                orders.meta && orders.meta?.page > 1
+                  ? (orders.meta.page - 1) * 10 + index + 1
+                  : index + 1
               }
             />
           ))}
         </tbody>
       </table>
       <div className="md:hidden overflow-y-auto w-full max-h-[60vh] mt-4 border">
-        <table className="w-full">
+        {/* <table className="w-full">
           {products?.map((product: TProduct, index: number) => (
             <ProductTableRowPhone
               key={product._id}
@@ -171,15 +169,15 @@ const ManageProduct = () => {
               }
             />
           ))}
-        </table>
-      <div className="w-full my-6 pb-6 flex md:hidden justify-center">
-        {" "}
-        <Pagination
-          defaultCurrent={meta?.page || page}
-          total={meta?.total}
-          onChange={onPageChange}
-        />
-      </div>
+        </table> */}
+        <div className="w-full my-6 pb-6 flex md:hidden justify-center">
+          {" "}
+          <Pagination
+            defaultCurrent={orders?.meta?.page || page}
+            total={orders?.meta?.total}
+            onChange={onPageChange}
+          />
+        </div>
       </div>
 
       {isLoading && (
@@ -187,7 +185,7 @@ const ManageProduct = () => {
           <CircleLoader size={24} />
         </div>
       )}
-      {products?.length === 0 && <div>No Data </div>}
+      {orders?.data?.length === 0 && <div>No Data </div>}
     </div>
   );
 };
