@@ -1,21 +1,21 @@
 import React from "react";
 import { BsGear } from "react-icons/bs";
-import SettingTitle from "../components/SettingTitle";
-import SettingRow from "../components/SettingRow";
+
+import DeveloperSettings from "../components/DeveloperSettings/DeveloperSettings";
+import { Button } from "antd";
 
 const SettingsPage = () => {
   return (
-    <div className="m-6 p-4 shadow-xl w-full">
-      <h1 className="text-center font-bold text-xl flex gap-1 items-center justify-center">
-        <BsGear />
-        Settings
-      </h1>
-      {/* Developer Settings */}
-      <SettingTitle settingTitle="Developer Settings" />
-      <SettingRow
-        name="Enable/Disable developer settings"
-        description="Hides Quick Login buttons from the login page."
-      />
+    <div className="m-6  p-4 shadow-xl w-full">
+      <div className="md:mx-20">
+        <h1 className="text-center relative font-bold text-xl flex gap-1 items-center justify-center">
+          <BsGear />
+          Settings
+          <Button className="absolute right-0">Save</Button>
+        </h1>
+        {/* Developer Settings */}
+        <DeveloperSettings />
+      </div>
     </div>
   );
 };
