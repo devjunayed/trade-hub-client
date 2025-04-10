@@ -3,6 +3,7 @@ import { BsGear } from "react-icons/bs";
 
 import DeveloperSettings from "../components/DeveloperSettings/DeveloperSettings";
 import { Button } from "antd";
+import UiSettings from "../components/UiSettings/UiSettings";
 
 const SettingsPage = () => {
   return (
@@ -13,6 +14,8 @@ const SettingsPage = () => {
           Settings
           <Button className="absolute right-0">Save</Button>
         </h1>
+        {/* Light Logo Settings */}
+        <UiSettings />
         {/* Developer Settings */}
         <DeveloperSettings />
       </div>

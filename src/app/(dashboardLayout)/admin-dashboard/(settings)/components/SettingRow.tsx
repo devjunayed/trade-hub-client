@@ -16,8 +16,8 @@ const SettingRow = ({
       <div>
         <p className="flex items-center gap-1">
           <span>{name}</span>
-          <Tooltip className="block " title={description}>
-            <BsQuestionCircle />
+          <Tooltip className="block font-extralight" title={description}>
+            <BsQuestionCircle className={"font-extralight text-gray-500"} />
           </Tooltip>
         </p>
       </div>

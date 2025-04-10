@@ -6,7 +6,6 @@ import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import { useUser } from "@/context/user.provider";
-import { BiArrowToBottom, BiSolidArrowFromBottom } from "react-icons/bi";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 
 interface Links {
@@ -173,7 +172,6 @@ export const SidebarLink = ({
   onClick?: () => void;
 }) => {
   const { open, animate } = useSidebar();
-  const { user } = useUser();
   return (
     <>
       {link.href ? (
