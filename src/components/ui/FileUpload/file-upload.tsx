@@ -66,7 +66,6 @@ const FileUpload: React.FC<FileUploadProps> = ({
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
     const newList = newFileList
       .map((list) => {
-        console.log(list);
         if (list.response) {
           // if (!list.response.name.includes("https://")) {
           //   return null;
@@ -82,7 +81,6 @@ const FileUpload: React.FC<FileUploadProps> = ({
     setFileList(() => [...newList]);
   };
 
-  console.log({ fileList });
 
   const customRequest = async ({ file, onSuccess, onError }: any) => {
     const formData = new FormData();

@@ -52,11 +52,9 @@ export const getSingleProduct = async (productId: string) => {
 };
 export const getAllProduct = async (search?: string, page: number = 1) => {
   try {
-    console.log(search);
     const { data } = await axiosInstance.get(
       `/product?page=${page}&searchTerm=${search}`
     );
-    console.log(data);
     return data.data;
   } catch (error) {
     ThrowError(error);

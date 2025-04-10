@@ -45,7 +45,6 @@ export const getUserOrders = async ({
       `/order/user-orders/?searchTerm=${search}&page=${page}&sort=${sort}&category=${filter}`
     );
 
-    console.log(data)
     return data;
   } catch (error) {
     ThrowError(error);

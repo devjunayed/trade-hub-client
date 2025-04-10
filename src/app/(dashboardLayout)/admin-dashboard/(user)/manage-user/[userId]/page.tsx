@@ -7,7 +7,6 @@ import { BiEdit } from "react-icons/bi";
 
 const ManageProduct = ({ params }: { params: { userId: string } }) => {
   const { data: user } = useGetUser(params.userId);
-  console.log(user);
   return (
     <div className="overflow-x-auto relative flex flex-col justify-center items-center my-6 h-1/12 w-1/2 bg-white  shadow-xl ">
       <div className="absolute top-4 right-4">

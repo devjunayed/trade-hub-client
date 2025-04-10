@@ -10,7 +10,9 @@ import Faq from './components/Faq/Faq'
 
 const HomePage = async () => {
   const { data: products }: { data: TProduct[] } = await getProducts();
-  await fetch(process.env.NEXT_PUBLIC_BASE_API + "/uiconfig/inc-visit");
+  await fetch(process.env.NEXT_PUBLIC_BASE_API + "/uiconfig/inc-visit", {
+    method: "PATCH"
+  });
 
   return (
     <div className='bg-white dark:bg-gray-900'>
