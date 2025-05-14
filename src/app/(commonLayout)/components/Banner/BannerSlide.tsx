@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 const BannerSlide = ({ data, isActive }: { data: any; isActive: boolean }) => {
@@ -8,13 +9,23 @@ const BannerSlide = ({ data, isActive }: { data: any; isActive: boolean }) => {
       initial={{ opacity: 0, x: isActive ? 50 : 0 }}
       animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -50 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
-      className="hero min-h-[70vh]"
-      style={{
-        backgroundImage: `url(${data.image})`,
-      }}
+      className="hero min-h-[70vh] relative overflow-hidden"
     >
-      <div className="hero-overlay bg-black bg-opacity-60"></div>
-      <div className="hero-content text-neutral-content text-center">
+      
+      {/* Background image */}
+      <Image
+        src={`/${data.image}`}
+        alt={data.title}
+        fill
+        priority
+        className="object-cover z-0"
+      />
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-60 z-10"></div>
+
+      {/* Content */}
+      <div className="hero-content text-neutral-content text-center z-20 relative">
         <div className="max-w-md">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -37,7 +48,12 @@ const BannerSlide = ({ data, isActive }: { data: any; isActive: boolean }) => {
             animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
           >
-            <Link href="/products"  className=" border-b py-2 text-white border-white">Shop Now</Link>
+            <Link
+              href="/products"
+              className="border-b py-2 text-white border-white"
+            >
+              Shop Now
+            </Link>
           </motion.div>
         </div>
       </div>

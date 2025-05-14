@@ -135,7 +135,7 @@ const ManageProduct = () => {
 
         <div className="grid grid-flow-row-dense  grid-cols-5 h-full w-full gap-4">
           {products?.map((product: TProduct) => (
-            <ProductCard height="380" key={product._id} product={product} />
+            <ProductCard height="300px" key={product._id} product={product} />
           ))}
         </div>
         {isLoading && (

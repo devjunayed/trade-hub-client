@@ -76,7 +76,7 @@ export default function NavBar() {
              rounded-sm`}
             href="/"
           >
-            <Image height={150} width={120} src={Logo} alt="Logo image" />
+            <Image priority height={150} width={120} src={Logo} alt="Logo image" />
           </Link>
         </NavbarBrand>
       </NavbarContent>

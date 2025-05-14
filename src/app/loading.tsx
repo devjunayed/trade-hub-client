@@ -1,13 +1,26 @@
-import React from 'react'
-import {  RingLoader } from 'react-spinners'
-
+"use client"
+import React, { CSSProperties } from "react";
+import {  RingLoader } from "react-spinners";
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 const LoadingUi = () => {
+
   return (
-    <div className='flex gap-4 flex-col min-h-screen justify-center w-full items-center'>
-      <RingLoader className='text-black dark:text-white' size={32}/>
+    <div className="flex gap-4 flex-col min-h-screen justify-center w-full items-center">
+      <RingLoader
+        color={"#dedede"}
+        loading={true}
+        cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
       <p>Stick tight Loading...</p>
     </div>
-  )
-}
+  );
+};
 
-export default LoadingUi
+export default LoadingUi;
