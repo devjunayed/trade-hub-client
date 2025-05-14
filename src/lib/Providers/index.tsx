@@ -18,7 +18,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       <PersistGate loading={null} persistor={persistor}>
         <AntdRegistry>
           <HeroUIProvider>
-            <NextThemesProvider attribute="class" defaultTheme="dark">
+            <NextThemesProvider attribute="class" defaultTheme="white">
               <UserProvider>
                 <QueryClientProvider client={queryClient}>
                   <ToastContainer
