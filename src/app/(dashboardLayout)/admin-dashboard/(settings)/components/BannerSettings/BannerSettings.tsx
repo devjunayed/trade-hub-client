@@ -13,7 +13,7 @@ export interface IBanner {
 }
 
 const BannerSettings = () => {
-  const [banners, setBanners] = useState<IBanner>();
+  // const [banners, setBanners] = useState<IBanner>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div>
