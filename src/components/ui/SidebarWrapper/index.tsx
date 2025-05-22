@@ -5,6 +5,9 @@ import {} from "@tabler/icons-react";
 import { cn } from "@/utils/utils";
 import { Sidebar, SidebarBody, SidebarLink } from "../Sidebar";
 import { TLinkItem } from "@/types";
+import { BiLogOut } from "react-icons/bi";
+import { logOutUser } from "@/services/AuthService";
+import { useRouter } from "next/navigation";
 
 export function SidebarWrapper({
   children,
@@ -13,7 +16,13 @@ export function SidebarWrapper({
   children: ReactNode;
   links: TLinkItem[];
 }) {
+    const router = useRouter();
   const [open, setOpen] = useState(false);
+
+    const handleLogout = async () => {
+      await logOutUser();
+      router.push("/login");
+    };
 
   return (
     <div
@@ -29,6 +38,14 @@ export function SidebarWrapper({
               {links.map((link, idx) => (
                 <SidebarLinkWithNested key={idx} link={link} />
               ))}
+              <SidebarLink
+                link={{
+                  href: "/",
+                  label: "Logout",
+                  icon: <BiLogOut color="white" className="h-5 w-5" />,
+                }}
+                onClick={handleLogout}
+              />
             </div>
           </div>
         </SidebarBody>
@@ -69,5 +86,9 @@ const SidebarLinkWithNested = ({ link }: { link: any }) => {
 };
 
 const Dashboard = ({ children }: { children: ReactNode }) => {
-  return <div className="text-black rounded-lg flex justify-center w-full shadow-xl">{children}</div>;
+  return (
+    <div className="text-black rounded-lg flex justify-center w-full shadow-xl">
+      {children}
+    </div>
+  );
 };

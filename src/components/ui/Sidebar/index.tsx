@@ -10,7 +10,7 @@ import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 
 interface Links {
   label: string;
-  href: string;
+  href?: string;
   icon: React.JSX.Element | React.ReactNode;
 }
 
@@ -144,7 +144,7 @@ export const MobileSidebar = ({
               )}
             >
               <div
-                className="absolute right-10 top-10 z-50 text-neutral-800 dark:text-neutral-200"
+                className="absolute right-10 top-10 z-50 text-white dark:text-neutral-200"
                 onClick={() => setOpen(!open)}
               >
                 <IconX />
@@ -165,7 +165,7 @@ export const SidebarLink = ({
   className,
   ...props
 }: {
-  link: Links;
+  link?: Links;
   className?: string;
   isOpen?: boolean;
   props?: LinkProps;
@@ -174,7 +174,7 @@ export const SidebarLink = ({
   const { open, setOpen, animate } = useSidebar();
   return (
     <>
-      {link.href ? (
+      {link?.href ? (
         <Link
           onClick={() => {
             onClick?.();
@@ -213,7 +213,7 @@ export const SidebarLink = ({
             )}
             {...props}
           >
-            {link.icon}
+            {link?.icon}
 
             <motion.span
               animate={{
@@ -226,7 +226,7 @@ export const SidebarLink = ({
               }}
               className="text-white dark:text-white text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
             >
-              {link.label}
+              {link?.label}
             </motion.span>
           </div>
           <div className="text-white ml-2">
