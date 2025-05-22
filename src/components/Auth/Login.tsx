@@ -83,7 +83,7 @@ const Login = () => {
 
         {/* Right Side */}
         <div className="w-full bg-white sm:w-1/2 p-8 flex flex-col justify-center">
-          <div className="flex items-center justify-center gap-4 mb-6">
+          <div className="flex lg:flex-row flex-col items-center justify-center gap-4 mb-6">
             <button
               onClick={() =>
                 setUserCred({ email: "admin@gmail.com", password: "admin123" })
