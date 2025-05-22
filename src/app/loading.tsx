@@ -11,10 +11,10 @@ const LoadingUi = () => {
   return (
     <div className="flex gap-4 flex-col min-h-screen justify-center w-full items-center">
       <RingLoader
-        color={"#dedede"}
+        color={"black"}
         loading={true}
         cssOverride={override}
-        size={150}
+        size={120}
         aria-label="Loading Spinner"
         data-testid="loader"
       />
