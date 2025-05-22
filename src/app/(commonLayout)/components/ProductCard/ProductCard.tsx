@@ -35,6 +35,7 @@ const ProductCard = ({
             fill
             // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-contain border rounded-lg overflow-hidden w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-105"
+            
             onMouseOver={() =>
               setCurrentImage(
                 product.productImages[1] || product.productImages[0]
