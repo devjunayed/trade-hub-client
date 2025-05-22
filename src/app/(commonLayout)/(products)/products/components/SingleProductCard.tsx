@@ -122,7 +122,7 @@ const SingleProductCard = ({ product }: { product: TProduct }) => {
               <p className="flex font-bold   items-center justify-center h-full ">
                 <IconCurrencyTaka /> {product.price}
               </p>
-              <p>Orders 0</p>
+              {/* <p>Orders 0</p> */}
             </div>
             <div className="mt-14 mx-auto w-full">
               <div className="flex gap-4 justify-center items-center text-xl">
@@ -141,7 +141,7 @@ const SingleProductCard = ({ product }: { product: TProduct }) => {
                   <BiPlus size={18} />
                 </Button>
               </div>
-              <div className="flex gap-4 items-center justify-center">
+              <div className="flex gap-4 items-center md:flex-row flex-col justify-center">
                 <Button
                   onClick={handleAddToCart}
                   className=" p-6 text-center mt-10 w-full"

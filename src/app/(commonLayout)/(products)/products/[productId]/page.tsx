@@ -12,6 +12,7 @@ const SingleProduct = async ({ params }: { params: { productId: string } }) => {
   const products: {data: TProduct[]} = await getProducts();
   return (
     <div className="px-6 max-w-7xl mx-auto">
+      
       <BreadCrumb
         activePath={`${productId}`}
         labels={["products", `${productId}`]}
