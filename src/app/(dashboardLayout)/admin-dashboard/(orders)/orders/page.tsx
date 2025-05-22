@@ -54,7 +54,7 @@ const ManageProduct = () => {
     setFilter(value);
   };
   return (
-    <div className="md:overflow-x-auto relative w-full px-4 xl:px-10">
+    <div className="md:overflow-x-auto max-h-[80vh] overflow-y-auto relative w-full px-4 xl:px-10">
       <div className="gap-4 min-w-full md:mt-4 flex-col md:flex-row justify-between items-center w-full flex">
         <div className="flex justify-center items-center w-full md:flex-1 md:justify-start">
           <SearchBar setSearch={setSearch} />
@@ -129,7 +129,9 @@ const ManageProduct = () => {
           </Select>
         </div>
       </div>
-      <table className="hidden md:table w-full mt-4">
+      <div className="max-w-screen overflow-x-auto md:max-h-screen max-h-[60vh] overscroll-y-auto">
+
+      <table className="table w-full mt-4">
         {/* head */}
         <thead>
           <tr className="bg-[#262626] text-white text-center">
@@ -144,7 +146,7 @@ const ManageProduct = () => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody className="overflow-y-auto min-h-[60vh]">
+        <tbody className="">
           {orders?.data?.map((order: any, index: number) => (
             <OrderTableRowAdmin
               key={order._id}
@@ -158,18 +160,8 @@ const ManageProduct = () => {
           ))}
         </tbody>
       </table>
+      </div>
       <div className="md:hidden overflow-y-auto w-full max-h-[60vh] mt-4 border">
-        {/* <table className="w-full">
-          {products?.map((product: TProduct, index: number) => (
-            <ProductTableRowPhone
-              key={product._id}
-              product={product}
-              sl={
-                meta && meta?.page > 1 ? meta.page * 10 + index + 1 : index + 1
-              }
-            />
-          ))}
-        </table> */}
         <div className="w-full my-6 pb-6 flex md:hidden justify-center">
           {" "}
           <Pagination

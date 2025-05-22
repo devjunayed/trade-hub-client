@@ -8,7 +8,7 @@ import { BiEdit } from "react-icons/bi";
 const ManageProduct = ({ params }: { params: { userId: string } }) => {
   const { data: user } = useGetUser(params.userId);
   return (
-    <div className="overflow-x-auto relative flex flex-col justify-center items-center my-6 h-1/12 w-1/2 bg-white  shadow-xl ">
+    <div className="overflow-x-auto relative flex flex-col justify-center items-center max-h-[80vh] md:my-6 md:h-1/12 md:w-1/2 bg-white  shadow-xl p-4">
       <div className="absolute top-4 right-4">
         <Link href={`/admin-dashboard/edit-user/${user?._id}`} className="bg-none  border flex items-center justify-center w-12 h-12 m-0 p-0">
           <BiEdit className="text-slate-500" size={24} />

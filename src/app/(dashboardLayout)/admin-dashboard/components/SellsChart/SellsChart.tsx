@@ -23,9 +23,9 @@ const SellsChart = ({isOrdersStatsLoading, ordersStats}: TSellsChart) => {
 
 
   return (
-    <div className="max-w-6xl mx-auto overflow-x-auto  overflow-y-hidden bg-gray-100 p-4 ">
+    <div className="max-w-lg md:max-w-6xl  mx-auto overflow-x-auto  overflow-y-hidden bg-gray-100 py-4 ">
       {!isOrdersStatsLoading && ordersStats && ordersStats.length > 0 && (
-        <ResponsiveContainer   height={300}>
+        <ResponsiveContainer className="w-full"   height={300}>
           <BarChart data={[...ordersStats]} width={1500} height={300}>
             <XAxis dataKey="date" />
             <YAxis />

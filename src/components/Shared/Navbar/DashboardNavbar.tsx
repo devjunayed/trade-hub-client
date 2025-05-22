@@ -70,10 +70,10 @@ export default function DashboardNavBar() {
       <NavbarContent justify="end">
         <div className="">
           {user && (
-            <div className="flex gap-2   items-center">
-              <p> Hello, {user.name}</p>
+            <div className="flex md:gap-2 gap-1  items-center">
+              <p className="md:block hidden"> Hello, {user.name}</p>
               {user?.image ? (
-                <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+                <Avatar  src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
               ) : (
                 <Avatar name={user?.name?.slice(0, 1)} />
               )}

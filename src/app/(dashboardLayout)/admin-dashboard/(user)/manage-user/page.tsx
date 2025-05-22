@@ -9,7 +9,7 @@ const ManageUser = () => {
   const { data: users, isLoading } = useGetAllUser();
 
   return (
-    <div className="overflow-x-auto w-full mx-10">
+    <div className="max-h-[80vh] overflow-x-auto w-full md:mx-10">
       <table className="table min-w-full">
         {/* head */}
         <thead>

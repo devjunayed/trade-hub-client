@@ -7,7 +7,7 @@ import CategoryTableRow from "../components/CategoryTableRow";
 const ManageCategories = () => {
   const { data: categories } = useGetAllCategory();
   return (
-    <div className="overflow-x-auto w-full mx-10">
+    <div className="overflow-x-auto max-h-[80vh] w-full md:my-4  md:mx-10">
       <table className="table">
         {/* head */}
         <thead>
@@ -18,7 +18,7 @@ const ManageCategories = () => {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           {categories?.data?.map((category: TCategoryData, index: number) => (
             <CategoryTableRow key={category._id} category={category} sl={index + 1} />
           ))}
