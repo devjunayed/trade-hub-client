@@ -9,7 +9,7 @@ import { PaginationProps, Select, SelectItem } from "@heroui/react";
 import { useGetAllCategory } from "@/hooks/category.hook";
 import BreadCrumb from "./components/BreadCrumb";
 import SearchBar from "@/app/(dashboardLayout)/admin-dashboard/(products)/components/SearchBar";
-import ProductCard from "../../components/ProductCard/ProductCard";
+import ProductCard from "../../(home)/components/ProductCard/ProductCard";
 
 export type TMeta = {
   page: number;
@@ -143,7 +143,11 @@ const ManageProduct = () => {
             <CircleLoader size={24} />
           </div>
         )}
-        {products && products.length === 0 && <div className="flex items-center justify-center min-h-[20vh]">No Products Found</div>}
+        {products && products.length === 0 && (
+          <div className="flex items-center justify-center min-h-[20vh]">
+            No Products Found
+          </div>
+        )}
         <div className="w-full flex justify-center my-10">
           {" "}
           <Pagination

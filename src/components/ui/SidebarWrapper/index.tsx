@@ -16,13 +16,13 @@ export function SidebarWrapper({
   children: ReactNode;
   links: TLinkItem[];
 }) {
-    const router = useRouter();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
-    const handleLogout = async () => {
-      await logOutUser();
-      router.push("/login");
-    };
+  const handleLogout = async () => {
+    await logOutUser();
+    router.push("/login");
+  };
 
   return (
     <div

@@ -21,7 +21,7 @@ import {
   increaseQuantity,
   removeFromCart,
 } from "@/redux/features/cart/cartSlice";
-import NewArrival from "../../components/NewArrival/NewArrival";
+import NewArrival from "../../(home)/components/NewArrival/NewArrival";
 
 import { TProduct } from "@/types";
 import { getProducts } from "@/actions/getProducts";
@@ -71,9 +71,11 @@ const CartPage = () => {
                       <TableCell>
                         {" "}
                         <div className="flex items-center gap-4">
-                        <Button
+                          <Button
                             onClick={() =>
-                              dispatch(decreaseQuantity(item.productId as string))
+                              dispatch(
+                                decreaseQuantity(item.productId as string)
+                              )
                             }
                             disabled={item?.quantity === 1}
                             className=""
@@ -83,13 +85,14 @@ const CartPage = () => {
                           {item?.quantity}
                           <Button
                             onClick={() =>
-                              dispatch(increaseQuantity(item.productId as string))
+                              dispatch(
+                                increaseQuantity(item.productId as string)
+                              )
                             }
                             className=""
                           >
                             <BiPlus />
                           </Button>
-                        
                         </div>
                       </TableCell>
                       <TableCell>{item.price * item.quantity}</TableCell>
@@ -124,7 +127,10 @@ const CartPage = () => {
               </TableBody>
             </Table>
             <div className="my-10 w-full">
-              <Link href="/checkout" className="py-2 mx-auto md:w-[150px] rounded-lg bg-none hover:bg-none hover:text-blue-400 hover:border-blue-400 w-full flex items-center justify-center gap-2 border">
+              <Link
+                href="/checkout"
+                className="py-2 mx-auto md:w-[150px] rounded-lg bg-none hover:bg-none hover:text-blue-400 hover:border-blue-400 w-full flex items-center justify-center gap-2 border"
+              >
                 <BiPackage /> Checkout
               </Link>
             </div>

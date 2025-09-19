@@ -3,16 +3,15 @@ import BreadCrumb from "../components/BreadCrumb";
 import SingleProductCard from "../components/SingleProductCard";
 import { getSingleProducts } from "@/actions/getSingleProducts";
 import { TProduct } from "@/types";
-import RecomendedProducts from "@/app/(commonLayout)/components/RecomendedProducts/RecomendedProducts";
+import RecomendedProducts from "@/app/(commonLayout)/(home)/components/RecomendedProducts/RecomendedProducts";
 import { getProducts } from "@/actions/getProducts";
 
 const SingleProduct = async ({ params }: { params: { productId: string } }) => {
   const { productId } = params;
   const product: TProduct[] = await getSingleProducts(productId as string);
-  const products: {data: TProduct[]} = await getProducts();
+  const products: { data: TProduct[] } = await getProducts();
   return (
     <div className="px-6 max-w-7xl mx-auto">
-      
       <BreadCrumb
         activePath={`${productId}`}
         labels={["products", `${productId}`]}
