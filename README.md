@@ -1,161 +1,87 @@
+# TradeHub
 
-# 🛍️ TradeHub
+## Overview  
+TradeHub is a full-stack eCommerce web application built with Next.js and TypeScript. It allows users to browse, search, filter, and sort products, add them to a cart, and complete purchases through integrated automatic and manual payment options. Users also have a dashboard to track their orders in real-time.
 
-[Live Demo 🚀](https://tradehub.devjunayed.xyz/)
+## Live Demo  
+[https://tradehub.devjunayed.xyz/](https://tradehub.devjunayed.xyz/)
 
-**TradeHub** is a single-vendor eCommerce platform built with modern web technologies including **Next.js**, **Redux**, and **Axios**. It offers a clean, performant, and responsive online shopping experience tailored for small to mid-scale businesses.
+## Repositories  
+- Client Code: [https://github.com/devjunayed/trade-hub-client](https://github.com/devjunayed/trade-hub-client)  
+- Server Code: [https://github.com/devjunayed/trade-hub-server](https://github.com/devjunayed/trade-hub-server)  
 
----
+## Features  
+- Product browsing with search, filter, and sorting functionalities  
+- Shopping cart for adding and managing products  
+- Automatic payment processing for seamless checkout  
+- Manual payment option requiring users to submit payment details after offline payment  
+- User dashboard for tracking order status and history  
 
-## 📌 Table of Contents
+## Technologies Used  
+- **Frontend:**  
+  - TypeScript  
+  - Next.js  
+  - Tailwind CSS  
+  - Ant Design  
+  - Redux Toolkit  
 
-* [Features](#features)
-* [Tech Stack](#tech-stack)
-* [Live Demo](#live-demo)
-* [Screenshots](#screenshots)
-* [Getting Started](#getting-started)
-* [Folder Structure](#folder-structure)
-* [Future Enhancements](#future-enhancements)
-* [Contributing](#contributing)
-* [License](#license)
+- **Backend:**  
+  - Node.js  
+  - Express  
+  - MongoDB  
+  - Mongoose  
 
----
+- **Validation:**  
+  - Zod  
 
-## ✨ Features
+## Getting Started
 
-* ✅ Fully functional single-vendor eCommerce platform
-* 🛒 Product listing with filtering and detailed product pages
-* 🧺 Add to cart, remove from cart, and cart item quantity management
-* 💳 Checkout process with billing summary (payment gateway integration coming soon)
-* 🧾 Order summary and confirmation
-* 🔧 Admin dashboard for managing products (coming soon)
-* 💻 Fully responsive design for mobile, tablet, and desktop
-* ⚡ Fast loading with server-side rendering (SSR) via Next.js
-* 📦 State management using Redux Toolkit
-* 🔌 API integration using Axios
+### Prerequisites  
+- Node.js installed  
+- MongoDB running or access to a MongoDB cloud instance  
 
----
+### Installation  
 
-## ⚙️ Tech Stack
+1. Clone the repositories:  
+   ```bash
+   git clone https://github.com/devjunayed/trade-hub-client.git
+   git clone https://github.com/devjunayed/trade-hub-server.git
+    ````
 
-| Category           | Technologies                                    |
-| ------------------ | ----------------------------------------------- |
-| Frontend Framework | [Next.js](https://nextjs.org/)                  |
-| State Management   | [Redux Toolkit](https://redux-toolkit.js.org/)  |
-| HTTP Client        | [Axios](https://axios-http.com/)                |
-| Styling            | CSS Modules / Tailwind (if applicable)          |
-| Deployment         | [Vercel](https://vercel.com/) or custom hosting |
+2. Navigate to each project directory and install dependencies:
 
----
+   ```bash
+   cd trade-hub-client
+   npm install
 
-## 🌐 Live Demo
+   cd ../trade-hub-server
+   npm install
+   ```
+3. Configure environment variables for database and payment gateway credentials in both projects.
+4. Run the development servers:
 
-You can explore the live version of TradeHub here:
-👉 [https://tradehub.devjunayed.xyz/](https://tradehub.devjunayed.xyz/)
+   ```bash
+   # Run server
+   cd trade-hub-server
+   npm run dev
 
-<!--
----
+   # Run client (in new terminal)
+   cd trade-hub-client
+   npm run dev
+   ```
 
-## 🖼️ Screenshots
+## Usage
 
-> *Include screenshots of the homepage, product page, and cart page here.*
-> You can use Markdown image tags like:
+* Open your browser and visit `http://localhost:3000` to use the application locally.
+* Create an account, browse products, add to cart, and complete orders.
+* Track your orders via the dashboard.
 
-```markdown
-![Home Page](./screenshots/homepage.png)
-![Product Page](./screenshots/productpage.png)
-![Cart Page](./screenshots/cartpage.png)
-```
+## License
 
----
--->
+MIT License
 
-## 🚀 Getting Started
+## Contact
 
-Follow these instructions to set up the project locally for development and testing purposes.
+For questions or feedback, please reach out at [mdjunayed601@gmail.com](mailto:mdjunayed601@gmail.com).
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/yourusername/tradehub.git
-cd tradehub
-```
-
-### 2. Install dependencies
-
-Make sure you have **Node.js** and **npm** or **yarn** installed.
-
-```bash
-npm install
-# or
-yarn install
-```
-
-### 3. Environment setup
-
-Create a `.env.local` file at the root and define your environment variables if required, e.g.:
-
-```env
-NEXT_PUBLIC_API_BASE_URL=https://api.example.com
-```
-
-### 4. Run the development server
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
----
-
-## 📁 Folder Structure
-
-```bash
-tradehub/
-├── components/       # Reusable React components
-├── pages/            # Next.js pages (routes)
-│   ├── index.js      # Homepage
-│   ├── product/      # Dynamic product pages
-│   ├── cart.js       # Cart page
-├── redux/            # Redux store and slices
-├── public/           # Static assets
-├── styles/           # Global and modular CSS
-├── utils/            # Helper functions and constants
-└── .env.local        # Local environment variables
-```
-
----
-
-## 🔮 Future Enhancements
-
-* [ ] Admin dashboard for product and order management
-* [ ] Authentication system (login/register)
-* [ ] Payment gateway integration (e.g., Stripe, AmarPay)
-* [ ] Order history for users
-* [ ] User profile page
-* [ ] Product reviews and ratings
-* [ ] Dark mode support
-
----
-
-## 🤝 Contributing
-
-Want to make TradeHub even better?
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/YourFeature`)
-3. Commit your changes (`git commit -m 'Add YourFeature'`)
-4. Push to the branch (`git push origin feature/YourFeature`)
-5. Open a Pull Request
-
-Suggestions and feedback are always welcome!
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License** — feel free to use and modify for personal or commercial projects.
 
